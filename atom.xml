@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>zero</title>
+  
+  
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2022-08-26T06:41:42.054Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>Jie Shen</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://example.com/2022/08/26/hello-world/"/>
+    <id>http://example.com/2022/08/26/hello-world/</id>
+    <published>2022-08-26T09:38:10.425Z</published>
+    <updated>2022-08-26T06:41:42.054Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>nginx部署vue和django</title>
+    <link href="http://example.com/2022/08/26/nginx%E9%83%A8%E7%BD%B2vue%E5%92%8Cdjango/"/>
+    <id>http://example.com/2022/08/26/nginx%E9%83%A8%E7%BD%B2vue%E5%92%8Cdjango/</id>
+    <published>2022-08-26T08:07:15.000Z</published>
+    <updated>2022-08-26T08:35:00.991Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;nginx部署vue和django&quot;&gt;&lt;a href=&quot;#nginx部署vue和django&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="linux" scheme="http://example.com/categories/linux/"/>
+    
+    
+    <category term="vue" scheme="http://example.com/tags/vue/"/>
+    
+    <category term="django" scheme="http://example.com/tags/django/"/>
+    
+    <category term="linux" scheme="http://example.com/tags/linux/"/>
+    
+  </entry>
+  
+</feed>
