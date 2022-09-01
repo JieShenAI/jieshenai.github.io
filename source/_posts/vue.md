@@ -90,6 +90,16 @@ beforeDestroy(){
 
 
 
+## 生命周期
+
+* 需求一
+
+  页面上的内容，由 axios 从服务器端拿回数据，并渲染到页面上。
+
+  问题：当 axios 从服务器取回数据后，vue如何感知到数据发生了变化，并重新渲染模板。
+
+
+
 ## 自定义事件
 
 > 涉及到子给父传东西
@@ -97,6 +107,8 @@ beforeDestroy(){
 在父组件中，给子组件添加一个自定义事件，@后面跟事件名，再跟事件的回调函数。比如：`@getA="getA"`。
 
 点击了子组件的按钮后，父组件接收到了子组件传过来的a。
+
+子组件执行 `this.$emit("getA", "xxx")`后，只有对应的父组件才会对此响应。
 
 父组件代码
 
@@ -151,6 +163,85 @@ export default {
 
 
 
+## 全局事件总线
+
+前面的自定义事件，只能是父子组件之间传递数据，孙子组件则不能传递数据；故引出了总线；
+
+### 导入
+
+在`main.js`中，进行引入
+
+```
+new Vue({
+	el:'#app',
+	render: h => h(App),
+	beforeCreate() {
+		Vue.prototype.$bus = this
+	},
+})
+```
+
+### 绑定
+
+```javascript
+mounted() {
+    this.$bus.$on('checkTodo',this.checkTodo);
+}
+```
+
+### 解绑
+
+```javascript
+beforeDestroy() {
+	this.$bus.$off('checkTodo');
+}
+```
+
+### emit
+
+```javascript
+methods: {
+    //勾选or取消勾选
+    handleCheck(id){
+        //通知App组件将对应的todo对象的done值取反
+        // this.checkTodo(id)
+        this.$bus.$emit('checkTodo',id)
+    }
+}
+```
+
+
+
+## 本地存储
+
+### 写入
+
+`deep:true `表示当 `todos` 对象的数据发生变化后，也能监视到；若不写`deep`，则只能监视到值的变化，不能监视到对象内部值的变化。
+
+```javascript
+watch: {
+			todos:{
+				deep:true,
+				handler(value){
+					localStorage.setItem('todos',JSON.stringify(value))
+				}
+			}
+		}
+```
+
+### 读取
+
+```
+data() {
+			return {
+				//由于todos是MyHeader组件和MyFooter组件都在使用，所以放在App中（状态提升）
+				todos:JSON.parse(localStorage.getItem('todos')) || []
+			}
+		},
+```
+
+
+
 ## 常用操作
 
 ### 确认删除
@@ -180,7 +271,26 @@ methods: {
 this.$set(obj,'attr',true);
 ```
 
- 
+
+
+案例：
+
+```
+if(todo.hasOwnProperty('isEdit')){
+    todo.isEdit = true;
+}else{
+    // console.log('@')
+    this.$set(todo,'isEdit',true)
+}
+
+todo.isEdit = false;
+```
+
+给对象绑定属性，得先用 `xxxobj.hasOwnProperty("xxxattr")`，判断它是否有某个属性。
+
+没有该属性，才 `this.$set(xxxobj,"xxxattr","初始值")`
+
+
 
 ### $nextTick
 
