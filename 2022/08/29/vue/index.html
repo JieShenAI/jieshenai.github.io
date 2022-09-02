@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title> zero</title>
+      <title>vue |  zero</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -52,206 +52,8 @@
     
       
     <main class="content on">
-      
-<section class="cover">
-    
-      
-      <a class="forkMe" href="https://github.com/Shen-Yu/hexo-theme-ayer"
-        target="_blank"><img width="149" height="149" src="/images/forkme.png"
-          class="attachment-full size-full" alt="Fork me on GitHub" data-recalc-dims="1"></a>
-    
-  <div class="cover-frame">
-    <div class="bg-box">
-      <img src="/images/cover1.jpg" alt="image frame" />
-    </div>
-    <div class="cover-inner text-center text-white">
-      <h1><a href="/">zero</a></h1>
-      <div id="subtitle-box">
-        
-        <span id="subtitle"></span>
-        
-      </div>
-      <div>
-        
-      </div>
-    </div>
-  </div>
-  <div class="cover-learn-more">
-    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
-  </div>
-</section>
-
-
-
-<script src="https://cdn.staticfile.org/typed.js/2.0.12/typed.min.js"></script>
-
-
-<!-- Subtitle -->
-
-  <script>
-    try {
-      var typed = new Typed("#subtitle", {
-        strings: ['面朝大海，春暖花开', '愿你一生努力，一生被爱', '一次编译，run everywhere'],
-        startDelay: 0,
-        typeSpeed: 200,
-        loop: true,
-        backSpeed: 100,
-        showCursor: true
-      });
-    } catch (err) {
-      console.log(err)
-    }
-  </script>
-  
-<div id="main">
-  <section class="outer">
-  
-  
-  
-
-<div class="notice" style="margin-top:50px">
-    <i class="ri-heart-fill"></i>
-    <div class="notice-content" id="broad"></div>
-</div>
-<script type="text/javascript">
-    fetch('https://v1.hitokoto.cn')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("broad").innerHTML = data.hitokoto;
-        })
-        .catch(console.error)
-</script>
-
-<style>
-    .notice {
-        padding: 20px;
-        border: 1px dashed #e6e6e6;
-        color: #969696;
-        position: relative;
-        display: inline-block;
-        width: 100%;
-        background: #fbfbfb50;
-        border-radius: 10px;
-    }
-
-    .notice i {
-        float: left;
-        color: #999;
-        font-size: 16px;
-        padding-right: 10px;
-        vertical-align: middle;
-        margin-top: -2px;
-    }
-
-    .notice-content {
-        display: initial;
-        vertical-align: middle;
-    }
-</style>
-  
-  <article class="articles">
-    
-    
-    
-    
-    <article
-  id="post-文章编辑结构"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/08/29/%E6%96%87%E7%AB%A0%E7%BC%96%E8%BE%91%E7%BB%93%E6%9E%84/"
-    >文章编辑结构</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/08/29/%E6%96%87%E7%AB%A0%E7%BC%96%E8%BE%91%E7%BB%93%E6%9E%84/" class="article-date">
-  <time datetime="2022-08-29T06:53:13.000Z" itemprop="datePublished">2022-08-29</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/autoWriteDesign/">autoWriteDesign</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="文章结构设计"><a href="#文章结构设计" class="headerlink" title="文章结构设计"></a>文章结构设计</h1><h2 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h2><blockquote>
-<p>选择vuex而不是全局总线，因为vuex可以集中进行管理</p>
-</blockquote>
-<h2 id="编辑组件"><a href="#编辑组件" class="headerlink" title="编辑组件"></a>编辑组件</h2><p>初始显示框 - 编辑框 - 显示框</p>
-<p>初始显示框的内容固定。因为其中包含了很多从数据库读入的数据。</p>
-<p>编辑框的初始数据来自显示初始显示框。</p>
-<p>最后汇总的数据的只有编辑框的文本。</p>
-<p>需要一个组件，把文本的字符传给组件。使用v-for循环，在页面上展示。</p>
-<p>给组件传值后，在组件内若想修改该值，如何同步修改；</p>
-<p>每一个组件内部还会有很多待从数据库读入的参数，他们的参数名</p>
-<p>如何获取当前编辑组件在 v-for 中的index</p>
-<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><p>父组件将内容传递给子组件，在子组件中修改了数据后，如何将子组件的内容同步上去。</p>
-<p>父组件构建一个由文字组成的数组，使用 v-for 将每个单独的文字传递给负责编辑的组件。</p>
-<p>编辑组件修改了文字后，父组件如何拿到子组件返回的数据。子组件传递多个值过去，从而告诉父组件应该修改哪个元素的值。</p>
-<h2 id="保存到浏览器"><a href="#保存到浏览器" class="headerlink" title="保存到浏览器"></a>保存到浏览器</h2><p>将数据保存到浏览器中</p>
-<h2 id="复原"><a href="#复原" class="headerlink" title="复原"></a>复原</h2><p>编辑完成后，将数据保存在json文件中，之后要能够根据该json文件恢复出文件，再进行编辑等操作。</p>
-<h1 id="取消编辑"><a href="#取消编辑" class="headerlink" title="取消编辑"></a>取消编辑</h1><p>像背景这个每个地方不同的文字，不能写在html中，可存放在数据库中，然后读取出来。</p>
-<p>文字写入到html里面。将文字内容从html中读取出来，装进对象里。</p>
-<p>再把对象，通过ajax发送到服务器，再由服务器把这个导出。</p>
-<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>为了实现在更改了数据库中的数据之后，刷新页面的时候，页面上会显示新的数据。采用每次导出时，我们会向数据库请求全部最新的数据进行网页的渲染。</p>
-<h2 id="总页预览"><a href="#总页预览" class="headerlink" title="总页预览"></a>总页预览</h2><p>用户点击导出之后，跳转到一个页面去，那个页面汇总了每个章节的内容。用户再点击确认导出。直接把那个页面缓存的数据发到服务器。</p>
-<p>父组件是总页面，子组件是每个分章。这样的话，子组件就需要把数据挂载到父组件身上。</p>
-<p>背景之类的，每个城市不同的数据，应该存在数据库中。</p>
-<p>测试，网络请求得到数据后，依然能够保持将数据进行传递给父组件。</p>
-<h3 id="设计缺陷"><a href="#设计缺陷" class="headerlink" title="设计缺陷"></a>设计缺陷</h3><p>在<code>OutPrint.vue</code>组件中，采用双重for循环导出dom元素</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> nodes = <span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">content</span>.<span class="property">childNodes</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> node <span class="keyword">of</span> nodes) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> n <span class="keyword">of</span> node.<span class="property">childNodes</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(n.<span class="property">tagName</span>, n.<span class="property">innerText</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>组件格式：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>（一）基本经济指标<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h4</span>&gt;</span>1. 地区生产总值<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      2021年恩施实现地区生产总值&#123;&#123; gdp &#125;&#125;亿元，按可比价格计算，比上年增长&#123;&#123; gdpIncrease &#125;&#125;%（名义增速16.5%），</span><br><span class="line">      经济总量和增速在湖北省地级行政区位居第11位和第5位，高于同年&#123;&#123; provinceGdpIncrease &#125;&#125;%的全省平均增速；</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"> 	...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><code>OutPrint.vue</code>格式:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>恩施土家族苗族自治州产业发展总体规划 2025-2035<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>必须是 div 容器下，立即接着 p|hx 容器。</p>
-<h2 id="待处理"><a href="#待处理" class="headerlink" title="待处理"></a>待处理</h2><ul>
-<li><p>痛点一</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">this.avgGdp = obj.avgGdp</span><br><span class="line">this.avgProvinceGdp = obj.avgProvinceGdp</span><br><span class="line">this.cityID = obj.cityID</span><br><span class="line">this.countryGdp = obj.countryGdp</span><br><span class="line">this.countryGdpIncrease = obj.countryGdpIncrease</span><br><span class="line">this.gdp = obj.gdp</span><br><span class="line">this.gdpIncrease = obj.gdpIncrease</span><br><span class="line">this.provinceGdp = obj.provinceGdp</span><br><span class="line">this.provinceGdpIncrease = obj.provinceGdpIncrease</span><br><span class="line">this.year = obj.year</span><br></pre></td></tr></table></figure>
-
-<p>  每一个都写初始化，这样太麻烦了。能否使用 <code>...obj</code>，直接一步到位。</p>
-</li>
-<li><p>文档导出</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.save(&quot;./test.docx&quot;)</span><br></pre></td></tr></table></figure>
-
-<p>采取先将用户传到服务器的数据，存到一个word文档中，再将该word文档返回给用户。</p>
-<p>试问：当有多个用户在同一时间上传文件的时候，由于django的异步，会不会导致某用户word文档的内容被另一用户的内容覆盖。从而造成巨大的<strong>安全隐患</strong>。</p>
-</li>
-</ul>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
+      <section class="outer">
+  <article
   id="post-vue"
   class="article article-type-post"
   itemscope
@@ -262,10 +64,9 @@
     
     <header class="article-header">
        
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/08/29/vue/"
-    >vue</a> 
-</h2>
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  vue
+</h1>
  
 
       
@@ -278,9 +79,34 @@
   <div class="article-category">
     <a class="article-category-link" href="/categories/vue/">vue</a>
   </div>
-   
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">5 min</span>
+        </span>
+    </span>
+</div>
+ 
     </div>
       
+    <div class="tocbot"></div>
+
+
+
+
+  
     <div class="article-entry" itemprop="articleBody">
        
   <h1 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h1><h2 id="消息订阅与发布"><a href="#消息订阅与发布" class="headerlink" title="消息订阅与发布"></a>消息订阅与发布</h2><blockquote>
@@ -381,241 +207,115 @@
  
       <!-- reward -->
       
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-nginx部署vue和django"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-     
-    <div class="article-meta">
-      <a href="/2022/08/28/nginx%E9%83%A8%E7%BD%B2vue%E5%92%8Cdjango/" class="article-date">
-  <time datetime="2022-08-28T11:09:19.625Z" itemprop="datePublished">2022-08-28</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="nginx部署vue和django"><a href="#nginx部署vue和django" class="headerlink" title="nginx部署vue和django"></a>nginx部署vue和django</h1><p>网站的前端是vue，后端是django。这两个都需要在linux服务器使用nginx部署。</p>
-<h2 id="django"><a href="#django" class="headerlink" title="django"></a>django</h2><blockquote>
-<p>使用nginx部署django</p>
-</blockquote>
-<h2 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h2><blockquote>
-<p>使用nginx部署vue</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2022/08/28/nginx%E9%83%A8%E7%BD%B2vue%E5%92%8Cdjango/zy.png" alt="图片"></p>
- 
-      <!-- reward -->
+      <div id="reword-out">
+        <div id="reward-btn">
+          Donate
+        </div>
+      </div>
       
     </div>
     
 
     <!-- copyright -->
     
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-hello-world"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/08/28/hello-world/"
-    >Hello World</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/08/28/hello-world/" class="article-date">
-  <time datetime="2022-08-28T11:09:19.624Z" itemprop="datePublished">2022-08-28</time>
-</a>    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>Copyright： </strong>
+          
+          Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+          
+        </li>
+      </ul>
     </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
     
     <footer class="article-footer">
        
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-nginx"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/08/26/nginx/"
-    >nginx部署vue和django</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/08/26/nginx/" class="article-date">
-  <time datetime="2022-08-26T08:07:15.000Z" itemprop="datePublished">2022-08-26</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/linux/">linux</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><h3 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h3><p>尚硅谷 <strong>@张一明</strong></p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yS4y1N76R">https://www.bilibili.com/video/BV1yS4y1N76R</a></p>
-</blockquote>
-<blockquote>
-<p>笔记：<a target="_blank" rel="noopener" href="https://blog.csdn.net/learning_xzj/category_11792194.html">https://blog.csdn.net/learning_xzj/category_11792194.html</a> @不知名架构师</p>
-</blockquote>
-<h3 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h3><h4 id="方式一："><a href="#方式一：" class="headerlink" title="方式一："></a>方式一：</h4><p><code>yum install nginx</code></p>
-<h4 id="方式二："><a href="#方式二：" class="headerlink" title="方式二："></a>方式二：</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_48721706/article/details/125577122">centos下载安装nginx在线版、离线版_hmb↑的博客-CSDN博客_centos 下载nginx</a></p>
-<blockquote>
-<p>在这篇文章中，给出了如何下载nginx的压缩包，编译安装的命令</p>
-</blockquote>
-<p>选择nginx的安装位置</p>
-<p><code>./configure --prefix=/usr/local/nginx</code></p>
-<h4 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h4><p>方式一：yum安装。自动添加进环境变量。文件分散在各处。</p>
-<p>方式二：编译安装。不会添加进环境变量，文件集中在一个文件夹下。</p>
-<p><code>ps aux|grep nginx</code> 查看运行的nginx的进程</p>
-<p><code>sudo /usr/sbin/nginx</code>  启动nginx</p>
-<p>如果出现端口占用，会启动失败，查出占用的端口的进程：</p>
-<p><code>netstat -ano | grep 80</code></p>
-<p>设置nginx开机自启动, 参考的是<a target="_blank" rel="noopener" href="https://hashnode.blog.csdn.net/article/details/124502959">这篇文章</a>的做法。<code>systemctl start|enable nginx.service</code></p>
-<p>具体<code>nginx.conf</code>配置文件的配置参考的<a target="_blank" rel="noopener" href="https://www.jb51.net/article/241964.htm">这篇文章</a>。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">user  普通用户名|root;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>若不填写, nginx没有访问本地文件的权限</p>
-</blockquote>
-<h3 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h3><p>若出现 <code>500 Internal Server Error</code></p>
-<p>直接进入nginx的配置文件去找问题，进入<strong>nginx&#x2F;logs&#x2F;error.log文件</strong></p>
-<h2 id="django部署"><a href="#django部署" class="headerlink" title="django部署"></a>django部署</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">        listen 8080;</span><br><span class="line">        server_name 127.0.0.1;</span><br><span class="line">        access_log /home/jie/.logs/django/access.log;</span><br><span class="line">        charset utf-8;</span><br><span class="line">        gzip on;</span><br><span class="line">        gzip_types text/plain application/x-javascript text/css text/javascript application/x-httpd-php image/jpeg image/gif image/png;</span><br><span class="line">        error_page 404  /404.html;</span><br><span class="line">        error_page 500 502 503 504  /50x.html;</span><br><span class="line">        location / &#123;</span><br><span class="line">                include uwsgi_params;</span><br><span class="line">                uwsgi_connect_timeout 30;</span><br><span class="line">                uwsgi_pass 127.0.0.1:8000;</span><br><span class="line">        &#125;</span><br><span class="line">        location /static/ &#123;</span><br><span class="line">                alias /home/jie/site/mysite/app/static/;</span><br><span class="line">                index index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>要修改的地方:</p>
-<ul>
-<li><code>access_log /home/jie/.logs/django;</code></li>
-<li><code>uwsgi_pass 127.0.0.1:8000;</code></li>
-<li><code>alias /opt/project_teacher/mysite/app/static/;</code></li>
-</ul>
-<p><code>uwsgi.ini</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[uwsgi]</span><br><span class="line">chdir=../mysite</span><br><span class="line">uid=root</span><br><span class="line">gid=root</span><br><span class="line">module=mysite.wsgi:application</span><br><span class="line">socket=127.0.0.1:8000</span><br><span class="line">master=true</span><br><span class="line">workers=2</span><br><span class="line">pidfile=uwsgi.pid</span><br><span class="line">vacuum=true </span><br><span class="line">thunder-lock=true</span><br><span class="line">enable-threads=true</span><br><span class="line">harakiri=30</span><br><span class="line">post-buffering=1024</span><br><span class="line">daemonize=uwsgi.log</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="django-装包"><a href="#django-装包" class="headerlink" title="django 装包"></a>django 装包</h3><p>以下以 vmware的centos7为例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pip3.9 install pymysql</span><br><span class="line">pip3.9 install pillow</span><br><span class="line">pip3.9 install simplejson</span><br><span class="line">pip3.9 install python-docx</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>若pip装包时，遇到如下报错：</p>
-<p>This error originates from a subprocess, and is likely not a problem with pip</p>
-<p>只需要：<code>pip3 install --upgrade setuptools</code></p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="http://192.168.31.103/">http://192.168.31.103/</a></p>
-<h2 id="vue部署"><a href="#vue部署" class="headerlink" title="vue部署"></a>vue部署</h2><p><code>npm run build</code>   在当前目录生成 dist文件夹</p>
-<p><code>scp -r dist/* root@xxx.xxx.xxx.69:/xxx/xxx/www</code></p>
-<p>在windows中，将window dist文件夹下的内容传到服务器上。</p>
-<h2 id="开启自启动"><a href="#开启自启动" class="headerlink" title="开启自启动"></a>开启自启动</h2><p>nginx 和 uwsgi 开机自启动</p>
-<p>nginx开机自启动，在前面已经给出了参考的<a target="_blank" rel="noopener" href="https://hashnode.blog.csdn.net/article/details/124502959">链接</a>。 <code>systemctl start|stop|status nginx.service</code></p>
-<p>uwsgi开机自启动，还没设置。不过云服务器，不需要关机，这个也不用设置。</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-  </article>
-  
-
-  
-</section>
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
 </div>
 
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2022/08/29/vue/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/08/29/%E6%96%87%E7%AB%A0%E7%BC%96%E8%BE%91%E7%BB%93%E6%9E%84/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            文章编辑结构
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/08/28/nginx%E9%83%A8%E7%BD%B2vue%E5%92%8Cdjango/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title"></div>
+      </a>
+    
+  </nav>
+
+  
+   
+    
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
       <footer class="footer">
   <div class="outer">
     <ul>
@@ -763,6 +463,22 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
 
 <script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
 <link

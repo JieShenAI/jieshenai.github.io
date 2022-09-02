@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Hello World</title>
-    <url>/2022/08/26/hello-world/</url>
+    <url>/2022/08/28/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
@@ -20,17 +20,64 @@
   </entry>
   <entry>
     <title>nginx部署vue和django</title>
-    <url>/2022/08/26/nginx%E9%83%A8%E7%BD%B2vue%E5%92%8Cdjango/</url>
-    <content><![CDATA[<h1 id="nginx部署vue和django"><a href="#nginx部署vue和django" class="headerlink" title="nginx部署vue和django"></a>nginx部署vue和django</h1><p>网站的前端是vue，后端是django。这两个都需要在linux服务器使用nginx部署。</p>
-<h2 id="django"><a href="#django" class="headerlink" title="django"></a>django</h2><blockquote>
-<p>使用nginx部署django</p>
+    <url>/2022/08/26/nginx/</url>
+    <content><![CDATA[<h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><h3 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h3><p>尚硅谷 <strong>@张一明</strong></p>
+<blockquote>
+<p><a href="https://www.bilibili.com/video/BV1yS4y1N76R">https://www.bilibili.com/video/BV1yS4y1N76R</a></p>
 </blockquote>
-<h2 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h2><blockquote>
-<p>使用nginx部署vue</p>
+<blockquote>
+<p>笔记：<a href="https://blog.csdn.net/learning_xzj/category_11792194.html">https://blog.csdn.net/learning_xzj/category_11792194.html</a> @不知名架构师</p>
 </blockquote>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h3><h4 id="方式一："><a href="#方式一：" class="headerlink" title="方式一："></a>方式一：</h4><p><code>yum install nginx</code></p>
+<h4 id="方式二："><a href="#方式二：" class="headerlink" title="方式二："></a>方式二：</h4><p><a href="https://blog.csdn.net/qq_48721706/article/details/125577122">centos下载安装nginx在线版、离线版_hmb↑的博客-CSDN博客_centos 下载nginx</a></p>
+<blockquote>
+<p>在这篇文章中，给出了如何下载nginx的压缩包，编译安装的命令</p>
+</blockquote>
+<p>选择nginx的安装位置</p>
+<p><code>./configure --prefix=/usr/local/nginx</code></p>
+<h4 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h4><p>方式一：yum安装。自动添加进环境变量。文件分散在各处。</p>
+<p>方式二：编译安装。不会添加进环境变量，文件集中在一个文件夹下。</p>
+<p><code>ps aux|grep nginx</code> 查看运行的nginx的进程</p>
+<p><code>sudo /usr/sbin/nginx</code>  启动nginx</p>
+<p>如果出现端口占用，会启动失败，查出占用的端口的进程：</p>
+<p><code>netstat -ano | grep 80</code></p>
+<p>设置nginx开机自启动, 参考的是<a href="https://hashnode.blog.csdn.net/article/details/124502959">这篇文章</a>的做法。<code>systemctl start|enable nginx.service</code></p>
+<p>具体<code>nginx.conf</code>配置文件的配置参考的<a href="https://www.jb51.net/article/241964.htm">这篇文章</a>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">user  普通用户名|root;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2022/08/26/nginx%E9%83%A8%E7%BD%B2vue%E5%92%8Cdjango/zy.png" alt="图片"></p>
+<blockquote>
+<p>若不填写, nginx没有访问本地文件的权限</p>
+</blockquote>
+<h3 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h3><p>若出现 <code>500 Internal Server Error</code></p>
+<p>直接进入nginx的配置文件去找问题，进入<strong>nginx&#x2F;logs&#x2F;error.log文件</strong></p>
+<h2 id="django部署"><a href="#django部署" class="headerlink" title="django部署"></a>django部署</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">        listen 8080;</span><br><span class="line">        server_name 127.0.0.1;</span><br><span class="line">        access_log /home/jie/.logs/django/access.log;</span><br><span class="line">        charset utf-8;</span><br><span class="line">        gzip on;</span><br><span class="line">        gzip_types text/plain application/x-javascript text/css text/javascript application/x-httpd-php image/jpeg image/gif image/png;</span><br><span class="line">        error_page 404  /404.html;</span><br><span class="line">        error_page 500 502 503 504  /50x.html;</span><br><span class="line">        location / &#123;</span><br><span class="line">                include uwsgi_params;</span><br><span class="line">                uwsgi_connect_timeout 30;</span><br><span class="line">                uwsgi_pass 127.0.0.1:8000;</span><br><span class="line">        &#125;</span><br><span class="line">        location /static/ &#123;</span><br><span class="line">                alias /home/jie/site/mysite/app/static/;</span><br><span class="line">                index index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要修改的地方:</p>
+<ul>
+<li><code>access_log /home/jie/.logs/django;</code></li>
+<li><code>uwsgi_pass 127.0.0.1:8000;</code></li>
+<li><code>alias /opt/project_teacher/mysite/app/static/;</code></li>
+</ul>
+<p><code>uwsgi.ini</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[uwsgi]</span><br><span class="line">chdir=../mysite</span><br><span class="line">uid=root</span><br><span class="line">gid=root</span><br><span class="line">module=mysite.wsgi:application</span><br><span class="line">socket=127.0.0.1:8000</span><br><span class="line">master=true</span><br><span class="line">workers=2</span><br><span class="line">pidfile=uwsgi.pid</span><br><span class="line">vacuum=true </span><br><span class="line">thunder-lock=true</span><br><span class="line">enable-threads=true</span><br><span class="line">harakiri=30</span><br><span class="line">post-buffering=1024</span><br><span class="line">daemonize=uwsgi.log</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="django-装包"><a href="#django-装包" class="headerlink" title="django 装包"></a>django 装包</h3><p>以下以 vmware的centos7为例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip3.9 install pymysql</span><br><span class="line">pip3.9 install pillow</span><br><span class="line">pip3.9 install simplejson</span><br><span class="line">pip3.9 install python-docx</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>若pip装包时，遇到如下报错：</p>
+<p>This error originates from a subprocess, and is likely not a problem with pip</p>
+<p>只需要：<code>pip3 install --upgrade setuptools</code></p>
+</blockquote>
+<p><a href="http://192.168.31.103/">http://192.168.31.103/</a></p>
+<h2 id="vue部署"><a href="#vue部署" class="headerlink" title="vue部署"></a>vue部署</h2><p><code>npm run build</code>   在当前目录生成 dist文件夹</p>
+<p><code>scp -r dist/* root@xxx.xxx.xxx.69:/xxx/xxx/www</code></p>
+<p>在windows中，将window dist文件夹下的内容传到服务器上。</p>
+<h2 id="开启自启动"><a href="#开启自启动" class="headerlink" title="开启自启动"></a>开启自启动</h2><p>nginx 和 uwsgi 开机自启动</p>
+<p>nginx开机自启动，在前面已经给出了参考的<a href="https://hashnode.blog.csdn.net/article/details/124502959">链接</a>。 <code>systemctl start|stop|status nginx.service</code></p>
+<p>uwsgi开机自启动，还没设置。不过云服务器，不需要关机，这个也不用设置。</p>
 ]]></content>
       <categories>
         <category>linux</category>
@@ -40,5 +87,178 @@
         <tag>django</tag>
         <tag>linux</tag>
       </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2022/08/28/nginx%E9%83%A8%E7%BD%B2vue%E5%92%8Cdjango/</url>
+    <content><![CDATA[<h1 id="nginx部署vue和django"><a href="#nginx部署vue和django" class="headerlink" title="nginx部署vue和django"></a>nginx部署vue和django</h1><p>网站的前端是vue，后端是django。这两个都需要在linux服务器使用nginx部署。</p>
+<h2 id="django"><a href="#django" class="headerlink" title="django"></a>django</h2><blockquote>
+<p>使用nginx部署django</p>
+</blockquote>
+<h2 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h2><blockquote>
+<p>使用nginx部署vue</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2022/08/28/nginx%E9%83%A8%E7%BD%B2vue%E5%92%8Cdjango/zy.png" alt="图片"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>vue</title>
+    <url>/2022/08/29/vue/</url>
+    <content><![CDATA[<h1 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h1><h2 id="消息订阅与发布"><a href="#消息订阅与发布" class="headerlink" title="消息订阅与发布"></a>消息订阅与发布</h2><blockquote>
+<p>用的不多，在vue中常用 事件总线</p>
+</blockquote>
+<p>推荐包:  <code>pubsub-js</code></p>
+<p>装包:  <code>npm i pubsub-js</code></p>
+<p>导入包：<code>import pubsub from &#39;pubsub-js&#39;</code></p>
+<h3 id="订阅消息"><a href="#订阅消息" class="headerlink" title="订阅消息"></a>订阅消息</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">this.pubId = pubsub.subscribe(&#x27;hello&#x27;,function(msgName,data)&#123;</span><br><span class="line">	// console.log(this); 问：这里的this为什么是undefined</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>订阅<code>hello</code>,当有人发布<code>hello</code>后，执行回调函数。<code>pubsub.subscribe</code>回调函数里的 this 不是vc 。因为vue承诺函数内的this是vc，而第三方库函数里的this不会这样设置。若需要使用vc，可参考下述的<strong>两种写法</strong>。</p>
+<p>每一次订阅后，都有一个订阅的id。避免取消订阅的函数读取不到pubId，所以把它放在 <code>this</code> 身上。</p>
+<ul>
+<li><p>msgName</p>
+<p>订阅名，即“hello”</p>
+</li>
+<li><p>data</p>
+<p>发布的数据</p>
+</li>
+</ul>
+<p>正确写法 √</p>
+<p>方式一,<strong>箭头函数</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mounted()&#123;</span><br><span class="line">    this.pubId = pubsub.subscribe(&#x27;hello&#x27;,(msgName,data) =&gt; &#123;</span><br><span class="line">        console.log(this); // 这里的this是vc</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>方式二：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">methods:&#123;</span><br><span class="line">	demo(msgName,data)&#123;</span><br><span class="line">		console.log(data,this);// 这里的this是vc</span><br><span class="line">	&#125;</span><br><span class="line">&#125;,</span><br><span class="line">mounted()&#123;</span><br><span class="line">    this.pubId = pubsub.subscribe(&#x27;hello&#x27;,this.demo)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="发布消息"><a href="#发布消息" class="headerlink" title="发布消息"></a>发布消息</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pubsub.publish(&#x27;hello&#x27;,666)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="取消订阅"><a href="#取消订阅" class="headerlink" title="取消订阅"></a>取消订阅</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">beforeDestroy()&#123;</span><br><span class="line">	pubsub.unsubscribe(this.pubId)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><ul>
+<li><p>需求一</p>
+<p>页面上的内容，由 axios 从服务器端拿回数据，并渲染到页面上。</p>
+<p>问题：当 axios 从服务器取回数据后，vue如何感知到数据发生了变化，并重新渲染模板。</p>
+</li>
+</ul>
+<h2 id="自定义事件"><a href="#自定义事件" class="headerlink" title="自定义事件"></a>自定义事件</h2><blockquote>
+<p>涉及到子给父传东西</p>
+</blockquote>
+<p>在父组件中，给子组件添加一个自定义事件，@后面跟事件名，再跟事件的回调函数。比如：<code>@getA=&quot;getA&quot;</code>。</p>
+<p>点击了子组件的按钮后，父组件接收到了子组件传过来的a。</p>
+<p>子组件执行 <code>this.$emit(&quot;getA&quot;, &quot;xxx&quot;)</code>后，只有对应的父组件才会对此响应。</p>
+<p>父组件代码</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>This is Father! A is &#123;&#123; a &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Son</span> @<span class="attr">getA</span>=<span class="string">&quot;getA&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Son</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">import</span> <span class="title class_">Son</span> <span class="keyword">from</span> <span class="string">&#x27;@/components/Son.vue&#x27;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="title function_">data</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">return</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="attr">a</span>: <span class="number">10</span>,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="attr">components</span>: &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="title class_">Son</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="attr">methods</span>: &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="title function_">getA</span>(<span class="params">value</span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="variable language_">this</span>.<span class="property">a</span> = value;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>子组件代码</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is son!<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;send&quot;</span>&gt;</span>点击<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="attr">methods</span>: &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="title function_">send</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="variable language_">this</span>.$emit(<span class="string">&quot;getA&quot;</span>, <span class="string">&quot;A from son&quot;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="全局事件总线"><a href="#全局事件总线" class="headerlink" title="全局事件总线"></a>全局事件总线</h2><p>前面的自定义事件，只能是父子组件之间传递数据，孙子组件则不能传递数据；故引出了总线；</p>
+<h3 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h3><p>在<code>main.js</code>中，进行引入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">new Vue(&#123;</span><br><span class="line">	el:&#x27;#app&#x27;,</span><br><span class="line">	render: h =&gt; h(App),</span><br><span class="line">	beforeCreate() &#123;</span><br><span class="line">		Vue.prototype.$bus = this</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="绑定"><a href="#绑定" class="headerlink" title="绑定"></a>绑定</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">mounted</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">$bus</span>.$on(<span class="string">&#x27;checkTodo&#x27;</span>,<span class="variable language_">this</span>.<span class="property">checkTodo</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解绑"><a href="#解绑" class="headerlink" title="解绑"></a>解绑</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">beforeDestroy</span>(<span class="params"></span>) &#123;</span><br><span class="line">	<span class="variable language_">this</span>.<span class="property">$bus</span>.$off(<span class="string">&#x27;checkTodo&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="emit"><a href="#emit" class="headerlink" title="emit"></a>emit</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">methods</span>: &#123;</span><br><span class="line">    <span class="comment">//勾选or取消勾选</span></span><br><span class="line">    <span class="title function_">handleCheck</span>(<span class="params">id</span>)&#123;</span><br><span class="line">        <span class="comment">//通知App组件将对应的todo对象的done值取反</span></span><br><span class="line">        <span class="comment">// this.checkTodo(id)</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$bus</span>.$emit(<span class="string">&#x27;checkTodo&#x27;</span>,id)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="本地存储"><a href="#本地存储" class="headerlink" title="本地存储"></a>本地存储</h2><h3 id="写入"><a href="#写入" class="headerlink" title="写入"></a>写入</h3><p><code>deep:true </code>表示当 <code>todos</code> 对象的数据发生变化后，也能监视到；若不写<code>deep</code>，则只能监视到值的变化，不能监视到对象内部值的变化。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">watch</span>: &#123;</span><br><span class="line">			<span class="attr">todos</span>:&#123;</span><br><span class="line">				<span class="attr">deep</span>:<span class="literal">true</span>,</span><br><span class="line">				<span class="title function_">handler</span>(<span class="params">value</span>)&#123;</span><br><span class="line">					<span class="variable language_">localStorage</span>.<span class="title function_">setItem</span>(<span class="string">&#x27;todos&#x27;</span>,<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(value))</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="读取"><a href="#读取" class="headerlink" title="读取"></a>读取</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">			return &#123;</span><br><span class="line">				//由于todos是MyHeader组件和MyFooter组件都在使用，所以放在App中（状态提升）</span><br><span class="line">				todos:JSON.parse(localStorage.getItem(&#x27;todos&#x27;)) || []</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h2><h3 id="确认删除"><a href="#确认删除" class="headerlink" title="确认删除"></a>确认删除</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">methods</span>: &#123;</span><br><span class="line">        <span class="title function_">handle</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="title function_">confirm</span>(<span class="string">&#x27;确定删除吗？&#x27;</span>)) &#123;</span><br><span class="line">                <span class="comment">//通知App组件将对应的todo对象删除</span></span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;已删除&quot;</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;取消&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><h3 id="set"><a href="#set" class="headerlink" title="$set"></a>$set</h3><p>在vc中添加一个数据后，这个数据的修改后不会重新加载模板</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">this.$set(obj,&#x27;attr&#x27;,true);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>案例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">if(todo.hasOwnProperty(&#x27;isEdit&#x27;))&#123;</span><br><span class="line">    todo.isEdit = true;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    // console.log(&#x27;@&#x27;)</span><br><span class="line">    this.$set(todo,&#x27;isEdit&#x27;,true)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">todo.isEdit = false;</span><br></pre></td></tr></table></figure>
+
+<p>给对象绑定属性，得先用 <code>xxxobj.hasOwnProperty(&quot;xxxattr&quot;)</code>，判断它是否有某个属性。</p>
+<p>没有该属性，才 <code>this.$set(xxxobj,&quot;xxxattr&quot;,&quot;初始值&quot;)</code></p>
+<h3 id="nextTick"><a href="#nextTick" class="headerlink" title="$nextTick"></a>$nextTick</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title function_">xxxfunc</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">//修改数据</span></span><br><span class="line">    <span class="variable language_">this</span>.$nextTick(</span><br><span class="line">        <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">			</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+
+<p>在xxxfunc函数内，修改了数据，会导致模板重新解析。</p>
+<p>比如，模板重新解析后，页面上会出现输入款，想拿到输入框的焦点，需要执行<code>this.$refs.xxx.focus()</code>。在<code>xxxfunc</code>函数内的操作全部执行完毕后，输入框才会解析出来。</p>
+<p>故将获取输入框的代码，放在 <code>$nextTick()</code>内，表示在本轮解决后，再执行。</p>
+]]></content>
+      <categories>
+        <category>vue</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>文章编辑结构</title>
+    <url>/2022/08/29/%E6%96%87%E7%AB%A0%E7%BC%96%E8%BE%91%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<h1 id="文章结构设计"><a href="#文章结构设计" class="headerlink" title="文章结构设计"></a>文章结构设计</h1><h2 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h2><blockquote>
+<p>选择vuex而不是全局总线，因为vuex可以集中进行管理</p>
+</blockquote>
+<h2 id="编辑组件"><a href="#编辑组件" class="headerlink" title="编辑组件"></a>编辑组件</h2><p>初始显示框 - 编辑框 - 显示框</p>
+<p>初始显示框的内容固定。因为其中包含了很多从数据库读入的数据。</p>
+<p>编辑框的初始数据来自显示初始显示框。</p>
+<p>最后汇总的数据的只有编辑框的文本。</p>
+<p>需要一个组件，把文本的字符传给组件。使用v-for循环，在页面上展示。</p>
+<p>给组件传值后，在组件内若想修改该值，如何同步修改；</p>
+<p>每一个组件内部还会有很多待从数据库读入的参数，他们的参数名</p>
+<p>如何获取当前编辑组件在 v-for 中的index</p>
+<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><p>父组件将内容传递给子组件，在子组件中修改了数据后，如何将子组件的内容同步上去。</p>
+<p>父组件构建一个由文字组成的数组，使用 v-for 将每个单独的文字传递给负责编辑的组件。</p>
+<p>编辑组件修改了文字后，父组件如何拿到子组件返回的数据。子组件传递多个值过去，从而告诉父组件应该修改哪个元素的值。</p>
+<h2 id="保存到浏览器"><a href="#保存到浏览器" class="headerlink" title="保存到浏览器"></a>保存到浏览器</h2><p>将数据保存到浏览器中</p>
+<h2 id="复原"><a href="#复原" class="headerlink" title="复原"></a>复原</h2><p>编辑完成后，将数据保存在json文件中，之后要能够根据该json文件恢复出文件，再进行编辑等操作。</p>
+<h1 id="取消编辑"><a href="#取消编辑" class="headerlink" title="取消编辑"></a>取消编辑</h1><p>像背景这个每个地方不同的文字，不能写在html中，可存放在数据库中，然后读取出来。</p>
+<p>文字写入到html里面。将文字内容从html中读取出来，装进对象里。</p>
+<p>再把对象，通过ajax发送到服务器，再由服务器把这个导出。</p>
+<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>为了实现在更改了数据库中的数据之后，刷新页面的时候，页面上会显示新的数据。采用每次导出时，我们会向数据库请求全部最新的数据进行网页的渲染。</p>
+<h2 id="总页预览"><a href="#总页预览" class="headerlink" title="总页预览"></a>总页预览</h2><p>用户点击导出之后，跳转到一个页面去，那个页面汇总了每个章节的内容。用户再点击确认导出。直接把那个页面缓存的数据发到服务器。</p>
+<p>父组件是总页面，子组件是每个分章。这样的话，子组件就需要把数据挂载到父组件身上。</p>
+<p>背景之类的，每个城市不同的数据，应该存在数据库中。</p>
+<p>测试，网络请求得到数据后，依然能够保持将数据进行传递给父组件。</p>
+<h3 id="设计缺陷"><a href="#设计缺陷" class="headerlink" title="设计缺陷"></a>设计缺陷</h3><p>在<code>OutPrint.vue</code>组件中，采用双重for循环导出dom元素</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> nodes = <span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">content</span>.<span class="property">childNodes</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> node <span class="keyword">of</span> nodes) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> n <span class="keyword">of</span> node.<span class="property">childNodes</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(n.<span class="property">tagName</span>, n.<span class="property">innerText</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>组件格式：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>（一）基本经济指标<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h4</span>&gt;</span>1. 地区生产总值<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      2021年恩施实现地区生产总值&#123;&#123; gdp &#125;&#125;亿元，按可比价格计算，比上年增长&#123;&#123; gdpIncrease &#125;&#125;%（名义增速16.5%），</span><br><span class="line">      经济总量和增速在湖北省地级行政区位居第11位和第5位，高于同年&#123;&#123; provinceGdpIncrease &#125;&#125;%的全省平均增速；</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"> 	...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>OutPrint.vue</code>格式:</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>恩施土家族苗族自治州产业发展总体规划 2025-2035<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>必须是 div 容器下，立即接着 p|hx 容器。</p>
+<h2 id="待处理"><a href="#待处理" class="headerlink" title="待处理"></a>待处理</h2><ul>
+<li><p>痛点一</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">this.avgGdp = obj.avgGdp</span><br><span class="line">this.avgProvinceGdp = obj.avgProvinceGdp</span><br><span class="line">this.cityID = obj.cityID</span><br><span class="line">this.countryGdp = obj.countryGdp</span><br><span class="line">this.countryGdpIncrease = obj.countryGdpIncrease</span><br><span class="line">this.gdp = obj.gdp</span><br><span class="line">this.gdpIncrease = obj.gdpIncrease</span><br><span class="line">this.provinceGdp = obj.provinceGdp</span><br><span class="line">this.provinceGdpIncrease = obj.provinceGdpIncrease</span><br><span class="line">this.year = obj.year</span><br></pre></td></tr></table></figure>
+
+<p>  每一个都写初始化，这样太麻烦了。能否使用 <code>...obj</code>，直接一步到位。</p>
+</li>
+<li><p>文档导出</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">document.save(&quot;./test.docx&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>采取先将用户传到服务器的数据，存到一个word文档中，再将该word文档返回给用户。</p>
+<p>试问：当有多个用户在同一时间上传文件的时候，由于django的异步，会不会导致某用户word文档的内容被另一用户的内容覆盖。从而造成巨大的<strong>安全隐患</strong>。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>autoWriteDesign</category>
+      </categories>
   </entry>
 </search>
