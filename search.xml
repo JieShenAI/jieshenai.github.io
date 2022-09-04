@@ -1,26 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2022/08/28/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>nginx部署vue和django</title>
-    <url>/2022/08/26/nginx/</url>
+    <title>nginx</title>
+    <url>/2022/linux/nginx/</url>
     <content><![CDATA[<h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><h3 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h3><p>尚硅谷 <strong>@张一明</strong></p>
 <blockquote>
 <p><a href="https://www.bilibili.com/video/BV1yS4y1N76R">https://www.bilibili.com/video/BV1yS4y1N76R</a></p>
@@ -82,30 +64,37 @@
       <categories>
         <category>linux</category>
       </categories>
-      <tags>
-        <tag>vue</tag>
-        <tag>django</tag>
-        <tag>linux</tag>
-      </tags>
   </entry>
   <entry>
-    <title></title>
-    <url>/2022/08/28/nginx%E9%83%A8%E7%BD%B2vue%E5%92%8Cdjango/</url>
-    <content><![CDATA[<h1 id="nginx部署vue和django"><a href="#nginx部署vue和django" class="headerlink" title="nginx部署vue和django"></a>nginx部署vue和django</h1><p>网站的前端是vue，后端是django。这两个都需要在linux服务器使用nginx部署。</p>
-<h2 id="django"><a href="#django" class="headerlink" title="django"></a>django</h2><blockquote>
-<p>使用nginx部署django</p>
-</blockquote>
-<h2 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h2><blockquote>
-<p>使用nginx部署vue</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br></pre></td></tr></table></figure>
+    <title>hexo</title>
+    <url>/2022/tools/hexo/</url>
+    <content><![CDATA[<h2 id="文章按类别存储"><a href="#文章按类别存储" class="headerlink" title="文章按类别存储"></a>文章按类别存储</h2><p>原来的博客文章全部保存在 <code>_post</code>目录下，显得很杂乱。在<code>_config.yml</code>中增加 <code>cate</code>，修改后的文件的链接和保存的地址</p>
+<ol>
+<li>在主目录的<code>_config.yml</code>指定目录的名</li>
+</ol>
+   <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">category_dir: cate</span><br><span class="line">permalink: :year/:category/:title/</span><br><span class="line">new_post_name: :year/:category/:title.md # File name of new posts</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2022/08/28/nginx%E9%83%A8%E7%BD%B2vue%E5%92%8Cdjango/zy.png" alt="图片"></p>
+<p>   在这里使用 <code>category</code> 而不是<code>categories</code>，因为<code>:categories</code>是一个对象，如果该文章有多个类别不易存储。</p>
+<ol start="2">
+<li><p>修改主题目录的<code>_config.yml</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">分类: /categories</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>新增文章时，指定<code>category</code>属性值</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new xxx --category 类别名</span><br></pre></td></tr></table></figure>
+
+<p>若想指定多个类别可以使用 <code>categories</code></p>
+</li>
+</ol>
 ]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
   </entry>
   <entry>
-    <title>vue</title>
-    <url>/2022/08/29/vue/</url>
+    <title>basic</title>
+    <url>/2022/vue/basic/</url>
     <content><![CDATA[<h1 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h1><h2 id="消息订阅与发布"><a href="#消息订阅与发布" class="headerlink" title="消息订阅与发布"></a>消息订阅与发布</h2><blockquote>
 <p>用的不多，在vue中常用 事件总线</p>
 </blockquote>
@@ -204,61 +193,6 @@
 ]]></content>
       <categories>
         <category>vue</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>文章编辑结构</title>
-    <url>/2022/08/29/%E6%96%87%E7%AB%A0%E7%BC%96%E8%BE%91%E7%BB%93%E6%9E%84/</url>
-    <content><![CDATA[<h1 id="文章结构设计"><a href="#文章结构设计" class="headerlink" title="文章结构设计"></a>文章结构设计</h1><h2 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h2><blockquote>
-<p>选择vuex而不是全局总线，因为vuex可以集中进行管理</p>
-</blockquote>
-<h2 id="编辑组件"><a href="#编辑组件" class="headerlink" title="编辑组件"></a>编辑组件</h2><p>初始显示框 - 编辑框 - 显示框</p>
-<p>初始显示框的内容固定。因为其中包含了很多从数据库读入的数据。</p>
-<p>编辑框的初始数据来自显示初始显示框。</p>
-<p>最后汇总的数据的只有编辑框的文本。</p>
-<p>需要一个组件，把文本的字符传给组件。使用v-for循环，在页面上展示。</p>
-<p>给组件传值后，在组件内若想修改该值，如何同步修改；</p>
-<p>每一个组件内部还会有很多待从数据库读入的参数，他们的参数名</p>
-<p>如何获取当前编辑组件在 v-for 中的index</p>
-<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><p>父组件将内容传递给子组件，在子组件中修改了数据后，如何将子组件的内容同步上去。</p>
-<p>父组件构建一个由文字组成的数组，使用 v-for 将每个单独的文字传递给负责编辑的组件。</p>
-<p>编辑组件修改了文字后，父组件如何拿到子组件返回的数据。子组件传递多个值过去，从而告诉父组件应该修改哪个元素的值。</p>
-<h2 id="保存到浏览器"><a href="#保存到浏览器" class="headerlink" title="保存到浏览器"></a>保存到浏览器</h2><p>将数据保存到浏览器中</p>
-<h2 id="复原"><a href="#复原" class="headerlink" title="复原"></a>复原</h2><p>编辑完成后，将数据保存在json文件中，之后要能够根据该json文件恢复出文件，再进行编辑等操作。</p>
-<h1 id="取消编辑"><a href="#取消编辑" class="headerlink" title="取消编辑"></a>取消编辑</h1><p>像背景这个每个地方不同的文字，不能写在html中，可存放在数据库中，然后读取出来。</p>
-<p>文字写入到html里面。将文字内容从html中读取出来，装进对象里。</p>
-<p>再把对象，通过ajax发送到服务器，再由服务器把这个导出。</p>
-<h2 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h2><p>为了实现在更改了数据库中的数据之后，刷新页面的时候，页面上会显示新的数据。采用每次导出时，我们会向数据库请求全部最新的数据进行网页的渲染。</p>
-<h2 id="总页预览"><a href="#总页预览" class="headerlink" title="总页预览"></a>总页预览</h2><p>用户点击导出之后，跳转到一个页面去，那个页面汇总了每个章节的内容。用户再点击确认导出。直接把那个页面缓存的数据发到服务器。</p>
-<p>父组件是总页面，子组件是每个分章。这样的话，子组件就需要把数据挂载到父组件身上。</p>
-<p>背景之类的，每个城市不同的数据，应该存在数据库中。</p>
-<p>测试，网络请求得到数据后，依然能够保持将数据进行传递给父组件。</p>
-<h3 id="设计缺陷"><a href="#设计缺陷" class="headerlink" title="设计缺陷"></a>设计缺陷</h3><p>在<code>OutPrint.vue</code>组件中，采用双重for循环导出dom元素</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> nodes = <span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">content</span>.<span class="property">childNodes</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> node <span class="keyword">of</span> nodes) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> n <span class="keyword">of</span> node.<span class="property">childNodes</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(n.<span class="property">tagName</span>, n.<span class="property">innerText</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>组件格式：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>（一）基本经济指标<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h4</span>&gt;</span>1. 地区生产总值<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      2021年恩施实现地区生产总值&#123;&#123; gdp &#125;&#125;亿元，按可比价格计算，比上年增长&#123;&#123; gdpIncrease &#125;&#125;%（名义增速16.5%），</span><br><span class="line">      经济总量和增速在湖北省地级行政区位居第11位和第5位，高于同年&#123;&#123; provinceGdpIncrease &#125;&#125;%的全省平均增速；</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"> 	...</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><code>OutPrint.vue</code>格式:</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>恩施土家族苗族自治州产业发展总体规划 2025-2035<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>必须是 div 容器下，立即接着 p|hx 容器。</p>
-<h2 id="待处理"><a href="#待处理" class="headerlink" title="待处理"></a>待处理</h2><ul>
-<li><p>痛点一</p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">this.avgGdp = obj.avgGdp</span><br><span class="line">this.avgProvinceGdp = obj.avgProvinceGdp</span><br><span class="line">this.cityID = obj.cityID</span><br><span class="line">this.countryGdp = obj.countryGdp</span><br><span class="line">this.countryGdpIncrease = obj.countryGdpIncrease</span><br><span class="line">this.gdp = obj.gdp</span><br><span class="line">this.gdpIncrease = obj.gdpIncrease</span><br><span class="line">this.provinceGdp = obj.provinceGdp</span><br><span class="line">this.provinceGdpIncrease = obj.provinceGdpIncrease</span><br><span class="line">this.year = obj.year</span><br></pre></td></tr></table></figure>
-
-<p>  每一个都写初始化，这样太麻烦了。能否使用 <code>...obj</code>，直接一步到位。</p>
-</li>
-<li><p>文档导出</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">document.save(&quot;./test.docx&quot;)</span><br></pre></td></tr></table></figure>
-
-<p>采取先将用户传到服务器的数据，存到一个word文档中，再将该word文档返回给用户。</p>
-<p>试问：当有多个用户在同一时间上传文件的时候，由于django的异步，会不会导致某用户word文档的内容被另一用户的内容覆盖。从而造成巨大的<strong>安全隐患</strong>。</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>autoWriteDesign</category>
       </categories>
   </entry>
 </search>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>zero</title>
+  <title>Hidden yourself until New God appear!</title>
   
   
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="https://jieshenai.github.io/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
-  <updated>2022-09-02T08:18:44.500Z</updated>
-  <id>http://example.com/</id>
+  <link href="https://jieshenai.github.io/"/>
+  <updated>2022-09-04T08:02:24.099Z</updated>
+  <id>https://jieshenai.github.io/</id>
   
   <author>
     <name>Jie Shen</name>
@@ -17,34 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>文章编辑结构</title>
-    <link href="http://example.com/2022/08/29/%E6%96%87%E7%AB%A0%E7%BC%96%E8%BE%91%E7%BB%93%E6%9E%84/"/>
-    <id>http://example.com/2022/08/29/%E6%96%87%E7%AB%A0%E7%BC%96%E8%BE%91%E7%BB%93%E6%9E%84/</id>
-    <published>2022-08-29T06:53:13.000Z</published>
-    <updated>2022-09-02T08:18:44.500Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;文章结构设计&quot;&gt;&lt;a href=&quot;#文章结构设计&quot; class=&quot;headerlink&quot; title=&quot;文章结构设计&quot;&gt;&lt;/a&gt;文章结构设计&lt;/h1&gt;&lt;h2 id=&quot;vuex&quot;&gt;&lt;a href=&quot;#vuex&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="autoWriteDesign" scheme="http://example.com/categories/autoWriteDesign/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>vue</title>
-    <link href="http://example.com/2022/08/29/vue/"/>
-    <id>http://example.com/2022/08/29/vue/</id>
-    <published>2022-08-29T01:05:42.000Z</published>
-    <updated>2022-09-01T09:13:16.391Z</updated>
+    <title>basic</title>
+    <link href="https://jieshenai.github.io/2022/vue/basic/"/>
+    <id>https://jieshenai.github.io/2022/vue/basic/</id>
+    <published>2022-09-04T08:01:44.000Z</published>
+    <updated>2022-09-04T08:02:24.099Z</updated>
     
     
       
@@ -57,59 +34,17 @@
     
     
     
-    <category term="vue" scheme="http://example.com/categories/vue/"/>
+    <category term="vue" scheme="https://jieshenai.github.io/categories/vue/"/>
     
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="http://example.com/2022/08/28/nginx%E9%83%A8%E7%BD%B2vue%E5%92%8Cdjango/"/>
-    <id>http://example.com/2022/08/28/nginx%E9%83%A8%E7%BD%B2vue%E5%92%8Cdjango/</id>
-    <published>2022-08-28T11:09:19.625Z</published>
-    <updated>2022-08-28T11:16:24.074Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;nginx部署vue和django&quot;&gt;&lt;a href=&quot;#nginx部署vue和django&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://example.com/2022/08/28/hello-world/"/>
-    <id>http://example.com/2022/08/28/hello-world/</id>
-    <published>2022-08-28T11:09:19.624Z</published>
-    <updated>2022-08-28T11:09:19.625Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;</summary>
-        
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>nginx部署vue和django</title>
-    <link href="http://example.com/2022/08/26/nginx/"/>
-    <id>http://example.com/2022/08/26/nginx/</id>
-    <published>2022-08-26T08:07:15.000Z</published>
-    <updated>2022-08-28T12:47:20.308Z</updated>
+    <title>nginx</title>
+    <link href="https://jieshenai.github.io/2022/linux/nginx/"/>
+    <id>https://jieshenai.github.io/2022/linux/nginx/</id>
+    <published>2022-09-04T07:58:37.000Z</published>
+    <updated>2022-09-04T08:00:47.214Z</updated>
     
     
       
@@ -122,14 +57,31 @@
     
     
     
-    <category term="linux" scheme="http://example.com/categories/linux/"/>
+    <category term="linux" scheme="https://jieshenai.github.io/categories/linux/"/>
     
     
-    <category term="vue" scheme="http://example.com/tags/vue/"/>
+  </entry>
+  
+  <entry>
+    <title>hexo</title>
+    <link href="https://jieshenai.github.io/2022/tools/hexo/"/>
+    <id>https://jieshenai.github.io/2022/tools/hexo/</id>
+    <published>2022-09-04T07:32:43.000Z</published>
+    <updated>2022-09-04T07:57:58.528Z</updated>
     
-    <category term="django" scheme="http://example.com/tags/django/"/>
     
-    <category term="linux" scheme="http://example.com/tags/linux/"/>
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;文章按类别存储&quot;&gt;&lt;a href=&quot;#文章按类别存储&quot; class=&quot;headerlink&quot; title=&quot;文章按类别存储&quot;&gt;&lt;/a&gt;文章按类别存储&lt;/h2&gt;&lt;p&gt;原来的博客文章全部保存在</summary>
+        
+      
+    
+    
+    
+    <category term="tools" scheme="https://jieshenai.github.io/categories/tools/"/>
+    
     
   </entry>
   
