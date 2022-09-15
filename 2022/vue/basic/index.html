@@ -85,7 +85,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.1k</span>
+            <span class="post-count">1.4k</span>
         </span>
     </span>
 
@@ -94,7 +94,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">5 分钟</span>
+            <span class="post-count">6 分钟</span>
         </span>
     </span>
 </div>
@@ -146,7 +146,13 @@
 
 
 
-<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><ul>
+<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p>参考<a target="_blank" rel="noopener" href="https://www.csdn.net/tags/NtTaAgwsMTYxMjktYmxvZwO0O0OO0O0O.html">点击</a></p>
+<blockquote>
+<p>computed是在DOM执行完成后立马执行（如：赋值）</p>
+<p>created执行时挂载阶段还没有开始，模版还没有渲染成html，所以无法获取元素。created钩子函数主要用来初始化数据。通常在created钩子函数里执行访问数据库的方法，然后返回数据给前端，前端data中定义全局变量接收数据</p>
+<p>mounted钩子函数一般用来向后端发起请求，拿到数据后做一些业务处理。该函数在模版渲染完成后才被调用。DOM操作一般是在mounted钩子函数中进行。<br>methods方法有一定的触发条件，如click等。<br>watch用于检测vue实例上数据的变动</p>
+</blockquote>
+<ul>
 <li><p>需求一</p>
 <p>页面上的内容，由 axios 从服务器端拿回数据，并渲染到页面上。</p>
 <p>问题：当 axios 从服务器取回数据后，vue如何感知到数据发生了变化，并重新渲染模板。</p>
@@ -182,6 +188,13 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">watch</span>: &#123;</span><br><span class="line">			<span class="attr">todos</span>:&#123;</span><br><span class="line">				<span class="attr">deep</span>:<span class="literal">true</span>,</span><br><span class="line">				<span class="title function_">handler</span>(<span class="params">value</span>)&#123;</span><br><span class="line">					<span class="variable language_">localStorage</span>.<span class="title function_">setItem</span>(<span class="string">&#x27;todos&#x27;</span>,<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(value))</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="读取"><a href="#读取" class="headerlink" title="读取"></a>读取</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">			return &#123;</span><br><span class="line">				//由于todos是MyHeader组件和MyFooter组件都在使用，所以放在App中（状态提升）</span><br><span class="line">				todos:JSON.parse(localStorage.getItem(&#x27;todos&#x27;)) || []</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h2><p>在一个函数中，修改完数据后，网页模板会重新解析。</p>
+<p>希望在网页模板解析完成后执行某项操作，通常情况当前函数内容全部执行完，模板才会重新解析。</p>
+<p>解决方法：使用 <code>setTimeout</code> 将该操作添加到队尾。计时的参数可以不用填。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">obj</span> = <span class="variable language_">this</span>.<span class="title function_">getData</span>();</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">arr</span> = <span class="variable language_">this</span>.<span class="title function_">fillParagraphText</span>();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 
 
@@ -284,6 +297,15 @@
 
    
   <nav class="article-nav">
+    
+      <a href="/2022/autoWrite/nextDo/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            nextDo
+          
+        </div>
+      </a>
     
     
       <a href="/2022/linux/nginx/" class="article-nav-link">
