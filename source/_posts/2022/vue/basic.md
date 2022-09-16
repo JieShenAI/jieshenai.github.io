@@ -1,7 +1,7 @@
 ---
-title: vue
-date: 2022-08-29 09:05:42
-categories: vue
+title: basic
+category: vue
+date: 2022-09-04 16:01:44
 tags:
 ---
 
@@ -91,6 +91,16 @@ beforeDestroy(){
 
 
 ## 生命周期
+
+参考[点击](https://www.csdn.net/tags/NtTaAgwsMTYxMjktYmxvZwO0O0OO0O0O.html)
+
+>computed是在DOM执行完成后立马执行（如：赋值）
+>
+>created执行时挂载阶段还没有开始，模版还没有渲染成html，所以无法获取元素。created钩子函数主要用来初始化数据。通常在created钩子函数里执行访问数据库的方法，然后返回数据给前端，前端data中定义全局变量接收数据
+>
+>mounted钩子函数一般用来向后端发起请求，拿到数据后做一些业务处理。该函数在模版渲染完成后才被调用。DOM操作一般是在mounted钩子函数中进行。
+>methods方法有一定的触发条件，如click等。
+>watch用于检测vue实例上数据的变动
 
 * 需求一
 
@@ -238,6 +248,23 @@ data() {
 				todos:JSON.parse(localStorage.getItem('todos')) || []
 			}
 		},
+```
+
+
+
+## 定时器
+
+在一个函数中，修改完数据后，网页模板会重新解析。
+
+希望在网页模板解析完成后执行某项操作，通常情况当前函数内容全部执行完，模板才会重新解析。
+
+解决方法：使用 `setTimeout` 将该操作添加到队尾。计时的参数可以不用填。
+
+```javascript
+this.obj = this.getData();
+setTimeout(() => {
+    this.arr = this.fillParagraphText();
+});
 ```
 
 

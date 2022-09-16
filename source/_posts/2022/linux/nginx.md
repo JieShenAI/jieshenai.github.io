@@ -1,13 +1,11 @@
 ---
-title: nginx部署vue和django
-date: 2022-08-26 16:07:15
-categories:
-- linux
+title: nginx
+category: linux
+date: 2022-09-04 15:58:37
 tags:
-- vue
-- django
-- linux
 ---
+
+
 
 ## nginx 
 
@@ -173,4 +171,3 @@ nginx 和 uwsgi 开机自启动
 nginx开机自启动，在前面已经给出了参考的[链接](https://hashnode.blog.csdn.net/article/details/124502959)。 `systemctl start|stop|status nginx.service`
 
 uwsgi开机自启动，还没设置。不过云服务器，不需要关机，这个也不用设置。
-
