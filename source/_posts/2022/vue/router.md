@@ -27,6 +27,8 @@ new Vue({
 
 
 
+
+
 ## 基本路由
 
 ### path
@@ -153,14 +155,17 @@ props: ['xxx',..]
 
 缺点：
 
-只处理param参数，不处理query参数
+**只处理param参数，不处理query参数**
 
 
 
 #### 方式三
 
+props的第三种写法，值为函数
+
+其实工作量没有减少，将本应在组件内写的代码，移到`router/index.js`中
+
 ```js
-//props的第三种写法，值为函数
 props($route){
     return {
         id: $route.query.id,
@@ -171,11 +176,24 @@ props($route){
 }
 ```
 
-
-
 组件接收：
 
 ```
 props: ['id', 'title', 'a', 'b'],
+```
+
+
+
+若觉得 `$route.query.id,` 写的很长可以使用结构赋值的连续写法
+
+```js
+props({query:{id,title}}){
+    return {
+        id,
+        title,
+        a: 1,
+        b: 'hello'
+    }
+}
 ```
 

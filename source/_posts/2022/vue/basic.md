@@ -7,6 +7,102 @@ tags:
 
 # vue
 
+## 配置项
+
+### 允许组件名为单个单词
+
+在vue根目录下，增加`.eslintrc.js`文件，文件内容如下：
+
+```js
+module.exports = {
+    root: true,
+    env: {
+        node: true
+    },
+    'extends': [
+        'plugin:vue/essential',
+        'eslint:recommended'
+    ],
+    parserOptions: {
+        parser: '@babel/eslint-parser'
+    },
+    rules: {
+        'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+        'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+        //在rules中添加自定义规则
+        //关闭组件命名规则
+        "vue/multi-word-component-names": "off",
+    },
+    overrides: [
+        {
+            files: [
+                '**/__tests__/*.{j,t}s?(x)',
+                '**/tests/unit/**/*.spec.{j,t}s?(x)'
+            ],
+            env: {
+                jest: true
+            }
+        }
+    ]
+}
+
+```
+
+
+
+## v-for
+
+### v-for 数据修改后，页面不变化原因
+
+```html
+<div v-for="data in paper" :key="data.id">
+    <PImg :textObj="data" />
+    {{data}}
+</div>
+```
+
+paper的数据格式如下：
+
+```js
+[
+	{
+        id:xxx,
+        value:xxx,
+    },
+    ...
+]
+```
+
+若只更改paper某个value的数据:
+
+* {{data}} 中的数据会变化
+
+* `pImg`组件的数据不会变化
+
+  只改变了value，:key="data.id"`没有变，vue不知道数据发生了变化，仍然使用上一次的虚拟dom，故新数据显示不出来。
+
+在修改数据时，用一个新对象替代原来对象的做法是不对的，这样也会导致vue感知到不到数据的变化
+
+❌
+
+```js
+state.data[key] = {
+      value: newValue,
+      id: nanoid(),
+}
+```
+
+必须逐个修改对象的值：
+
+```js
+for (const key in paper) {
+    if (paper[key].id == id) {
+        paper[key].id = nanoid();
+        paper[key].value = newValue;
+    }
+}
+```
+
 
 
 ## 消息订阅与发布
