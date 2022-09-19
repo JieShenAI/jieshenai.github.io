@@ -85,7 +85,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.4k</span>
+            <span class="post-count">1.8k</span>
         </span>
     </span>
 
@@ -94,7 +94,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">6 分钟</span>
+            <span class="post-count">7 分钟</span>
         </span>
     </span>
 </div>
@@ -109,7 +109,34 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h1><h2 id="消息订阅与发布"><a href="#消息订阅与发布" class="headerlink" title="消息订阅与发布"></a>消息订阅与发布</h2><blockquote>
+  <h1 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h1><h2 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h2><h3 id="允许组件名为单个单词"><a href="#允许组件名为单个单词" class="headerlink" title="允许组件名为单个单词"></a>允许组件名为单个单词</h3><p>在vue根目录下，增加<code>.eslintrc.js</code>文件，文件内容如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">root</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">env</span>: &#123;</span><br><span class="line">        <span class="attr">node</span>: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&#x27;extends&#x27;</span>: [</span><br><span class="line">        <span class="string">&#x27;plugin:vue/essential&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;eslint:recommended&#x27;</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">parserOptions</span>: &#123;</span><br><span class="line">        <span class="attr">parser</span>: <span class="string">&#x27;@babel/eslint-parser&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">rules</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;no-console&#x27;</span>: process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span> ? <span class="string">&#x27;warn&#x27;</span> : <span class="string">&#x27;off&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;no-debugger&#x27;</span>: process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span> ? <span class="string">&#x27;warn&#x27;</span> : <span class="string">&#x27;off&#x27;</span>,</span><br><span class="line">        <span class="comment">//在rules中添加自定义规则</span></span><br><span class="line">        <span class="comment">//关闭组件命名规则</span></span><br><span class="line">        <span class="string">&quot;vue/multi-word-component-names&quot;</span>: <span class="string">&quot;off&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">overrides</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">files</span>: [</span><br><span class="line">                <span class="string">&#x27;**/__tests__/*.&#123;j,t&#125;s?(x)&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;**/tests/unit/**/*.spec.&#123;j,t&#125;s?(x)&#x27;</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">env</span>: &#123;</span><br><span class="line">                <span class="attr">jest</span>: <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h2><h3 id="v-for-数据修改后，页面不变化原因"><a href="#v-for-数据修改后，页面不变化原因" class="headerlink" title="v-for 数据修改后，页面不变化原因"></a>v-for 数据修改后，页面不变化原因</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;data in paper&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;data.id&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">PImg</span> <span class="attr">:textObj</span>=<span class="string">&quot;data&quot;</span> /&gt;</span></span><br><span class="line">    &#123;&#123;data&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>paper的数据格式如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">	&#123;</span><br><span class="line">        <span class="attr">id</span>:xxx,</span><br><span class="line">        <span class="attr">value</span>:xxx,</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>若只更改paper某个value的数据:</p>
+<ul>
+<li> 中的数据会变化
+</li>
+<li><p><code>pImg</code>组件的数据不会变化</p>
+<p>只改变了value，:key&#x3D;”data.id”&#96;没有变，vue不知道数据发生了变化，仍然使用上一次的虚拟dom，故新数据显示不出来。</p>
+</li>
+</ul>
+<p>在修改数据时，用一个新对象替代原来对象的做法是不对的，这样也会导致vue感知到不到数据的变化</p>
+<p>❌</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">state.<span class="property">data</span>[key] = &#123;</span><br><span class="line">      <span class="attr">value</span>: newValue,</span><br><span class="line">      <span class="attr">id</span>: <span class="title function_">nanoid</span>(),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>必须逐个修改对象的值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> paper) &#123;</span><br><span class="line">    <span class="keyword">if</span> (paper[key].<span class="property">id</span> == id) &#123;</span><br><span class="line">        paper[key].<span class="property">id</span> = <span class="title function_">nanoid</span>();</span><br><span class="line">        paper[key].<span class="property">value</span> = newValue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="消息订阅与发布"><a href="#消息订阅与发布" class="headerlink" title="消息订阅与发布"></a>消息订阅与发布</h2><blockquote>
 <p>用的不多，在vue中常用 事件总线</p>
 </blockquote>
 <p>推荐包:  <code>pubsub-js</code></p>

@@ -1,101 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>hexo</title>
-    <url>/2022/tools/hexo/</url>
-    <content><![CDATA[<h2 id="文章按类别存储"><a href="#文章按类别存储" class="headerlink" title="文章按类别存储"></a>文章按类别存储</h2><p>原来的博客文章全部保存在 <code>_post</code>目录下，显得很杂乱。在<code>_config.yml</code>中增加 <code>cate</code>，修改后的文件的链接和保存的地址</p>
-<ol>
-<li>在主目录的<code>_config.yml</code>指定目录的名</li>
-</ol>
-   <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">category_dir: cate</span><br><span class="line">permalink: :year/:category/:title/</span><br><span class="line">new_post_name: :year/:category/:title.md # File name of new posts</span><br></pre></td></tr></table></figure>
+    <title>nextDo</title>
+    <url>/2022/autoWrite/nextDo/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">init(obj) &#123;</span><br><span class="line">    this.avgGdp = obj.avgGdp</span><br><span class="line">    this.avgProvinceGdp = obj.avgProvinceGdp</span><br><span class="line">    this.cityID = obj.cityID</span><br><span class="line">    this.countryGdp = obj.countryGdp</span><br><span class="line">    this.countryGdpIncrease = obj.countryGdpIncrease</span><br><span class="line">    this.gdp = obj.gdp</span><br><span class="line">    this.gdpIncrease = obj.gdpIncrease</span><br><span class="line">    this.provinceGdp = obj.provinceGdp</span><br><span class="line">    this.provinceGdpIncrease = obj.provinceGdpIncrease</span><br><span class="line">    this.year = obj.year</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
 
-<p>   在这里使用 <code>category</code> 而不是<code>categories</code>，因为<code>:categories</code>是一个对象，如果该文章有多个类别不易存储。</p>
-<ol start="2">
-<li><p>修改主题目录的<code>_config.yml</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">分类: /categories</span><br></pre></td></tr></table></figure>
+<p>在每个页面都这样写，太丑了。遍历data中的数据，如果obj含有该属性则对data中的数据进行赋值。</p>
+<hr>
+
+<p>发起网络请求的代码，建议移到showPaper组件内。资源加载后，存放在浏览器的缓存内。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">getData() &#123;</span><br><span class="line">      let url = &quot;http://localhost:80/api/jsons/query?year=2021&amp;cityID=422801&quot;;</span><br><span class="line">      axios.get(url).then(</span><br><span class="line">        (response) =&gt; &#123;</span><br><span class="line">          console.log(&quot;请求成功了&quot;, response.data);</span><br><span class="line">          this.init(response.data);</span><br><span class="line"></span><br><span class="line">          setTimeout(() =&gt; &#123;</span><br><span class="line">            this.fillParagraphText();</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">        (error) =&gt; &#123;</span><br><span class="line">          console.log(&quot;请求失败了&quot;, error.message);</span><br><span class="line">        &#125;</span><br><span class="line">      );</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
 
 
-</li>
-<li><p>新增文章时，指定<code>category</code>属性值</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new xxx --category 类别名</span><br></pre></td></tr></table></figure>
 
-<p>若想指定多个类别可以使用 <code>categories</code></p>
-</li>
-</ol>
+<hr>
+
+<p>存储在浏览器内存的内容，保存时间多久，会不会存在用户一直在本地编辑不提交，从而丢失用户数据的问题？</p>
 ]]></content>
       <categories>
-        <category>tools</category>
+        <category>autoWrite</category>
       </categories>
   </entry>
   <entry>
-    <title>nginx</title>
-    <url>/2022/linux/nginx/</url>
-    <content><![CDATA[<h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><h3 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h3><p>尚硅谷 <strong>@张一明</strong></p>
-<blockquote>
-<p><a href="https://www.bilibili.com/video/BV1yS4y1N76R">https://www.bilibili.com/video/BV1yS4y1N76R</a></p>
-</blockquote>
-<blockquote>
-<p>笔记：<a href="https://blog.csdn.net/learning_xzj/category_11792194.html">https://blog.csdn.net/learning_xzj/category_11792194.html</a> @不知名架构师</p>
-</blockquote>
-<h3 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h3><h4 id="方式一："><a href="#方式一：" class="headerlink" title="方式一："></a>方式一：</h4><p><code>yum install nginx</code></p>
-<h4 id="方式二："><a href="#方式二：" class="headerlink" title="方式二："></a>方式二：</h4><p><a href="https://blog.csdn.net/qq_48721706/article/details/125577122">centos下载安装nginx在线版、离线版_hmb↑的博客-CSDN博客_centos 下载nginx</a></p>
-<blockquote>
-<p>在这篇文章中，给出了如何下载nginx的压缩包，编译安装的命令</p>
-</blockquote>
-<p>选择nginx的安装位置</p>
-<p><code>./configure --prefix=/usr/local/nginx</code></p>
-<h4 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h4><p>方式一：yum安装。自动添加进环境变量。文件分散在各处。</p>
-<p>方式二：编译安装。不会添加进环境变量，文件集中在一个文件夹下。</p>
-<p><code>ps aux|grep nginx</code> 查看运行的nginx的进程</p>
-<p><code>sudo /usr/sbin/nginx</code>  启动nginx</p>
-<p>如果出现端口占用，会启动失败，查出占用的端口的进程：</p>
-<p><code>netstat -ano | grep 80</code></p>
-<p>设置nginx开机自启动, 参考的是<a href="https://hashnode.blog.csdn.net/article/details/124502959">这篇文章</a>的做法。<code>systemctl start|enable nginx.service</code></p>
-<p>具体<code>nginx.conf</code>配置文件的配置参考的<a href="https://www.jb51.net/article/241964.htm">这篇文章</a>。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">user  普通用户名|root;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>若不填写, nginx没有访问本地文件的权限</p>
-</blockquote>
-<h3 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h3><p>若出现 <code>500 Internal Server Error</code></p>
-<p>直接进入nginx的配置文件去找问题，进入<strong>nginx&#x2F;logs&#x2F;error.log文件</strong></p>
-<h2 id="django部署"><a href="#django部署" class="headerlink" title="django部署"></a>django部署</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">        listen 8080;</span><br><span class="line">        server_name 127.0.0.1;</span><br><span class="line">        access_log /home/jie/.logs/django/access.log;</span><br><span class="line">        charset utf-8;</span><br><span class="line">        gzip on;</span><br><span class="line">        gzip_types text/plain application/x-javascript text/css text/javascript application/x-httpd-php image/jpeg image/gif image/png;</span><br><span class="line">        error_page 404  /404.html;</span><br><span class="line">        error_page 500 502 503 504  /50x.html;</span><br><span class="line">        location / &#123;</span><br><span class="line">                include uwsgi_params;</span><br><span class="line">                uwsgi_connect_timeout 30;</span><br><span class="line">                uwsgi_pass 127.0.0.1:8000;</span><br><span class="line">        &#125;</span><br><span class="line">        location /static/ &#123;</span><br><span class="line">                alias /home/jie/site/mysite/app/static/;</span><br><span class="line">                index index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>要修改的地方:</p>
-<ul>
-<li><code>access_log /home/jie/.logs/django;</code></li>
-<li><code>uwsgi_pass 127.0.0.1:8000;</code></li>
-<li><code>alias /opt/project_teacher/mysite/app/static/;</code></li>
-</ul>
-<p><code>uwsgi.ini</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[uwsgi]</span><br><span class="line">chdir=../mysite</span><br><span class="line">uid=root</span><br><span class="line">gid=root</span><br><span class="line">module=mysite.wsgi:application</span><br><span class="line">socket=127.0.0.1:8000</span><br><span class="line">master=true</span><br><span class="line">workers=2</span><br><span class="line">pidfile=uwsgi.pid</span><br><span class="line">vacuum=true </span><br><span class="line">thunder-lock=true</span><br><span class="line">enable-threads=true</span><br><span class="line">harakiri=30</span><br><span class="line">post-buffering=1024</span><br><span class="line">daemonize=uwsgi.log</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="django-装包"><a href="#django-装包" class="headerlink" title="django 装包"></a>django 装包</h3><p>以下以 vmware的centos7为例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip3.9 install pymysql</span><br><span class="line">pip3.9 install pillow</span><br><span class="line">pip3.9 install simplejson</span><br><span class="line">pip3.9 install python-docx</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>若pip装包时，遇到如下报错：</p>
-<p>This error originates from a subprocess, and is likely not a problem with pip</p>
-<p>只需要：<code>pip3 install --upgrade setuptools</code></p>
-</blockquote>
-<p><a href="http://192.168.31.103/">http://192.168.31.103/</a></p>
-<h2 id="vue部署"><a href="#vue部署" class="headerlink" title="vue部署"></a>vue部署</h2><p><code>npm run build</code>   在当前目录生成 dist文件夹</p>
-<p><code>scp -r dist/* root@xxx.xxx.xxx.69:/xxx/xxx/www</code></p>
-<p>在windows中，将window dist文件夹下的内容传到服务器上。</p>
-<h2 id="开启自启动"><a href="#开启自启动" class="headerlink" title="开启自启动"></a>开启自启动</h2><p>nginx 和 uwsgi 开机自启动</p>
-<p>nginx开机自启动，在前面已经给出了参考的<a href="https://hashnode.blog.csdn.net/article/details/124502959">链接</a>。 <code>systemctl start|stop|status nginx.service</code></p>
-<p>uwsgi开机自启动，还没设置。不过云服务器，不需要关机，这个也不用设置。</p>
+    <title>paperStruct</title>
+    <url>/2022/autoWrite/paperStruct/</url>
+    <content><![CDATA[<h1 id="结构设计"><a href="#结构设计" class="headerlink" title="结构设计"></a>结构设计</h1><h2 id="ShowPaper-vue加载不同文件"><a href="#ShowPaper-vue加载不同文件" class="headerlink" title="ShowPaper.vue加载不同文件"></a><code>ShowPaper.vue</code>加载不同文件</h2><p><code>showPaper</code> 带有不同的query参数，实现访问不同文件的效果。</p>
 ]]></content>
       <categories>
-        <category>linux</category>
+        <category>autoWrite</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>jsIntro</title>
+    <url>/2022/javascript/jsIntro/</url>
+    <content><![CDATA[<h1 id="js基础知识"><a href="#js基础知识" class="headerlink" title="js基础知识"></a>js基础知识</h1><p>建议阅读 <a href="https://zh.javascript.info/">现代 JavaScript 教程</a> ，分类细，写的水平也高</p>
+<h2 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">proDemo</span>(<span class="params">num</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(</span><br><span class="line">        <span class="keyword">function</span> (<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> a = num;</span><br><span class="line">            <span class="keyword">if</span> (a % <span class="number">2</span>) &#123;</span><br><span class="line">                <span class="title function_">resolve</span>(a);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="title function_">reject</span>(a);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">odd</span>(<span class="params">params</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(params + <span class="string">&quot;是奇数&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">even</span>(<span class="params">params</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(params + <span class="string">&quot; even error&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> promise = <span class="title function_">proDemo</span>(<span class="number">10</span>);</span><br><span class="line">promise.<span class="title function_">then</span>(odd, even).<span class="title function_">catch</span>(<span class="function">(<span class="params">err</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(err + <span class="string">&quot; catch&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="读取值"><a href="#读取值" class="headerlink" title="读取值"></a>读取值</h2><p>从对象读取值，如果为undefied，则赋值为 [ ]</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;papers&#x27;</span>)) || []</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="键为变量"><a href="#键为变量" class="headerlink" title="键为变量"></a>键为变量</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">&#123; [a] : <span class="string">&quot;xxx&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>[]</code>把作为键的变量包起来</p>
+<h3 id="单对象键值"><a href="#单对象键值" class="headerlink" title="单对象键值"></a>单对象键值</h3><p>获取单个对象的键和值</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = &#123; <span class="attr">name</span>: <span class="string">&#x27;jie&#x27;</span> &#125;;</span><br><span class="line"><span class="keyword">let</span> key = <span class="title class_">Object</span>.<span class="title function_">keys</span>(arr)[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">let</span> value = <span class="title class_">Object</span>.<span class="title function_">values</span>(arr)[<span class="number">0</span>];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(key, value);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="结构赋值"><a href="#结构赋值" class="headerlink" title="结构赋值"></a>结构赋值</h3><p>直接拿到参数内部的属性，简化代码；</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">person</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;jie&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">show1</span> = (<span class="params">&#123; person &#125;</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(person);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结构赋值连续写法</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">show2</span> = (<span class="params">&#123; person: &#123; name &#125; &#125;</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">show1</span>(obj);</span><br><span class="line"><span class="title function_">show2</span>(obj);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>输入结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123; name: &#x27;jie&#x27; &#125;</span><br><span class="line">jie</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>javascript</category>
       </categories>
   </entry>
   <entry>
     <title>basic</title>
     <url>/2022/vue/basic/</url>
-    <content><![CDATA[<h1 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h1><h2 id="消息订阅与发布"><a href="#消息订阅与发布" class="headerlink" title="消息订阅与发布"></a>消息订阅与发布</h2><blockquote>
+    <content><![CDATA[<h1 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h1><h2 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h2><h3 id="允许组件名为单个单词"><a href="#允许组件名为单个单词" class="headerlink" title="允许组件名为单个单词"></a>允许组件名为单个单词</h3><p>在vue根目录下，增加<code>.eslintrc.js</code>文件，文件内容如下：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">root</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">env</span>: &#123;</span><br><span class="line">        <span class="attr">node</span>: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&#x27;extends&#x27;</span>: [</span><br><span class="line">        <span class="string">&#x27;plugin:vue/essential&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;eslint:recommended&#x27;</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">parserOptions</span>: &#123;</span><br><span class="line">        <span class="attr">parser</span>: <span class="string">&#x27;@babel/eslint-parser&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">rules</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;no-console&#x27;</span>: process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span> ? <span class="string">&#x27;warn&#x27;</span> : <span class="string">&#x27;off&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;no-debugger&#x27;</span>: process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span> ? <span class="string">&#x27;warn&#x27;</span> : <span class="string">&#x27;off&#x27;</span>,</span><br><span class="line">        <span class="comment">//在rules中添加自定义规则</span></span><br><span class="line">        <span class="comment">//关闭组件命名规则</span></span><br><span class="line">        <span class="string">&quot;vue/multi-word-component-names&quot;</span>: <span class="string">&quot;off&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">overrides</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">files</span>: [</span><br><span class="line">                <span class="string">&#x27;**/__tests__/*.&#123;j,t&#125;s?(x)&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;**/tests/unit/**/*.spec.&#123;j,t&#125;s?(x)&#x27;</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">env</span>: &#123;</span><br><span class="line">                <span class="attr">jest</span>: <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h2><h3 id="v-for-数据修改后，页面不变化原因"><a href="#v-for-数据修改后，页面不变化原因" class="headerlink" title="v-for 数据修改后，页面不变化原因"></a>v-for 数据修改后，页面不变化原因</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;data in paper&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;data.id&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">PImg</span> <span class="attr">:textObj</span>=<span class="string">&quot;data&quot;</span> /&gt;</span></span><br><span class="line">    &#123;&#123;data&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>paper的数据格式如下：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">	&#123;</span><br><span class="line">        <span class="attr">id</span>:xxx,</span><br><span class="line">        <span class="attr">value</span>:xxx,</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>若只更改paper某个value的数据:</p>
+<ul>
+<li> 中的数据会变化
+</li>
+<li><p><code>pImg</code>组件的数据不会变化</p>
+<p>只改变了value，:key&#x3D;”data.id”&#96;没有变，vue不知道数据发生了变化，仍然使用上一次的虚拟dom，故新数据显示不出来。</p>
+</li>
+</ul>
+<p>在修改数据时，用一个新对象替代原来对象的做法是不对的，这样也会导致vue感知到不到数据的变化</p>
+<p>❌</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">state.<span class="property">data</span>[key] = &#123;</span><br><span class="line">      <span class="attr">value</span>: newValue,</span><br><span class="line">      <span class="attr">id</span>: <span class="title function_">nanoid</span>(),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>必须逐个修改对象的值：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> paper) &#123;</span><br><span class="line">    <span class="keyword">if</span> (paper[key].<span class="property">id</span> == id) &#123;</span><br><span class="line">        paper[key].<span class="property">id</span> = <span class="title function_">nanoid</span>();</span><br><span class="line">        paper[key].<span class="property">value</span> = newValue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="消息订阅与发布"><a href="#消息订阅与发布" class="headerlink" title="消息订阅与发布"></a>消息订阅与发布</h2><blockquote>
 <p>用的不多，在vue中常用 事件总线</p>
 </blockquote>
 <p>推荐包:  <code>pubsub-js</code></p>
@@ -209,6 +212,289 @@
       </categories>
   </entry>
   <entry>
+    <title>router</title>
+    <url>/2022/vue/router/</url>
+    <content><![CDATA[<h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1><h2 id="main-js-引入"><a href="#main-js-引入" class="headerlink" title="main.js 引入"></a>main.js 引入</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//引入VueRouter</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">VueRouter</span> <span class="keyword">from</span> <span class="string">&#x27;vue-router&#x27;</span></span><br><span class="line"><span class="comment">//引入路由器</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&#x27;./router&#x27;</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">use</span>(<span class="title class_">VueRouter</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">	<span class="attr">el</span>:<span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">	<span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> <span class="title function_">h</span>(<span class="title class_">App</span>),</span><br><span class="line">	<span class="attr">router</span>:router</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="基本路由"><a href="#基本路由" class="headerlink" title="基本路由"></a>基本路由</h2><h3 id="path"><a href="#path" class="headerlink" title="path"></a>path</h3><p>使用路由的path</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;router-link to=&quot;&#123;</span><br><span class="line">	path: &quot;/home/news&quot;                                         </span><br><span class="line">    &#125;&quot;&gt;</span><br><span class="line">    ...</span><br><span class="line">&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>若有<code>&lt;router-link&gt;</code> 必须在当前组件指定 <code>&lt;router-view&gt;&lt;/router-view&gt;</code></p>
+<h3 id="name"><a href="#name" class="headerlink" title="name"></a>name</h3><p>使用路由的name</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;router-link :to=&quot;&#123;</span><br><span class="line">	name:&#x27;xiangqing&#x27;,				</span><br><span class="line">    &#125;&quot;&gt;</span><br><span class="line">&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="路由传参"><a href="#路由传参" class="headerlink" title="路由传参"></a>路由传参</h2><h3 id="query参数"><a href="#query参数" class="headerlink" title="query参数"></a>query参数</h3><p>传递query参数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;router-link :to=&quot;&#123;</span><br><span class="line">	...</span><br><span class="line">	query:&#123;</span><br><span class="line">		id:m.id,</span><br><span class="line">		title:m.title</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;&quot;&gt;</span><br><span class="line">&#123;&#123;m.title&#125;&#125;</span><br><span class="line">&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+
+<p>接收query参数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;&#123; $route.query.id &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="params-参数"><a href="#params-参数" class="headerlink" title="params 参数"></a>params 参数</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;router-link :to=&quot;&#123;</span><br><span class="line">	...</span><br><span class="line">	params:&#123;</span><br><span class="line">		id:m.id,</span><br><span class="line">		title:m.title</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;&quot;&gt;</span><br><span class="line">&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="路由props"><a href="#路由props" class="headerlink" title="路由props"></a>路由props</h3><p>目的：为了让路由读参数读的更容易；</p>
+<p>不使用props接收参数，如下所示，这样很繁琐：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">$route</span>.<span class="property">query</span>.<span class="property">xxx</span>;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">$route</span>.<span class="property">params</span>.<span class="property">xxx</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>路由的props与组件的props一样，都需要在组件中使用：<code>props: [&#39;id&#39;, &#39;title&#39;, ...],</code> 来接收</p>
+<p>不同的是，路由的props，在 <code>router/index.js</code> 中，进行配置</p>
+<h4 id="方式一-不常用"><a href="#方式一-不常用" class="headerlink" title="方式一 不常用"></a>方式一 不常用</h4><pre><code>//props的第一种写法，值为对象，该对象中的所有key-value都会以props的形式传给组件。
+props:&#123;a:1,b:&#39;hello&#39;&#125;
+</code></pre>
+<p>组件接收：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">props:[&#x27;a&#x27;,&#x27;b&#x27;]</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h4><p>props的第二种写法，值为布尔值;</p>
+<p>若布尔值为真，就会把该路由组件收到的所有params参数，以props的形式传给Detail组件。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="attr">props</span>:<span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+
+<p>组件接收：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="attr">props</span>: [<span class="string">&#x27;xxx&#x27;</span>,..]</span><br></pre></td></tr></table></figure>
+
+<p>缺点：</p>
+<p><strong>只处理param参数，不处理query参数</strong></p>
+<h4 id="方式三"><a href="#方式三" class="headerlink" title="方式三"></a>方式三</h4><p>props的第三种写法，值为函数</p>
+<p>其实工作量没有减少，将本应在组件内写的代码，移到<code>router/index.js</code>中</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">props</span>(<span class="params">$route</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">id</span>: $route.<span class="property">query</span>.<span class="property">id</span>,</span><br><span class="line">        <span class="attr">title</span>: $route.<span class="property">query</span>.<span class="property">title</span>,</span><br><span class="line">        <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">b</span>: <span class="string">&#x27;hello&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>组件接收：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">props: [&#x27;id&#x27;, &#x27;title&#x27;, &#x27;a&#x27;, &#x27;b&#x27;],</span><br></pre></td></tr></table></figure>
+
+
+
+<p>若觉得 <code>$route.query.id,</code> 写的很长可以使用结构赋值的连续写法</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">props</span>(<span class="params">&#123;query:&#123;id,title&#125;&#125;</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        id,</span><br><span class="line">        title,</span><br><span class="line">        <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">b</span>: <span class="string">&#x27;hello&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>vue</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>less</title>
+    <url>/2022/css/less/</url>
+    <content><![CDATA[<h1 id="less"><a href="#less" class="headerlink" title="less"></a>less</h1><p>less官网： <a href="https://lesscss.org/">https://lesscss.org/</a></p>
+<p>参考笔记： <a href="https://brucecai55520.gitee.io/bruceblog/notes/less/less.html">https://brucecai55520.gitee.io/bruceblog/notes/less/less.html</a></p>
+<p>vscode安装插件：Easy LESS</p>
+<p>浏览器测试</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&lt;style type=&quot;text/less&quot;&gt;</span><br><span class="line">        <span class="selector-class">.head</span> &#123;</span><br><span class="line">            <span class="attribute">background-color</span>: skyblue;</span><br><span class="line">            <span class="selector-tag">p</span> &#123;</span><br><span class="line">                <span class="attribute">color</span>: red;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">// 写在尾部</span><br><span class="line">&lt;script <span class="attribute">src</span>=&quot;./less-<span class="number">1.3</span>.<span class="number">1</span><span class="selector-class">.min</span><span class="selector-class">.js</span>&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>注释</p>
+<p>&#x2F;&#x2F; 开头注释，不会被编译到css文件中</p>
+<p>&#x2F;**&#x2F;包裹的注释，被编译到css文件中</p>
+<h2 id="less-变量"><a href="#less-变量" class="headerlink" title="less 变量"></a>less 变量</h2><figure class="highlight less"><table><tr><td class="code"><pre><span class="line">&lt;<span class="selector-tag">style</span> <span class="selector-tag">scoped</span> <span class="selector-tag">lang</span>=&quot;<span class="selector-tag">less</span>&quot;&gt;</span><br><span class="line">@<span class="selector-tag">color</span>: <span class="selector-tag">aqua</span>;</span><br><span class="line">@<span class="selector-tag">selector</span>: <span class="selector-tag">p</span>;</span><br><span class="line">@<span class="selector-tag">c</span>: <span class="selector-tag">color</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.head</span> &#123;</span><br><span class="line">  <span class="variable">@&#123;selector&#125;</span> &#123;</span><br><span class="line">    @&#123;c&#125;: @<span class="selector-tag">color</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/<span class="selector-tag">style</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>@&#123;c&#125;: @color;</code> 展示了属性名和属性值作为变量的写法；</p>
+<p>属性名 和 选择器 作为变量需要用<code>&#123;&#125;</code>包裹；</p>
+<h3 id="变量的延迟加载"><a href="#变量的延迟加载" class="headerlink" title="变量的延迟加载"></a>变量的延迟加载</h3><p>less 内的变量都是块级作用域， 延迟加载；</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="variable">@var:</span> <span class="number">0</span>;</span><br><span class="line"><span class="selector-class">.class</span>&#123;</span><br><span class="line">    <span class="variable">@var:</span> <span class="number">1</span>;</span><br><span class="line">	<span class="selector-class">.brass</span>&#123;</span><br><span class="line">		<span class="variable">@var:</span> <span class="number">2</span>;</span><br><span class="line">		three: @var; <span class="comment">// 3,延迟加载</span></span><br><span class="line">		<span class="variable">@var:</span> <span class="number">3</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	one: @var;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译后的结果是：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.class&#123;</span><br><span class="line">	one: 1;</span><br><span class="line">&#125;</span><br><span class="line">.class .brass&#123;</span><br><span class="line">	three: 3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="css嵌套规则"><a href="#css嵌套规则" class="headerlink" title="css嵌套规则"></a>css嵌套规则</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.cls&#123;</span><br><span class="line">	&amp;:hover&#123;</span><br><span class="line">		xxx</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&amp;表示平级；</p>
+<p>若不加编译之后是: <code>.cls :hover</code>，就变成了父子关系；</p>
+<h2 id="less混合"><a href="#less混合" class="headerlink" title="less混合"></a>less混合</h2><p>混合将一系列属性从一个规则集，引入到另一个规则集；</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;head&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;c1&quot;</span>&gt;</span></span><br><span class="line">      文字</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;c2&quot;</span>&gt;</span></span><br><span class="line">      文字</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="普通混合"><a href="#普通混合" class="headerlink" title="普通混合"></a>普通混合</h3><p>.c1 和 .c2 直接使用<code>.func</code>定义好的样式</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.func</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.head</span> &#123;</span><br><span class="line">  <span class="selector-class">.c1</span> &#123;</span><br><span class="line">    <span class="selector-class">.func</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="selector-class">.c2</span> &#123;</span><br><span class="line">    <span class="selector-class">.func</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="带参数的混合"><a href="#带参数的混合" class="headerlink" title="带参数的混合"></a>带参数的混合</h3><p>带参数，指定默认值为 aqua</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.func(@c: aqua) &#123;</span><br><span class="line">  color: @c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>调用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.c1 &#123;</span><br><span class="line">  .func(pink);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.c2 &#123;</span><br><span class="line">  .func();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="命名参数"><a href="#命名参数" class="headerlink" title="命名参数"></a>命名参数</h3><p>在传实参时，指定参数; 用于有多个参数和默认参数值时，指定传的参数；</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.func(@c:aqua)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="匹配模式"><a href="#匹配模式" class="headerlink" title="匹配模式"></a>匹配模式</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;son&quot;&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &quot;MyHello&quot;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped lang=&quot;less&quot;&gt;</span><br><span class="line">.pos(@_, @w, @h) &#123;</span><br><span class="line">  background-color: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.pos(L, @w, @h) &#123;</span><br><span class="line">  float: left;</span><br><span class="line">  width: 200px;</span><br><span class="line">  height: 200px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.pos(R, @w, @h) &#123;</span><br><span class="line">  float: right;</span><br><span class="line">  width: @w;</span><br><span class="line">  height: @h;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.container &#123;</span><br><span class="line">  width: 300px;</span><br><span class="line">  height: 300px;</span><br><span class="line">  background-color: aquamarine;</span><br><span class="line">  .son &#123;</span><br><span class="line">    .pos(R, 200px, 200px);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>.pos</code>，通过在形参里添加标志L，R，从而避免了重新定义混合的问题；</p>
+<p><code>.pos(@_, @w, @h)</code> 都能匹配上，可以上公共部分放在其中。</p>
+<h3 id="arguments-变量"><a href="#arguments-变量" class="headerlink" title="arguments  变量"></a>arguments  变量</h3><p>实参列表</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.border</span>(<span class="variable">@w</span>,<span class="variable">@sytle</span>,<span class="variable">@c</span>)&#123;</span><br><span class="line">	<span class="attribute">border</span>: <span class="variable">@arguments</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.xxxClass</span> &#123;</span><br><span class="line">	<span class="selector-class">.border</span>(<span class="number">1px</span>,solid,black)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h2><p>在less计算中，双方只要有一方带单位就行了</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.xxxClass</span>&#123;</span><br><span class="line">	<span class="attribute">width</span>: (<span class="number">100</span> + <span class="number">100px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>混合的缺点：在转成css时，很多共有的css属性不能合并，这样导致文件变大；</p>
+<p>如下的代码，在混合中实现不了</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span>,<span class="selector-tag">h2</span>&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>继承不能带参数；</p>
+<p>继承性能比混合高，灵活性没有混合强；</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: aqua;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.div</span>:<span class="selector-tag">extend</span>(.parent)&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="selector-tag">&amp;</span><span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="父"><a href="#父" class="headerlink" title="父"></a>父</h3><figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: aqua;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>错误写法❌</p>
+<blockquote>
+<p>父后面不能跟()，也不能像继承那样参数</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.parent()&#123;</span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="继承的两种写法"><a href="#继承的两种写法" class="headerlink" title="继承的两种写法"></a>继承的两种写法</h3><ul>
+<li><p>一</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.div</span>:<span class="selector-tag">extend</span>(.parent)&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>二</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.div</span>&#123;</span><br><span class="line">	<span class="selector-tag">&amp;</span>:<span class="selector-tag">extend</span>(.parent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>继承 all</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: aqua;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.parent</span><span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: skyblue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>.parent</code> 指定了鼠标悬浮更换背景色；在继承时，需要在其后加上 <code>all</code>, <code>.parent:hover</code> 才会生效；</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">&amp;</span>:<span class="selector-tag">extend</span>(.parent all);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>编译成css</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>,</span><br><span class="line"><span class="selector-class">.div</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: aqua;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.div</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.div</span><span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>) &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于.div继承了.parent，故形成了如下代码</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>,</span><br><span class="line"><span class="selector-class">.div</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: aqua;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="避免编译"><a href="#避免编译" class="headerlink" title="避免编译"></a>避免编译</h2>]]></content>
+      <categories>
+        <category>css</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>nginx</title>
+    <url>/2022/linux/nginx/</url>
+    <content><![CDATA[<h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><h3 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h3><p>尚硅谷 <strong>@张一明</strong></p>
+<blockquote>
+<p><a href="https://www.bilibili.com/video/BV1yS4y1N76R">https://www.bilibili.com/video/BV1yS4y1N76R</a></p>
+</blockquote>
+<blockquote>
+<p>笔记：<a href="https://blog.csdn.net/learning_xzj/category_11792194.html">https://blog.csdn.net/learning_xzj/category_11792194.html</a> @不知名架构师</p>
+</blockquote>
+<h3 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h3><h4 id="方式一："><a href="#方式一：" class="headerlink" title="方式一："></a>方式一：</h4><p><code>yum install nginx</code></p>
+<h4 id="方式二："><a href="#方式二：" class="headerlink" title="方式二："></a>方式二：</h4><p><a href="https://blog.csdn.net/qq_48721706/article/details/125577122">centos下载安装nginx在线版、离线版_hmb↑的博客-CSDN博客_centos 下载nginx</a></p>
+<blockquote>
+<p>在这篇文章中，给出了如何下载nginx的压缩包，编译安装的命令</p>
+</blockquote>
+<p>选择nginx的安装位置</p>
+<p><code>./configure --prefix=/usr/local/nginx</code></p>
+<h4 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h4><p>方式一：yum安装。自动添加进环境变量。文件分散在各处。</p>
+<p>方式二：编译安装。不会添加进环境变量，文件集中在一个文件夹下。</p>
+<p><code>ps aux|grep nginx</code> 查看运行的nginx的进程</p>
+<p><code>sudo /usr/sbin/nginx</code>  启动nginx</p>
+<p>如果出现端口占用，会启动失败，查出占用的端口的进程：</p>
+<p><code>netstat -ano | grep 80</code></p>
+<p>设置nginx开机自启动, 参考的是<a href="https://hashnode.blog.csdn.net/article/details/124502959">这篇文章</a>的做法。<code>systemctl start|enable nginx.service</code></p>
+<p>具体<code>nginx.conf</code>配置文件的配置参考的<a href="https://www.jb51.net/article/241964.htm">这篇文章</a>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">user  普通用户名|root;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>若不填写, nginx没有访问本地文件的权限</p>
+</blockquote>
+<h3 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h3><p>若出现 <code>500 Internal Server Error</code></p>
+<p>直接进入nginx的配置文件去找问题，进入<strong>nginx&#x2F;logs&#x2F;error.log文件</strong></p>
+<h2 id="django部署"><a href="#django部署" class="headerlink" title="django部署"></a>django部署</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">        listen 8080;</span><br><span class="line">        server_name 127.0.0.1;</span><br><span class="line">        access_log /home/jie/.logs/django/access.log;</span><br><span class="line">        charset utf-8;</span><br><span class="line">        gzip on;</span><br><span class="line">        gzip_types text/plain application/x-javascript text/css text/javascript application/x-httpd-php image/jpeg image/gif image/png;</span><br><span class="line">        error_page 404  /404.html;</span><br><span class="line">        error_page 500 502 503 504  /50x.html;</span><br><span class="line">        location / &#123;</span><br><span class="line">                include uwsgi_params;</span><br><span class="line">                uwsgi_connect_timeout 30;</span><br><span class="line">                uwsgi_pass 127.0.0.1:8000;</span><br><span class="line">        &#125;</span><br><span class="line">        location /static/ &#123;</span><br><span class="line">                alias /home/jie/site/mysite/app/static/;</span><br><span class="line">                index index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要修改的地方:</p>
+<ul>
+<li><code>access_log /home/jie/.logs/django;</code></li>
+<li><code>uwsgi_pass 127.0.0.1:8000;</code></li>
+<li><code>alias /opt/project_teacher/mysite/app/static/;</code></li>
+</ul>
+<p><code>uwsgi.ini</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[uwsgi]</span><br><span class="line">chdir=../mysite</span><br><span class="line">uid=root</span><br><span class="line">gid=root</span><br><span class="line">module=mysite.wsgi:application</span><br><span class="line">socket=127.0.0.1:8000</span><br><span class="line">master=true</span><br><span class="line">workers=2</span><br><span class="line">pidfile=uwsgi.pid</span><br><span class="line">vacuum=true </span><br><span class="line">thunder-lock=true</span><br><span class="line">enable-threads=true</span><br><span class="line">harakiri=30</span><br><span class="line">post-buffering=1024</span><br><span class="line">daemonize=uwsgi.log</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="django-装包"><a href="#django-装包" class="headerlink" title="django 装包"></a>django 装包</h3><p>以下以 vmware的centos7为例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip3.9 install pymysql</span><br><span class="line">pip3.9 install pillow</span><br><span class="line">pip3.9 install simplejson</span><br><span class="line">pip3.9 install python-docx</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>若pip装包时，遇到如下报错：</p>
+<p>This error originates from a subprocess, and is likely not a problem with pip</p>
+<p>只需要：<code>pip3 install --upgrade setuptools</code></p>
+</blockquote>
+<p><a href="http://192.168.31.103/">http://192.168.31.103/</a></p>
+<h2 id="vue部署"><a href="#vue部署" class="headerlink" title="vue部署"></a>vue部署</h2><p><code>npm run build</code>   在当前目录生成 dist文件夹</p>
+<p><code>scp -r dist/* root@xxx.xxx.xxx.69:/xxx/xxx/www</code></p>
+<p>在windows中，将window dist文件夹下的内容传到服务器上。</p>
+<h2 id="开启自启动"><a href="#开启自启动" class="headerlink" title="开启自启动"></a>开启自启动</h2><p>nginx 和 uwsgi 开机自启动</p>
+<p>nginx开机自启动，在前面已经给出了参考的<a href="https://hashnode.blog.csdn.net/article/details/124502959">链接</a>。 <code>systemctl start|stop|status nginx.service</code></p>
+<p>uwsgi开机自启动，还没设置。不过云服务器，不需要关机，这个也不用设置。</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>hexo</title>
+    <url>/2022/tools/hexo/</url>
+    <content><![CDATA[<h2 id="文章按类别存储"><a href="#文章按类别存储" class="headerlink" title="文章按类别存储"></a>文章按类别存储</h2><p>原来的博客文章全部保存在 <code>_post</code>目录下，显得很杂乱。在<code>_config.yml</code>中增加 <code>cate</code>，修改后的文件的链接和保存的地址</p>
+<ol>
+<li>在主目录的<code>_config.yml</code>指定目录的名</li>
+</ol>
+   <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">category_dir: cate</span><br><span class="line">permalink: :year/:category/:title/</span><br><span class="line">new_post_name: :year/:category/:title.md # File name of new posts</span><br></pre></td></tr></table></figure>
+
+<p>   在这里使用 <code>category</code> 而不是<code>categories</code>，因为<code>:categories</code>是一个对象，如果该文章有多个类别不易存储。</p>
+<ol start="2">
+<li><p>修改主题目录的<code>_config.yml</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">分类: /categories</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>新增文章时，指定<code>category</code>属性值</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new xxx --category 类别名</span><br></pre></td></tr></table></figure>
+
+<p>若想指定多个类别可以使用 <code>categories</code></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+  </entry>
+  <entry>
     <title>vuex</title>
     <url>/2022/vue/vuex/</url>
     <content><![CDATA[<h1 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h1><p>在header组件中 ，dispatch</p>
@@ -219,34 +505,15 @@
 <li>监视数据变化</li>
 </ul>
 <p>​	当基本类型的 state 中的数据发生变化时，vue能感知到；但对象内部数据发生变化时，无法被vue感知到。</p>
-<p>​	采用 computed + watch的方式</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="attr">computed</span>: &#123;</span><br><span class="line">       <span class="title function_">paper</span>(<span class="params"></span>) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">$store</span>.<span class="property">state</span>.<span class="property">paper</span>.<span class="property">data</span>[<span class="variable language_">this</span>.<span class="property">chse</span>];</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="attr">watch</span>: &#123;</span><br><span class="line">       <span class="attr">paper</span>: &#123;</span><br><span class="line">           <span class="attr">deep</span>: <span class="literal">true</span>,</span><br><span class="line">           <span class="title function_">handler</span>(<span class="params">val</span>) &#123;</span><br><span class="line">               <span class="comment">// 由于是异步载入，所以只能在状态值的变化时执行渲染操作</span></span><br><span class="line">               <span class="comment">// 绝不可在mounted中执行render方法</span></span><br><span class="line">               <span class="variable language_">this</span>.<span class="title function_">render</span>(val)</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>​	采用 computed + watch的方式，v-if ，都失效了；</p>
+<p>​	我把这个 state的数据放在 data里，就好了, vuex中的数据更新后，data中的数据也会同步更新</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">return &#123;</span><br><span class="line">            chse: &quot;2-3&quot;,</span><br><span class="line">            paper: this.$store.state.paper.data[&quot;2-3&quot;],</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 
-<p>​	有个小细节：vuex中有其他数据变化时，此前无法察觉的对象，此时可被vue感知到了。</p>
+
+
 ]]></content>
       <categories>
         <category>vue</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>nextDo</title>
-    <url>/2022/autoWrite/nextDo/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">init(obj) &#123;</span><br><span class="line">    this.avgGdp = obj.avgGdp</span><br><span class="line">    this.avgProvinceGdp = obj.avgProvinceGdp</span><br><span class="line">    this.cityID = obj.cityID</span><br><span class="line">    this.countryGdp = obj.countryGdp</span><br><span class="line">    this.countryGdpIncrease = obj.countryGdpIncrease</span><br><span class="line">    this.gdp = obj.gdp</span><br><span class="line">    this.gdpIncrease = obj.gdpIncrease</span><br><span class="line">    this.provinceGdp = obj.provinceGdp</span><br><span class="line">    this.provinceGdpIncrease = obj.provinceGdpIncrease</span><br><span class="line">    this.year = obj.year</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<p>在每个页面都这样写，太丑了。遍历data中的数据，如果obj含有该属性则对data中的数据进行赋值。</p>
-<hr>
-
-<p>发起网络请求的代码，建议移到showPaper组件内。资源加载后，存放在浏览器的缓存内。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">getData() &#123;</span><br><span class="line">      let url = &quot;http://localhost:80/api/jsons/query?year=2021&amp;cityID=422801&quot;;</span><br><span class="line">      axios.get(url).then(</span><br><span class="line">        (response) =&gt; &#123;</span><br><span class="line">          console.log(&quot;请求成功了&quot;, response.data);</span><br><span class="line">          this.init(response.data);</span><br><span class="line"></span><br><span class="line">          setTimeout(() =&gt; &#123;</span><br><span class="line">            this.fillParagraphText();</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">        (error) =&gt; &#123;</span><br><span class="line">          console.log(&quot;请求失败了&quot;, error.message);</span><br><span class="line">        &#125;</span><br><span class="line">      );</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
-
-
-
-<hr>
-
-<p>存储在浏览器内存的内容，保存时间多久，会不会存在用户一直在本地编辑不提交，从而丢失用户数据的问题？</p>
-]]></content>
-      <categories>
-        <category>autoWrite</category>
       </categories>
   </entry>
   <entry>
@@ -264,57 +531,6 @@
       </categories>
   </entry>
   <entry>
-    <title>paperStruct</title>
-    <url>/2022/autoWrite/paperStruct/</url>
-    <content><![CDATA[<h1 id="结构设计"><a href="#结构设计" class="headerlink" title="结构设计"></a>结构设计</h1><h2 id="文章编辑"><a href="#文章编辑" class="headerlink" title="文章编辑"></a>文章编辑</h2><p>主页面  <code>ShowPaper.vue</code></p>
-<ul>
-<li>浏览器内存读出数据</li>
-<li>浏览器内存写入数据</li>
-</ul>
-<p>数据由该页面传给其他的组件</p>
-]]></content>
-      <categories>
-        <category>autoWrite</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>pythonTricks</title>
-    <url>/2022/python/pythonTricks/</url>
-    <content><![CDATA[<h1 id="py-tricks"><a href="#py-tricks" class="headerlink" title="py tricks"></a>py tricks</h1><blockquote>
-<p>记录python编程的一些小技巧</p>
-</blockquote>
-<h1 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h1><p>最深处递归函数的值，会逐层被带回来</p>
-<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h2 id="修改外部对象"><a href="#修改外部对象" class="headerlink" title="修改外部对象"></a>修改外部对象</h2><p>若参数是外部的对象</p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>jsIntro</title>
-    <url>/2022/javascript/jsIntro/</url>
-    <content><![CDATA[<p><a href="https://zh.javascript.info/">推荐阅读</a></p>
-<h2 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">proDemo</span>(<span class="params">num</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(</span><br><span class="line">        <span class="keyword">function</span> (<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> a = num;</span><br><span class="line">            <span class="keyword">if</span> (a % <span class="number">2</span>) &#123;</span><br><span class="line">                <span class="title function_">resolve</span>(a);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="title function_">reject</span>(a);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">odd</span>(<span class="params">params</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(params + <span class="string">&quot;是奇数&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">even</span>(<span class="params">params</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(params + <span class="string">&quot; even error&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> promise = <span class="title function_">proDemo</span>(<span class="number">10</span>);</span><br><span class="line">promise.<span class="title function_">then</span>(odd, even).<span class="title function_">catch</span>(<span class="function">(<span class="params">err</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(err + <span class="string">&quot; catch&quot;</span>));</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="值"><a href="#值" class="headerlink" title="值"></a>值</h2><p>从对象读取值，如果为undefied，则赋值为 [ ]</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;papers&#x27;</span>)) || []</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h2><h3 id="键为变量"><a href="#键为变量" class="headerlink" title="键为变量"></a>键为变量</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">&#123; [a] : <span class="string">&quot;xxx&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用<code>[]</code>把作为键的变量包起来</p>
-<h3 id="单对象键值"><a href="#单对象键值" class="headerlink" title="单对象键值"></a>单对象键值</h3><p>获取单个对象的键和值</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = &#123; <span class="attr">name</span>: <span class="string">&#x27;jie&#x27;</span> &#125;;</span><br><span class="line"><span class="keyword">let</span> key = <span class="title class_">Object</span>.<span class="title function_">keys</span>(arr)[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">let</span> value = <span class="title class_">Object</span>.<span class="title function_">values</span>(arr)[<span class="number">0</span>];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(key, value);</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-  </entry>
-  <entry>
     <title>正则</title>
     <url>/2022/python/%E6%AD%A3%E5%88%99/</url>
     <content><![CDATA[<h1 id="正则化匹配"><a href="#正则化匹配" class="headerlink" title="正则化匹配"></a>正则化匹配</h1><blockquote>
@@ -329,6 +545,19 @@
 <p>排版好</p>
 </li>
 </ul>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>pythonTricks</title>
+    <url>/2022/python/pythonTricks/</url>
+    <content><![CDATA[<h1 id="py-tricks"><a href="#py-tricks" class="headerlink" title="py tricks"></a>py tricks</h1><blockquote>
+<p>记录python编程的一些小技巧</p>
+</blockquote>
+<h1 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h1><p>最深处递归函数的值，会逐层被带回来</p>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h2 id="修改外部对象"><a href="#修改外部对象" class="headerlink" title="修改外部对象"></a>修改外部对象</h2><p>若参数是外部的对象</p>
 ]]></content>
       <categories>
         <category>python</category>

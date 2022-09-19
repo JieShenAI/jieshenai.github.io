@@ -85,7 +85,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">180</span>
+            <span class="post-count">141</span>
         </span>
     </span>
 
@@ -117,10 +117,12 @@
 <li>监视数据变化</li>
 </ul>
 <p>​	当基本类型的 state 中的数据发生变化时，vue能感知到；但对象内部数据发生变化时，无法被vue感知到。</p>
-<p>​	采用 computed + watch的方式</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">computed</span>: &#123;</span><br><span class="line">       <span class="title function_">paper</span>(<span class="params"></span>) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">$store</span>.<span class="property">state</span>.<span class="property">paper</span>.<span class="property">data</span>[<span class="variable language_">this</span>.<span class="property">chse</span>];</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;,</span><br><span class="line">   <span class="attr">watch</span>: &#123;</span><br><span class="line">       <span class="attr">paper</span>: &#123;</span><br><span class="line">           <span class="attr">deep</span>: <span class="literal">true</span>,</span><br><span class="line">           <span class="title function_">handler</span>(<span class="params">val</span>) &#123;</span><br><span class="line">               <span class="comment">// 由于是异步载入，所以只能在状态值的变化时执行渲染操作</span></span><br><span class="line">               <span class="comment">// 绝不可在mounted中执行render方法</span></span><br><span class="line">               <span class="variable language_">this</span>.<span class="title function_">render</span>(val)</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>​	采用 computed + watch的方式，v-if ，都失效了；</p>
+<p>​	我把这个 state的数据放在 data里，就好了, vuex中的数据更新后，data中的数据也会同步更新</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">return &#123;</span><br><span class="line">            chse: &quot;2-3&quot;,</span><br><span class="line">            paper: this.$store.state.paper.data[&quot;2-3&quot;],</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 
-<p>​	有个小细节：vuex中有其他数据变化时，此前无法察觉的对象，此时可被vue感知到了。</p>
+
+
  
       <!-- reward -->
       
@@ -201,6 +203,15 @@
 
    
   <nav class="article-nav">
+    
+      <a href="/2022/vue/router/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            router
+          
+        </div>
+      </a>
     
     
       <a href="/2022/python/pythonTricks/" class="article-nav-link">

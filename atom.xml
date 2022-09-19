@@ -6,7 +6,7 @@
   <link href="https://jieshenai.github.io/atom.xml" rel="self"/>
   
   <link href="https://jieshenai.github.io/"/>
-  <updated>2022-09-15T12:18:15.395Z</updated>
+  <updated>2022-09-17T03:17:55.498Z</updated>
   <id>https://jieshenai.github.io/</id>
   
   <author>
@@ -17,11 +17,57 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>less</title>
+    <link href="https://jieshenai.github.io/2022/css/less/"/>
+    <id>https://jieshenai.github.io/2022/css/less/</id>
+    <published>2022-09-16T07:19:35.000Z</published>
+    <updated>2022-09-17T03:17:55.498Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;less&quot;&gt;&lt;a href=&quot;#less&quot; class=&quot;headerlink&quot; title=&quot;less&quot;&gt;&lt;/a&gt;less&lt;/h1&gt;&lt;p&gt;less官网： &lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="css" scheme="https://jieshenai.github.io/categories/css/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>router</title>
+    <link href="https://jieshenai.github.io/2022/vue/router/"/>
+    <id>https://jieshenai.github.io/2022/vue/router/</id>
+    <published>2022-09-16T01:53:06.000Z</published>
+    <updated>2022-09-17T08:40:15.605Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;路由&quot;&gt;&lt;a href=&quot;#路由&quot; class=&quot;headerlink&quot; title=&quot;路由&quot;&gt;&lt;/a&gt;路由&lt;/h1&gt;&lt;h2 id=&quot;main-js-引入&quot;&gt;&lt;a href=&quot;#main-js-引入&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="vue" scheme="https://jieshenai.github.io/categories/vue/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>vuex</title>
     <link href="https://jieshenai.github.io/2022/vue/vuex/"/>
     <id>https://jieshenai.github.io/2022/vue/vuex/</id>
     <published>2022-09-15T08:45:12.000Z</published>
-    <updated>2022-09-15T12:18:15.395Z</updated>
+    <updated>2022-09-15T14:11:21.865Z</updated>
     
     
       
@@ -114,14 +160,14 @@
     <link href="https://jieshenai.github.io/2022/autoWrite/paperStruct/"/>
     <id>https://jieshenai.github.io/2022/autoWrite/paperStruct/</id>
     <published>2022-09-05T08:46:00.000Z</published>
-    <updated>2022-09-05T08:57:38.152Z</updated>
+    <updated>2022-09-18T12:12:28.871Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;结构设计&quot;&gt;&lt;a href=&quot;#结构设计&quot; class=&quot;headerlink&quot; title=&quot;结构设计&quot;&gt;&lt;/a&gt;结构设计&lt;/h1&gt;&lt;h2 id=&quot;文章编辑&quot;&gt;&lt;a href=&quot;#文章编辑&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h1 id=&quot;结构设计&quot;&gt;&lt;a href=&quot;#结构设计&quot; class=&quot;headerlink&quot; title=&quot;结构设计&quot;&gt;&lt;/a&gt;结构设计&lt;/h1&gt;&lt;h2 id=&quot;ShowPaper-vue加载不同文件&quot;&gt;&lt;a href=&quot;#ShowPaper-vue加载不同文件&quot;</summary>
         
       
     
@@ -137,15 +183,14 @@
     <link href="https://jieshenai.github.io/2022/javascript/jsIntro/"/>
     <id>https://jieshenai.github.io/2022/javascript/jsIntro/</id>
     <published>2022-09-04T12:25:14.000Z</published>
-    <updated>2022-09-05T08:58:58.476Z</updated>
+    <updated>2022-09-16T03:21:05.773Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;p&gt;&lt;a href=&quot;https://zh.javascript.info/&quot;&gt;推荐阅读&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;promise&quot;&gt;&lt;a href=&quot;#promise&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h1 id=&quot;js基础知识&quot;&gt;&lt;a href=&quot;#js基础知识&quot; class=&quot;headerlink&quot; title=&quot;js基础知识&quot;&gt;&lt;/a&gt;js基础知识&lt;/h1&gt;&lt;p&gt;建议阅读 &lt;a href=&quot;https://zh.javascript.info/&quot;&gt;现代</summary>
         
       
     
@@ -184,14 +229,14 @@
     <link href="https://jieshenai.github.io/2022/vue/basic/"/>
     <id>https://jieshenai.github.io/2022/vue/basic/</id>
     <published>2022-09-04T08:01:44.000Z</published>
-    <updated>2022-09-04T10:44:14.961Z</updated>
+    <updated>2022-09-18T08:08:14.938Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;vue&quot;&gt;&lt;a href=&quot;#vue&quot; class=&quot;headerlink&quot; title=&quot;vue&quot;&gt;&lt;/a&gt;vue&lt;/h1&gt;&lt;h2 id=&quot;消息订阅与发布&quot;&gt;&lt;a href=&quot;#消息订阅与发布&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h1 id=&quot;vue&quot;&gt;&lt;a href=&quot;#vue&quot; class=&quot;headerlink&quot; title=&quot;vue&quot;&gt;&lt;/a&gt;vue&lt;/h1&gt;&lt;h2 id=&quot;配置项&quot;&gt;&lt;a href=&quot;#配置项&quot; class=&quot;headerlink&quot;</summary>
         
       
     
