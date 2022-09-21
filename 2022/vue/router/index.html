@@ -85,7 +85,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">537</span>
+            <span class="post-count">573</span>
         </span>
     </span>
 
@@ -170,8 +170,10 @@ props:&#123;a:1,b:&#39;hello&#39;&#125;
 <p>组件接收：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">props: [&#x27;id&#x27;, &#x27;title&#x27;, &#x27;a&#x27;, &#x27;b&#x27;],</span><br></pre></td></tr></table></figure>
 
-
-
+<p>问？组件的 props 和 路由的 props，都能在  <code>props: [&#39;id&#39;, &#39;title&#39;]</code>  中接收吗？</p>
+<blockquote>
+<p>试了一下，发现不能一起接收</p>
+</blockquote>
 <p>若觉得 <code>$route.query.id,</code> 写的很长可以使用结构赋值的连续写法</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">props</span>(<span class="params">&#123;query:&#123;id,title&#125;&#125;</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        id,</span><br><span class="line">        title,</span><br><span class="line">        <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">b</span>: <span class="string">&#x27;hello&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 

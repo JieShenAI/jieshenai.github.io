@@ -1,33 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>nextDo</title>
-    <url>/2022/autoWrite/nextDo/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">init(obj) &#123;</span><br><span class="line">    this.avgGdp = obj.avgGdp</span><br><span class="line">    this.avgProvinceGdp = obj.avgProvinceGdp</span><br><span class="line">    this.cityID = obj.cityID</span><br><span class="line">    this.countryGdp = obj.countryGdp</span><br><span class="line">    this.countryGdpIncrease = obj.countryGdpIncrease</span><br><span class="line">    this.gdp = obj.gdp</span><br><span class="line">    this.gdpIncrease = obj.gdpIncrease</span><br><span class="line">    this.provinceGdp = obj.provinceGdp</span><br><span class="line">    this.provinceGdpIncrease = obj.provinceGdpIncrease</span><br><span class="line">    this.year = obj.year</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<p>在每个页面都这样写，太丑了。遍历data中的数据，如果obj含有该属性则对data中的数据进行赋值。</p>
-<hr>
-
-<p>发起网络请求的代码，建议移到showPaper组件内。资源加载后，存放在浏览器的缓存内。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">getData() &#123;</span><br><span class="line">      let url = &quot;http://localhost:80/api/jsons/query?year=2021&amp;cityID=422801&quot;;</span><br><span class="line">      axios.get(url).then(</span><br><span class="line">        (response) =&gt; &#123;</span><br><span class="line">          console.log(&quot;请求成功了&quot;, response.data);</span><br><span class="line">          this.init(response.data);</span><br><span class="line"></span><br><span class="line">          setTimeout(() =&gt; &#123;</span><br><span class="line">            this.fillParagraphText();</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">        (error) =&gt; &#123;</span><br><span class="line">          console.log(&quot;请求失败了&quot;, error.message);</span><br><span class="line">        &#125;</span><br><span class="line">      );</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+    <title>less</title>
+    <url>/2022/css/less/</url>
+    <content><![CDATA[<h1 id="less"><a href="#less" class="headerlink" title="less"></a>less</h1><p>less官网： <a href="https://lesscss.org/">https://lesscss.org/</a></p>
+<p>参考笔记： <a href="https://brucecai55520.gitee.io/bruceblog/notes/less/less.html">https://brucecai55520.gitee.io/bruceblog/notes/less/less.html</a></p>
+<p>vscode安装插件：Easy LESS</p>
+<p>浏览器测试</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&lt;style type=&quot;text/less&quot;&gt;</span><br><span class="line">        <span class="selector-class">.head</span> &#123;</span><br><span class="line">            <span class="attribute">background-color</span>: skyblue;</span><br><span class="line">            <span class="selector-tag">p</span> &#123;</span><br><span class="line">                <span class="attribute">color</span>: red;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">// 写在尾部</span><br><span class="line">&lt;script <span class="attribute">src</span>=&quot;./less-<span class="number">1.3</span>.<span class="number">1</span><span class="selector-class">.min</span><span class="selector-class">.js</span>&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 
 
 
-<hr>
+<p>注释</p>
+<p>&#x2F;&#x2F; 开头注释，不会被编译到css文件中</p>
+<p>&#x2F;**&#x2F;包裹的注释，被编译到css文件中</p>
+<h2 id="less-变量"><a href="#less-变量" class="headerlink" title="less 变量"></a>less 变量</h2><figure class="highlight less"><table><tr><td class="code"><pre><span class="line">&lt;<span class="selector-tag">style</span> <span class="selector-tag">scoped</span> <span class="selector-tag">lang</span>=&quot;<span class="selector-tag">less</span>&quot;&gt;</span><br><span class="line">@<span class="selector-tag">color</span>: <span class="selector-tag">aqua</span>;</span><br><span class="line">@<span class="selector-tag">selector</span>: <span class="selector-tag">p</span>;</span><br><span class="line">@<span class="selector-tag">c</span>: <span class="selector-tag">color</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.head</span> &#123;</span><br><span class="line">  <span class="variable">@&#123;selector&#125;</span> &#123;</span><br><span class="line">    @&#123;c&#125;: @<span class="selector-tag">color</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/<span class="selector-tag">style</span>&gt;</span><br></pre></td></tr></table></figure>
 
-<p>存储在浏览器内存的内容，保存时间多久，会不会存在用户一直在本地编辑不提交，从而丢失用户数据的问题？</p>
-]]></content>
+<p><code>@&#123;c&#125;: @color;</code> 展示了属性名和属性值作为变量的写法；</p>
+<p>属性名 和 选择器 作为变量需要用<code>&#123;&#125;</code>包裹；</p>
+<h3 id="变量的延迟加载"><a href="#变量的延迟加载" class="headerlink" title="变量的延迟加载"></a>变量的延迟加载</h3><p>less 内的变量都是块级作用域， 延迟加载；</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="variable">@var:</span> <span class="number">0</span>;</span><br><span class="line"><span class="selector-class">.class</span>&#123;</span><br><span class="line">    <span class="variable">@var:</span> <span class="number">1</span>;</span><br><span class="line">	<span class="selector-class">.brass</span>&#123;</span><br><span class="line">		<span class="variable">@var:</span> <span class="number">2</span>;</span><br><span class="line">		three: @var; <span class="comment">// 3,延迟加载</span></span><br><span class="line">		<span class="variable">@var:</span> <span class="number">3</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	one: @var;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译后的结果是：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.class&#123;</span><br><span class="line">	one: 1;</span><br><span class="line">&#125;</span><br><span class="line">.class .brass&#123;</span><br><span class="line">	three: 3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="css嵌套规则"><a href="#css嵌套规则" class="headerlink" title="css嵌套规则"></a>css嵌套规则</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.cls&#123;</span><br><span class="line">	&amp;:hover&#123;</span><br><span class="line">		xxx</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&amp;表示平级；</p>
+<p>若不加编译之后是: <code>.cls :hover</code>，就变成了父子关系；</p>
+<h2 id="less混合"><a href="#less混合" class="headerlink" title="less混合"></a>less混合</h2><p>混合将一系列属性从一个规则集，引入到另一个规则集；</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;head&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;c1&quot;</span>&gt;</span></span><br><span class="line">      文字</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;c2&quot;</span>&gt;</span></span><br><span class="line">      文字</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="普通混合"><a href="#普通混合" class="headerlink" title="普通混合"></a>普通混合</h3><p>.c1 和 .c2 直接使用<code>.func</code>定义好的样式</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.func</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.head</span> &#123;</span><br><span class="line">  <span class="selector-class">.c1</span> &#123;</span><br><span class="line">    <span class="selector-class">.func</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="selector-class">.c2</span> &#123;</span><br><span class="line">    <span class="selector-class">.func</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="带参数的混合"><a href="#带参数的混合" class="headerlink" title="带参数的混合"></a>带参数的混合</h3><p>带参数，指定默认值为 aqua</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.func(@c: aqua) &#123;</span><br><span class="line">  color: @c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>调用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.c1 &#123;</span><br><span class="line">  .func(pink);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.c2 &#123;</span><br><span class="line">  .func();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="命名参数"><a href="#命名参数" class="headerlink" title="命名参数"></a>命名参数</h3><p>在传实参时，指定参数; 用于有多个参数和默认参数值时，指定传的参数；</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.func(@c:aqua)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="匹配模式"><a href="#匹配模式" class="headerlink" title="匹配模式"></a>匹配模式</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;son&quot;&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &quot;MyHello&quot;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped lang=&quot;less&quot;&gt;</span><br><span class="line">.pos(@_, @w, @h) &#123;</span><br><span class="line">  background-color: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.pos(L, @w, @h) &#123;</span><br><span class="line">  float: left;</span><br><span class="line">  width: 200px;</span><br><span class="line">  height: 200px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.pos(R, @w, @h) &#123;</span><br><span class="line">  float: right;</span><br><span class="line">  width: @w;</span><br><span class="line">  height: @h;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.container &#123;</span><br><span class="line">  width: 300px;</span><br><span class="line">  height: 300px;</span><br><span class="line">  background-color: aquamarine;</span><br><span class="line">  .son &#123;</span><br><span class="line">    .pos(R, 200px, 200px);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>.pos</code>，通过在形参里添加标志L，R，从而避免了重新定义混合的问题；</p>
+<p><code>.pos(@_, @w, @h)</code> 都能匹配上，可以上公共部分放在其中。</p>
+<h3 id="arguments-变量"><a href="#arguments-变量" class="headerlink" title="arguments  变量"></a>arguments  变量</h3><p>实参列表</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.border</span>(<span class="variable">@w</span>,<span class="variable">@sytle</span>,<span class="variable">@c</span>)&#123;</span><br><span class="line">	<span class="attribute">border</span>: <span class="variable">@arguments</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.xxxClass</span> &#123;</span><br><span class="line">	<span class="selector-class">.border</span>(<span class="number">1px</span>,solid,black)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h2><p>在less计算中，双方只要有一方带单位就行了</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.xxxClass</span>&#123;</span><br><span class="line">	<span class="attribute">width</span>: (<span class="number">100</span> + <span class="number">100px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>混合的缺点：在转成css时，很多共有的css属性不能合并，这样导致文件变大；</p>
+<p>如下的代码，在混合中实现不了</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span>,<span class="selector-tag">h2</span>&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>继承不能带参数；</p>
+<p>继承性能比混合高，灵活性没有混合强；</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: aqua;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.div</span>:<span class="selector-tag">extend</span>(.parent)&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="selector-tag">&amp;</span><span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="父"><a href="#父" class="headerlink" title="父"></a>父</h3><figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: aqua;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>错误写法❌</p>
+<blockquote>
+<p>父后面不能跟()，也不能像继承那样参数</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.parent()&#123;</span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="继承的两种写法"><a href="#继承的两种写法" class="headerlink" title="继承的两种写法"></a>继承的两种写法</h3><ul>
+<li><p>一</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.div</span>:<span class="selector-tag">extend</span>(.parent)&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>二</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.div</span>&#123;</span><br><span class="line">	<span class="selector-tag">&amp;</span>:<span class="selector-tag">extend</span>(.parent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>继承 all</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: aqua;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.parent</span><span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: skyblue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>.parent</code> 指定了鼠标悬浮更换背景色；在继承时，需要在其后加上 <code>all</code>, <code>.parent:hover</code> 才会生效；</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">&amp;</span>:<span class="selector-tag">extend</span>(.parent all);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>编译成css</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>,</span><br><span class="line"><span class="selector-class">.div</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: aqua;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.div</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.div</span><span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>) &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于.div继承了.parent，故形成了如下代码</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>,</span><br><span class="line"><span class="selector-class">.div</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: aqua;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="避免编译"><a href="#避免编译" class="headerlink" title="避免编译"></a>避免编译</h2>]]></content>
       <categories>
-        <category>autoWrite</category>
+        <category>css</category>
       </categories>
   </entry>
   <entry>
-    <title>paperStruct</title>
-    <url>/2022/autoWrite/paperStruct/</url>
-    <content><![CDATA[<h1 id="结构设计"><a href="#结构设计" class="headerlink" title="结构设计"></a>结构设计</h1><h2 id="ShowPaper-vue加载不同文件"><a href="#ShowPaper-vue加载不同文件" class="headerlink" title="ShowPaper.vue加载不同文件"></a><code>ShowPaper.vue</code>加载不同文件</h2><p><code>showPaper</code> 带有不同的query参数，实现访问不同文件的效果。</p>
+    <title>this</title>
+    <url>/2022/javascript/this/</url>
+    <content><![CDATA[<h1 id="this"><a href="#this" class="headerlink" title="this"></a>this</h1><h2 id="函数的this"><a href="#函数的this" class="headerlink" title="函数的this"></a>函数的this</h2><h3 id="单个函数的this是什么"><a href="#单个函数的this是什么" class="headerlink" title="单个函数的this是什么"></a>单个函数的this是什么</h3><p>window</p>
+<h3 id="嵌套函数的this"><a href="#嵌套函数的this" class="headerlink" title="嵌套函数的this"></a>嵌套函数的this</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">parent</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> name = <span class="string">&quot;parent&quot;</span>;</span><br><span class="line">        <span class="keyword">function</span> <span class="title function_">son</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> name = <span class="string">&quot;son&quot;</span>;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">son</span>();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="title function_">parent</span>();</span><br></pre></td></tr></table></figure>
+
+<p>输出也是window</p>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="单层函数"><a href="#单层函数" class="headerlink" title="单层函数"></a>单层函数</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;obj&quot;</span>,</span><br><span class="line">    <span class="attr">sayHi</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="title function_">sayHi</span>();</span><br></pre></td></tr></table></figure>
+
+<p>obj 这个对象</p>
+<h3 id><a href="#" class="headerlink" title></a></h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">let</span> parent = &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">name</span>: <span class="string">&quot;parent&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">son</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">let</span> name = <span class="string">&quot;son&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">let</span> <span class="title function_">arrow</span> = (<span class="params"></span>) =&gt; &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;arrow&quot;</span>, <span class="variable language_">this</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">function</span> <span class="title function_">th</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;th&quot;</span>, <span class="variable language_">this</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">name</span>: <span class="string">&quot;re&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">                arrow,</span></span><br><span class="line"><span class="language-javascript">                th,</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">    parent.<span class="title function_">son</span>().<span class="title function_">arrow</span>();</span></span><br><span class="line"><span class="language-javascript">    parent.<span class="title function_">son</span>().<span class="title function_">th</span>();</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">arrow &#123;name: &#x27;parent&#x27;, son: ƒ&#125;</span><br><span class="line">th &#123;name: &#x27;re&#x27;, arrow: ƒ, th: ƒ&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    grandPa = &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">name</span>: <span class="string">&quot;gradnPa&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">parent</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// let name = &quot;parent&quot;;</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> <span class="keyword">function</span> <span class="title function_">son</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">let</span> name = <span class="string">&quot;son&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">let</span> <span class="title function_">arrow</span> = (<span class="params"></span>) =&gt; &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;arrow&quot;</span>, <span class="variable language_">this</span>);</span></span><br><span class="line"><span class="language-javascript">                &#125;;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">function</span> <span class="title function_">th</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;th&quot;</span>, <span class="variable language_">this</span>);</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="attr">name</span>: <span class="string">&quot;re&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">                    arrow,</span></span><br><span class="line"><span class="language-javascript">                    th,</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">    grandPa.<span class="title function_">parent</span>()().<span class="title function_">arrow</span>();</span></span><br><span class="line"><span class="language-javascript">    grandPa.<span class="title function_">parent</span>()().<span class="title function_">th</span>();</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>arrow Window {window: Window, self: Window, document: document, name: ‘’, location: Location, …}<br>th {name: ‘re’, arrow: ƒ, th: ƒ}</p>
+</blockquote>
 ]]></content>
       <categories>
-        <category>autoWrite</category>
+        <category>javascript</category>
       </categories>
   </entry>
   <entry>
@@ -275,8 +394,10 @@ props:&#123;a:1,b:&#39;hello&#39;&#125;
 <p>组件接收：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">props: [&#x27;id&#x27;, &#x27;title&#x27;, &#x27;a&#x27;, &#x27;b&#x27;],</span><br></pre></td></tr></table></figure>
 
-
-
+<p>问？组件的 props 和 路由的 props，都能在  <code>props: [&#39;id&#39;, &#39;title&#39;]</code>  中接收吗？</p>
+<blockquote>
+<p>试了一下，发现不能一起接收</p>
+</blockquote>
 <p>若觉得 <code>$route.query.id,</code> 写的很长可以使用结构赋值的连续写法</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">props</span>(<span class="params">&#123;query:&#123;id,title&#125;&#125;</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        id,</span><br><span class="line">        title,</span><br><span class="line">        <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">b</span>: <span class="string">&#x27;hello&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -286,120 +407,94 @@ props:&#123;a:1,b:&#39;hello&#39;&#125;
       </categories>
   </entry>
   <entry>
-    <title>less</title>
-    <url>/2022/css/less/</url>
-    <content><![CDATA[<h1 id="less"><a href="#less" class="headerlink" title="less"></a>less</h1><p>less官网： <a href="https://lesscss.org/">https://lesscss.org/</a></p>
-<p>参考笔记： <a href="https://brucecai55520.gitee.io/bruceblog/notes/less/less.html">https://brucecai55520.gitee.io/bruceblog/notes/less/less.html</a></p>
-<p>vscode安装插件：Easy LESS</p>
-<p>浏览器测试</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&lt;style type=&quot;text/less&quot;&gt;</span><br><span class="line">        <span class="selector-class">.head</span> &#123;</span><br><span class="line">            <span class="attribute">background-color</span>: skyblue;</span><br><span class="line">            <span class="selector-tag">p</span> &#123;</span><br><span class="line">                <span class="attribute">color</span>: red;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">// 写在尾部</span><br><span class="line">&lt;script <span class="attribute">src</span>=&quot;./less-<span class="number">1.3</span>.<span class="number">1</span><span class="selector-class">.min</span><span class="selector-class">.js</span>&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+    <title>vuex</title>
+    <url>/2022/vue/vuex/</url>
+    <content><![CDATA[<h1 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h1><h2 id="模块化写法"><a href="#模块化写法" class="headerlink" title="模块化写法"></a>模块化写法</h2><h3 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h3><p><code>store/index.js</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="comment">//引入Vuex</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Vuex</span> <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"><span class="keyword">import</span> countOptions <span class="keyword">from</span> <span class="string">&#x27;./count&#x27;</span></span><br><span class="line"><span class="keyword">import</span> personOptions <span class="keyword">from</span> <span class="string">&#x27;./person&#x27;</span></span><br><span class="line"><span class="comment">//应用Vuex插件</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">use</span>(<span class="title class_">Vuex</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建并暴露store</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> <span class="title class_">Vuex</span>.<span class="title class_">Store</span>(&#123;</span><br><span class="line">	<span class="attr">modules</span>:&#123;</span><br><span class="line">		<span class="attr">countAbout</span>:countOptions,</span><br><span class="line">		<span class="attr">personAbout</span>:personOptions</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="子模块"><a href="#子模块" class="headerlink" title="子模块"></a>子模块</h3><p><code>store/子模块.js</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//求和相关的配置</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">	<span class="attr">namespaced</span>:<span class="literal">true</span>,</span><br><span class="line">	<span class="attr">actions</span>:&#123;</span><br><span class="line">		<span class="title function_">jiaOdd</span>(<span class="params">context,value</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span>(context.<span class="property">state</span>.<span class="property">sum</span> % <span class="number">2</span>)&#123;</span><br><span class="line">				context.<span class="title function_">commit</span>(<span class="string">&#x27;JIA&#x27;</span>,value)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="title function_">jiaWait</span>(<span class="params">context,value</span>)&#123;</span><br><span class="line">			<span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">				context.<span class="title function_">commit</span>(<span class="string">&#x27;JIA&#x27;</span>,value)</span><br><span class="line">			&#125;,<span class="number">500</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">mutations</span>:&#123;</span><br><span class="line">		<span class="title function_">JIA</span>(<span class="params">state,value</span>)&#123;</span><br><span class="line">			state.<span class="property">sum</span> += value</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="title function_">JIAN</span>(<span class="params">state,value</span>)&#123;</span><br><span class="line">			state.<span class="property">sum</span> -= value</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">state</span>:&#123;</span><br><span class="line">		<span class="attr">sum</span>:<span class="number">0</span>, <span class="comment">//当前的和</span></span><br><span class="line">		<span class="attr">school</span>:<span class="string">&#x27;尚硅谷&#x27;</span>,</span><br><span class="line">		<span class="attr">subject</span>:<span class="string">&#x27;前端&#x27;</span>,</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">getters</span>:&#123;</span><br><span class="line">		<span class="title function_">bigSum</span>(<span class="params">state</span>)&#123;</span><br><span class="line">			<span class="keyword">return</span> state.<span class="property">sum</span>*<span class="number">10</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
-<p>注释</p>
-<p>&#x2F;&#x2F; 开头注释，不会被编译到css文件中</p>
-<p>&#x2F;**&#x2F;包裹的注释，被编译到css文件中</p>
-<h2 id="less-变量"><a href="#less-变量" class="headerlink" title="less 变量"></a>less 变量</h2><figure class="highlight less"><table><tr><td class="code"><pre><span class="line">&lt;<span class="selector-tag">style</span> <span class="selector-tag">scoped</span> <span class="selector-tag">lang</span>=&quot;<span class="selector-tag">less</span>&quot;&gt;</span><br><span class="line">@<span class="selector-tag">color</span>: <span class="selector-tag">aqua</span>;</span><br><span class="line">@<span class="selector-tag">selector</span>: <span class="selector-tag">p</span>;</span><br><span class="line">@<span class="selector-tag">c</span>: <span class="selector-tag">color</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.head</span> &#123;</span><br><span class="line">  <span class="variable">@&#123;selector&#125;</span> &#123;</span><br><span class="line">    @&#123;c&#125;: @<span class="selector-tag">color</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/<span class="selector-tag">style</span>&gt;</span><br></pre></td></tr></table></figure>
-
-<p><code>@&#123;c&#125;: @color;</code> 展示了属性名和属性值作为变量的写法；</p>
-<p>属性名 和 选择器 作为变量需要用<code>&#123;&#125;</code>包裹；</p>
-<h3 id="变量的延迟加载"><a href="#变量的延迟加载" class="headerlink" title="变量的延迟加载"></a>变量的延迟加载</h3><p>less 内的变量都是块级作用域， 延迟加载；</p>
-<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="variable">@var:</span> <span class="number">0</span>;</span><br><span class="line"><span class="selector-class">.class</span>&#123;</span><br><span class="line">    <span class="variable">@var:</span> <span class="number">1</span>;</span><br><span class="line">	<span class="selector-class">.brass</span>&#123;</span><br><span class="line">		<span class="variable">@var:</span> <span class="number">2</span>;</span><br><span class="line">		three: @var; <span class="comment">// 3,延迟加载</span></span><br><span class="line">		<span class="variable">@var:</span> <span class="number">3</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	one: @var;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>编译后的结果是：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.class&#123;</span><br><span class="line">	one: 1;</span><br><span class="line">&#125;</span><br><span class="line">.class .brass&#123;</span><br><span class="line">	three: 3;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分发请求"><a href="#分发请求" class="headerlink" title="分发请求"></a>分发请求</h3><p><code>personAbout/addPersonWang</code>:  前面是子仓库的模块名</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">$store</span>.<span class="title function_">dispatch</span>(<span class="string">&#x27;personAbout/addPersonWang&#x27;</span>,personObj);</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">$store</span>.<span class="title function_">commit</span>(<span class="string">&#x27;personAbout/ADD_PERSON&#x27;</span>,personObj);</span><br></pre></td></tr></table></figure>
 
 
 
-<h2 id="css嵌套规则"><a href="#css嵌套规则" class="headerlink" title="css嵌套规则"></a>css嵌套规则</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.cls&#123;</span><br><span class="line">	&amp;:hover&#123;</span><br><span class="line">		xxx</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>&amp;表示平级；</p>
-<p>若不加编译之后是: <code>.cls :hover</code>，就变成了父子关系；</p>
-<h2 id="less混合"><a href="#less混合" class="headerlink" title="less混合"></a>less混合</h2><p>混合将一系列属性从一个规则集，引入到另一个规则集；</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;head&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;c1&quot;</span>&gt;</span></span><br><span class="line">      文字</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;c2&quot;</span>&gt;</span></span><br><span class="line">      文字</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="组件内简写形式"><a href="#组件内简写形式" class="headerlink" title="组件内简写形式"></a>组件内简写形式</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">		&lt;h1&gt;当前求和为：&#123;&#123;sum&#125;&#125;&lt;/h1&gt;</span><br><span class="line">		&lt;h3&gt;当前求和放大10倍为：&#123;&#123;bigSum&#125;&#125;&lt;/h3&gt;</span><br><span class="line">		&lt;h3&gt;我在&#123;&#123;school&#125;&#125;，学习&#123;&#123;subject&#125;&#125;&lt;/h3&gt;</span><br><span class="line">		&lt;h3 style=&quot;color:red&quot;&gt;Person组件的总人数是：&#123;&#123;personList.length&#125;&#125;&lt;/h3&gt;</span><br><span class="line">		&lt;select v-model.number=&quot;n&quot;&gt;</span><br><span class="line">			&lt;option value=&quot;1&quot;&gt;1&lt;/option&gt;</span><br><span class="line">			&lt;option value=&quot;2&quot;&gt;2&lt;/option&gt;</span><br><span class="line">			&lt;option value=&quot;3&quot;&gt;3&lt;/option&gt;</span><br><span class="line">		&lt;/select&gt;</span><br><span class="line">		&lt;button @click=&quot;increment(n)&quot;&gt;+&lt;/button&gt;</span><br><span class="line">		&lt;button @click=&quot;decrement(n)&quot;&gt;-&lt;/button&gt;</span><br><span class="line">		&lt;button @click=&quot;incrementOdd(n)&quot;&gt;当前求和为奇数再加&lt;/button&gt;</span><br><span class="line">		&lt;button @click=&quot;incrementWait(n)&quot;&gt;等一等再加&lt;/button&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	import &#123;mapState,mapGetters,mapMutations,mapActions&#125; from &#x27;vuex&#x27;</span><br><span class="line">	export default &#123;</span><br><span class="line">		name:&#x27;Count&#x27;,</span><br><span class="line">		data() &#123;</span><br><span class="line">			return &#123;</span><br><span class="line">				n:1, //用户选择的数字</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		computed:&#123;</span><br><span class="line">			//借助mapState生成计算属性，从state中读取数据。（数组写法）</span><br><span class="line">			...mapState(&#x27;countAbout&#x27;,[&#x27;sum&#x27;,&#x27;school&#x27;,&#x27;subject&#x27;]),</span><br><span class="line">			...mapState(&#x27;personAbout&#x27;,[&#x27;personList&#x27;]),</span><br><span class="line">			//借助mapGetters生成计算属性，从getters中读取数据。（数组写法）</span><br><span class="line">			...mapGetters(&#x27;countAbout&#x27;,[&#x27;bigSum&#x27;])</span><br><span class="line">		&#125;,</span><br><span class="line">		methods: &#123;</span><br><span class="line">			//借助mapMutations生成对应的方法，方法中会调用commit去联系mutations(对象写法)</span><br><span class="line">			...mapMutations(&#x27;countAbout&#x27;,&#123;increment:&#x27;JIA&#x27;,decrement:&#x27;JIAN&#x27;&#125;),</span><br><span class="line">			//借助mapActions生成对应的方法，方法中会调用dispatch去联系actions(对象写法)</span><br><span class="line">			...mapActions(&#x27;countAbout&#x27;,&#123;incrementOdd:&#x27;jiaOdd&#x27;,incrementWait:&#x27;jiaWait&#x27;&#125;)</span><br><span class="line">		&#125;,</span><br><span class="line">		mounted() &#123;</span><br><span class="line">			console.log(this.$store)</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style lang=&quot;css&quot;&gt;</span><br><span class="line">	button&#123;</span><br><span class="line">		margin-left: 5px;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="普通混合"><a href="#普通混合" class="headerlink" title="普通混合"></a>普通混合</h3><p>.c1 和 .c2 直接使用<code>.func</code>定义好的样式</p>
-<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.func</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.head</span> &#123;</span><br><span class="line">  <span class="selector-class">.c1</span> &#123;</span><br><span class="line">    <span class="selector-class">.func</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="selector-class">.c2</span> &#123;</span><br><span class="line">    <span class="selector-class">.func</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="带参数的混合"><a href="#带参数的混合" class="headerlink" title="带参数的混合"></a>带参数的混合</h3><p>带参数，指定默认值为 aqua</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.func(@c: aqua) &#123;</span><br><span class="line">  color: @c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>调用</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.c1 &#123;</span><br><span class="line">  .func(pink);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.c2 &#123;</span><br><span class="line">  .func();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="命名参数"><a href="#命名参数" class="headerlink" title="命名参数"></a>命名参数</h3><p>在传实参时，指定参数; 用于有多个参数和默认参数值时，指定传的参数；</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.func(@c:aqua)</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="匹配模式"><a href="#匹配模式" class="headerlink" title="匹配模式"></a>匹配模式</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;son&quot;&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &quot;MyHello&quot;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped lang=&quot;less&quot;&gt;</span><br><span class="line">.pos(@_, @w, @h) &#123;</span><br><span class="line">  background-color: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.pos(L, @w, @h) &#123;</span><br><span class="line">  float: left;</span><br><span class="line">  width: 200px;</span><br><span class="line">  height: 200px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.pos(R, @w, @h) &#123;</span><br><span class="line">  float: right;</span><br><span class="line">  width: @w;</span><br><span class="line">  height: @h;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.container &#123;</span><br><span class="line">  width: 300px;</span><br><span class="line">  height: 300px;</span><br><span class="line">  background-color: aquamarine;</span><br><span class="line">  .son &#123;</span><br><span class="line">    .pos(R, 200px, 200px);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-
-<p><code>.pos</code>，通过在形参里添加标志L，R，从而避免了重新定义混合的问题；</p>
-<p><code>.pos(@_, @w, @h)</code> 都能匹配上，可以上公共部分放在其中。</p>
-<h3 id="arguments-变量"><a href="#arguments-变量" class="headerlink" title="arguments  变量"></a>arguments  变量</h3><p>实参列表</p>
-<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.border</span>(<span class="variable">@w</span>,<span class="variable">@sytle</span>,<span class="variable">@c</span>)&#123;</span><br><span class="line">	<span class="attribute">border</span>: <span class="variable">@arguments</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.xxxClass</span> &#123;</span><br><span class="line">	<span class="selector-class">.border</span>(<span class="number">1px</span>,solid,black)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="计算"><a href="#计算" class="headerlink" title="计算"></a>计算</h2><p>在less计算中，双方只要有一方带单位就行了</p>
-<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.xxxClass</span>&#123;</span><br><span class="line">	<span class="attribute">width</span>: (<span class="number">100</span> + <span class="number">100px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>混合的缺点：在转成css时，很多共有的css属性不能合并，这样导致文件变大；</p>
-<p>如下的代码，在混合中实现不了</p>
-<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">h1</span>,<span class="selector-tag">h2</span>&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>继承不能带参数；</p>
-<p>继承性能比混合高，灵活性没有混合强；</p>
-<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: aqua;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.div</span>:<span class="selector-tag">extend</span>(.parent)&#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">    <span class="selector-tag">&amp;</span><span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="父"><a href="#父" class="headerlink" title="父"></a>父</h3><figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: aqua;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>错误写法❌</p>
-<blockquote>
-<p>父后面不能跟()，也不能像继承那样参数</p>
+<h2 id="全局写法"><a href="#全局写法" class="headerlink" title="全局写法"></a>全局写法</h2><blockquote>
+<p>不常用，不建议使用</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">.parent()&#123;</span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每个子仓库都可以写成独立js文件，模板如下；</p>
+<p>在分发请求时，无需写子仓库的模块名了；缺点很严重，不同子仓库里的函数不能重名；</p>
+<p><code>this.$store.dispatch(&#39;addPersonWang&#39;,personObj);</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> state = &#123;</span><br><span class="line">    <span class="attr">data</span>: &#123;&#125;,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> actions = &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> mutations = &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//仓库计算属性</span></span><br><span class="line"><span class="keyword">let</span> getters = &#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//对外暴露小仓库</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    state,</span><br><span class="line">    mutations,</span><br><span class="line">    actions,</span><br><span class="line">    getters</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
-
-<h3 id="继承的两种写法"><a href="#继承的两种写法" class="headerlink" title="继承的两种写法"></a>继承的两种写法</h3><ul>
-<li><p>一</p>
-<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.div</span>:<span class="selector-tag">extend</span>(.parent)&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>二</p>
-<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.div</span>&#123;</span><br><span class="line">	<span class="selector-tag">&amp;</span>:<span class="selector-tag">extend</span>(.parent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<p>继承 all</p>
-<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: aqua;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.parent</span><span class="selector-pseudo">:hover</span>&#123;</span><br><span class="line">    <span class="attribute">background-color</span>: skyblue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>.parent</code> 指定了鼠标悬浮更换背景色；在继承时，需要在其后加上 <code>all</code>, <code>.parent:hover</code> 才会生效；</p>
-<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">&amp;</span>:<span class="selector-tag">extend</span>(.parent all);</span><br></pre></td></tr></table></figure>
-
-
-
-<p>编译成css</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>,</span><br><span class="line"><span class="selector-class">.div</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: aqua;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.div</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.div</span><span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>) &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">12px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>由于.div继承了.parent，故形成了如下代码</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.parent</span>,</span><br><span class="line"><span class="selector-class">.div</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: aqua;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="避免编译"><a href="#避免编译" class="headerlink" title="避免编译"></a>避免编译</h2>]]></content>
+]]></content>
       <categories>
-        <category>css</category>
+        <category>vue</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>nextDo</title>
+    <url>/2022/autoWrite/nextDo/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">init(obj) &#123;</span><br><span class="line">    this.avgGdp = obj.avgGdp</span><br><span class="line">    this.avgProvinceGdp = obj.avgProvinceGdp</span><br><span class="line">    this.cityID = obj.cityID</span><br><span class="line">    this.countryGdp = obj.countryGdp</span><br><span class="line">    this.countryGdpIncrease = obj.countryGdpIncrease</span><br><span class="line">    this.gdp = obj.gdp</span><br><span class="line">    this.gdpIncrease = obj.gdpIncrease</span><br><span class="line">    this.provinceGdp = obj.provinceGdp</span><br><span class="line">    this.provinceGdpIncrease = obj.provinceGdpIncrease</span><br><span class="line">    this.year = obj.year</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>在每个页面都这样写，太丑了。遍历data中的数据，如果obj含有该属性则对data中的数据进行赋值。</p>
+<hr>
+
+<p>发起网络请求的代码，建议移到showPaper组件内。资源加载后，存放在浏览器的缓存内。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">getData() &#123;</span><br><span class="line">      let url = &quot;http://localhost:80/api/jsons/query?year=2021&amp;cityID=422801&quot;;</span><br><span class="line">      axios.get(url).then(</span><br><span class="line">        (response) =&gt; &#123;</span><br><span class="line">          console.log(&quot;请求成功了&quot;, response.data);</span><br><span class="line">          this.init(response.data);</span><br><span class="line"></span><br><span class="line">          setTimeout(() =&gt; &#123;</span><br><span class="line">            this.fillParagraphText();</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">        (error) =&gt; &#123;</span><br><span class="line">          console.log(&quot;请求失败了&quot;, error.message);</span><br><span class="line">        &#125;</span><br><span class="line">      );</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+
+<p>存储在浏览器内存的内容，保存时间多久，会不会存在用户一直在本地编辑不提交，从而丢失用户数据的问题？</p>
+]]></content>
+      <categories>
+        <category>autoWrite</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>paperStruct</title>
+    <url>/2022/autoWrite/paperStruct/</url>
+    <content><![CDATA[<h1 id="结构设计"><a href="#结构设计" class="headerlink" title="结构设计"></a>结构设计</h1><h2 id="ShowPaper-vue加载不同文件"><a href="#ShowPaper-vue加载不同文件" class="headerlink" title="ShowPaper.vue加载不同文件"></a><code>ShowPaper.vue</code>加载不同文件</h2><p><code>showPaper</code> 带有不同的query参数，实现访问不同文件的效果。</p>
+<p>如何将一个query参数传给一个组件？</p>
+]]></content>
+      <categories>
+        <category>autoWrite</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>hexo</title>
+    <url>/2022/tools/hexo/</url>
+    <content><![CDATA[<h2 id="文章按类别存储"><a href="#文章按类别存储" class="headerlink" title="文章按类别存储"></a>文章按类别存储</h2><p>原来的博客文章全部保存在 <code>_post</code>目录下，显得很杂乱。在<code>_config.yml</code>中增加 <code>cate</code>，修改后的文件的链接和保存的地址</p>
+<ol>
+<li>在主目录的<code>_config.yml</code>指定目录的名</li>
+</ol>
+   <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">category_dir: cate</span><br><span class="line">permalink: :year/:category/:title/</span><br><span class="line">new_post_name: :year/:category/:title.md # File name of new posts</span><br></pre></td></tr></table></figure>
+
+<p>   在这里使用 <code>category</code> 而不是<code>categories</code>，因为<code>:categories</code>是一个对象，如果该文章有多个类别不易存储。</p>
+<ol start="2">
+<li><p>修改主题目录的<code>_config.yml</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">分类: /categories</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>新增文章时，指定<code>category</code>属性值</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new xxx --category 类别名</span><br></pre></td></tr></table></figure>
+
+<p>若想指定多个类别可以使用 <code>categories</code></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>tools</category>
       </categories>
   </entry>
   <entry>
@@ -468,55 +563,6 @@ props:&#123;a:1,b:&#39;hello&#39;&#125;
       </categories>
   </entry>
   <entry>
-    <title>hexo</title>
-    <url>/2022/tools/hexo/</url>
-    <content><![CDATA[<h2 id="文章按类别存储"><a href="#文章按类别存储" class="headerlink" title="文章按类别存储"></a>文章按类别存储</h2><p>原来的博客文章全部保存在 <code>_post</code>目录下，显得很杂乱。在<code>_config.yml</code>中增加 <code>cate</code>，修改后的文件的链接和保存的地址</p>
-<ol>
-<li>在主目录的<code>_config.yml</code>指定目录的名</li>
-</ol>
-   <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">category_dir: cate</span><br><span class="line">permalink: :year/:category/:title/</span><br><span class="line">new_post_name: :year/:category/:title.md # File name of new posts</span><br></pre></td></tr></table></figure>
-
-<p>   在这里使用 <code>category</code> 而不是<code>categories</code>，因为<code>:categories</code>是一个对象，如果该文章有多个类别不易存储。</p>
-<ol start="2">
-<li><p>修改主题目录的<code>_config.yml</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">分类: /categories</span><br></pre></td></tr></table></figure>
-
-
-</li>
-<li><p>新增文章时，指定<code>category</code>属性值</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new xxx --category 类别名</span><br></pre></td></tr></table></figure>
-
-<p>若想指定多个类别可以使用 <code>categories</code></p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>tools</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>vuex</title>
-    <url>/2022/vue/vuex/</url>
-    <content><![CDATA[<h1 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h1><p>在header组件中 ，dispatch</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">this.$store.dispatch(&quot;logout&quot;);</span><br></pre></td></tr></table></figure>
-
-<p>我好奇的是，为何它无需指明是哪一个子store？</p>
-<ul>
-<li>监视数据变化</li>
-</ul>
-<p>​	当基本类型的 state 中的数据发生变化时，vue能感知到；但对象内部数据发生变化时，无法被vue感知到。</p>
-<p>​	采用 computed + watch的方式，v-if ，都失效了；</p>
-<p>​	我把这个 state的数据放在 data里，就好了, vuex中的数据更新后，data中的数据也会同步更新</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">return &#123;</span><br><span class="line">            chse: &quot;2-3&quot;,</span><br><span class="line">            paper: this.$store.state.paper.data[&quot;2-3&quot;],</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-      <categories>
-        <category>vue</category>
-      </categories>
-  </entry>
-  <entry>
     <title>qB</title>
     <url>/2022/tools/qB/</url>
     <content><![CDATA[<h1 id="qBittorrent"><a href="#qBittorrent" class="headerlink" title="qBittorrent"></a>qBittorrent</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://1337.abcvg.info:80/announce</span><br><span class="line"></span><br><span class="line">http://fxtt.ru:80/announce</span><br><span class="line"></span><br><span class="line">http://milanesitracker.tekcities.com:80/announce</span><br><span class="line"></span><br><span class="line">http://nyaa.tracker.wf:7777/announce</span><br><span class="line"></span><br><span class="line">http://open.acgnxtracker.com:80/announce</span><br><span class="line"></span><br><span class="line">http://open.nyap2p.com:8080/announce</span><br><span class="line"></span><br><span class="line">http://open.tracker.ink:6969/announce</span><br><span class="line"></span><br><span class="line">http://opentracker.xyz:80/announce</span><br><span class="line"></span><br><span class="line">http://share.camoe.cn:8080/announce</span><br><span class="line"></span><br><span class="line">http://t.acg.rip:6699/announce</span><br><span class="line"></span><br><span class="line">http://t.nyaatracker.com:80/announce</span><br><span class="line"></span><br><span class="line">http://t.overflow.biz:6969/announce</span><br><span class="line"></span><br><span class="line">http://tr.cili001.com:8070/announce</span><br><span class="line"></span><br><span class="line">http://tracker.aeerso.space:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.bt4g.com:2095/announce</span><br><span class="line"></span><br><span class="line">http://tracker.files.fm:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.gbitt.info:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker.ipv6tracker.ru:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker.mywaifu.best:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker1.itzmx.com:8080/announce</span><br><span class="line"></span><br><span class="line">http://tracker2.itzmx.com:6961/announce</span><br><span class="line"></span><br><span class="line">http://tracker3.520.jp:2095/announce</span><br><span class="line"></span><br><span class="line">http://tracker3.itzmx.com:6961/announce</span><br><span class="line"></span><br><span class="line">http://tracker4.itzmx.com:2710/announce</span><br><span class="line"></span><br><span class="line">https://carbon-bonsai-621.appspot.com:443/announce</span><br><span class="line"></span><br><span class="line">https://opentracker.i2p.rocks:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.abiir.top:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.burnabyhighstar.com:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.ready4.icu:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.baka.ink:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.imgoingto.icu:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.lilithraws.cf:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.nanoha.org:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.tamersunion.org:443/announce</span><br><span class="line"></span><br><span class="line">https://trackme.theom.nz:443/announce</span><br><span class="line"></span><br><span class="line">udp://9.rarbg.com:2810/announce</span><br><span class="line"></span><br><span class="line">udp://exodus.desync.com:6969/announce</span><br><span class="line"></span><br><span class="line">udp://fe.dealclub.de:6969/announce</span><br><span class="line"></span><br><span class="line">udp://ipv4.tracker.harry.lu:80/announce</span><br><span class="line"></span><br><span class="line">udp://ipv6.babico.name.tr:8000/announce</span><br><span class="line"></span><br><span class="line">udp://mirror.aptus.co.tz:6969/announce</span><br><span class="line"></span><br><span class="line">udp://movies.zsw.ca:6969/announce</span><br><span class="line"></span><br><span class="line">udp://oldboystudy.com:6969/announce</span><br><span class="line"></span><br><span class="line">udp://open.demonii.com:1337/announce</span><br><span class="line"></span><br><span class="line">udp://open.dstud.io:6969/announce</span><br><span class="line"></span><br><span class="line">udp://open.free-tracker.ga:6969/announce</span><br><span class="line"></span><br><span class="line">udp://open.publictracker.xyz:6969/announce</span><br><span class="line"></span><br><span class="line">udp://open.stealth.si:80/announce</span><br><span class="line"></span><br><span class="line">udp://open.tracker.ink:6969/announce</span><br><span class="line"></span><br><span class="line">udp://open.xxtor.com:3074/announce</span><br><span class="line"></span><br><span class="line">udp://opentor.org:2710/announce</span><br><span class="line"></span><br><span class="line">udp://opentracker.i2p.rocks:6969/announce</span><br><span class="line"></span><br><span class="line">udp://p4p.arenabg.com:1337/announce</span><br><span class="line"></span><br><span class="line">udp://retracker.hotplug.ru:2710/announce</span><br><span class="line"></span><br><span class="line">udp://run.publictracker.xyz:6969/announce</span><br><span class="line"></span><br><span class="line">udp://thetracker.org:80/announce</span><br><span class="line"></span><br><span class="line">udp://torrentclub.space:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.0x.tf:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.altrosky.nl:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.auctor.tv:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.beeimg.com:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.birkenwald.de:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.bitsearch.to:1337/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.cyberia.is:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.edkj.club:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.jordan.im:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.leech.ie:1337/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.moeking.me:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.openbittorrent.com:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.opentrackr.org:1337/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.pomf.se:80/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.publictracker.xyz:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.srv00.com:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.theoks.net:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.tiny-vps.com:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.torrent.eu.org:451/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.zerobytes.xyz:1337/announce</span><br><span class="line"></span><br><span class="line">udp://tracker1.bt.moack.co.kr:80/announce</span><br><span class="line"></span><br><span class="line">udp://tracker2.dler.com:80/announce</span><br><span class="line"></span><br><span class="line">udp://tracker2.dler.org:80/announce</span><br><span class="line"></span><br><span class="line">udp://tracker6.lelux.fi:6969/announce</span><br><span class="line"></span><br><span class="line">udp://v2.iperson.xyz:6969/announce</span><br><span class="line"></span><br><span class="line">udp://vibe.sleepyinternetfun.xyz:1738/announce</span><br><span class="line"></span><br><span class="line">udp://www.torrent.eu.org:451/announce</span><br><span class="line"></span><br><span class="line">udp://zecircle.xyz:6969/announce</span><br><span class="line"></span><br><span class="line">ws://hub.bugout.link:80/announce</span><br><span class="line"></span><br><span class="line">wss://tracker.openwebtorrent.com:443/announce</span><br><span class="line"></span><br><span class="line">http://1337.abcvg.info:80/announce</span><br><span class="line"></span><br><span class="line">http://207.241.226.111:6969/announce</span><br><span class="line"></span><br><span class="line">http://207.241.231.226:6969/announce</span><br><span class="line"></span><br><span class="line">http://[2001:1b10:1000:8101:0:242:ac11:2]:6969/announce</span><br><span class="line"></span><br><span class="line">http://[2a04:ac00:1:3dd8::1:2710]:2710/announce</span><br><span class="line"></span><br><span class="line">http://fe.dealclub.de:6969/announce</span><br><span class="line"></span><br><span class="line">http://fxtt.ru:80/announce</span><br><span class="line"></span><br><span class="line">http://milanesitracker.tekcities.com:80/announce</span><br><span class="line"></span><br><span class="line">http://movies.zsw.ca:6969/announce</span><br><span class="line"></span><br><span class="line">http://nyaa.tracker.wf:7777/announce</span><br><span class="line"></span><br><span class="line">http://open.acgnxtracker.com:80/announce</span><br><span class="line"></span><br><span class="line">http://open.acgtracker.com:1096/announce</span><br><span class="line"></span><br><span class="line">http://open.nyap2p.com:8080/announce</span><br><span class="line"></span><br><span class="line">http://open.tracker.ink:6969/announce</span><br><span class="line"></span><br><span class="line">http://opentracker.i2p.rocks:6969/announce</span><br><span class="line"></span><br><span class="line">http://opentracker.xyz:80/announce</span><br><span class="line"></span><br><span class="line">http://retracker.hotplug.ru:2710/announce</span><br><span class="line"></span><br><span class="line">http://share.camoe.cn:8080/announce</span><br><span class="line"></span><br><span class="line">http://t.acg.rip:6699/announce</span><br><span class="line"></span><br><span class="line">http://t.nyaatracker.com:80/announce</span><br><span class="line"></span><br><span class="line">http://t.overflow.biz:6969/announce</span><br><span class="line"></span><br><span class="line">http://tr.cili001.com:8070/announce</span><br><span class="line"></span><br><span class="line">http://tracker.aeerso.space:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.birkenwald.de:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.bt4g.com:2095/announce</span><br><span class="line"></span><br><span class="line">http://tracker.dler.com:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.dler.org:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.edkj.club:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.files.fm:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.gbitt.info:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker.ipv6tracker.ru:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker.mywaifu.best:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.noobsubs.net:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker.opentrackr.org:1337/announce</span><br><span class="line"></span><br><span class="line">http://tracker.srv00.com:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.srv00.com:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker.zerobytes.xyz:1337/announce</span><br><span class="line"></span><br><span class="line">http://tracker1.bt.moack.co.kr:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker1.itzmx.com:8080/announce</span><br><span class="line"></span><br><span class="line">http://tracker2.520.jp:2095/announce</span><br><span class="line"></span><br><span class="line">http://tracker2.dler.org:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker2.itzmx.com:6961/announce</span><br><span class="line"></span><br><span class="line">http://tracker3.520.jp:2095/announce</span><br><span class="line"></span><br><span class="line">http://tracker3.ctix.cn:2095/announce</span><br><span class="line"></span><br><span class="line">http://tracker3.itzmx.com:6961/announce</span><br><span class="line"></span><br><span class="line">http://tracker4.itzmx.com:2710/announce</span><br><span class="line"></span><br><span class="line">http://vps02.net.orel.ru:80/announce</span><br><span class="line"></span><br><span class="line">https://1337.abcvg.info:443/announce</span><br><span class="line"></span><br><span class="line">https://carbon-bonsai-621.appspot.com:443/announce</span><br><span class="line"></span><br><span class="line">https://chihaya-heroku.120181311.xyz:443/announce</span><br><span class="line"></span><br><span class="line">https://opentracker.i2p.rocks:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.abiir.top:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.abir.ga:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.burnabyhighstar.com:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.ready4.icu:443/announce</span><br><span class="line"></span><br><span class="line">https://track.plop.pm:8989/announce</span><br><span class="line"></span><br><span class="line">https://tracker.babico.name.tr:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.baka.ink:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.dmhy.pw:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.foreverpirates.co:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.imgoingto.icu:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.kuroy.me:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.lelux.fi:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.lilithraws.cf:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.lilithraws.org:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.nanoha.org:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.nitrix.me:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.srv00.com:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.tamersunion.org:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker1.520.jp:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker1.loli.co.nz:443/announce</span><br><span class="line"></span><br><span class="line">https://trackme.theom.nz:443/announce</span><br><span class="line"></span><br><span class="line">https://xtremex.herokuapp.com:443/announce</span><br><span class="line"></span><br><span class="line">udp://93.158.213.92:1337/announce</span><br><span class="line"></span><br><span class="line">udp://151.80.120.114:2810/announce</span><br><span class="line"></span><br><span class="line">udp://45.154.253.8:6969/announce</span><br><span class="line"></span><br><span class="line">udp://89.234.156.205:451/announce</span><br><span class="line"></span><br><span class="line">udp://185.181.60.155:80/announce</span><br><span class="line"></span><br><span class="line">udp://5.79.216.168:6969/announce</span><br><span class="line"></span><br><span class="line">udp://208.83.20.20:6969/announce</span><br><span class="line"></span><br><span class="line">udp://149.28.47.87:1738/announce</span><br><span class="line"></span><br><span class="line">udp://156.234.201.18:80/announce</span><br><span class="line"></span><br><span class="line">udp://209.141.59.16:6969/announce</span><br><span class="line"></span><br><span class="line">udp://194.53.137.231:6969/announce</span><br><span class="line"></span><br><span class="line">udp://93.104.214.40:6969/announce</span><br><span class="line"></span><br><span class="line">udp://107.189.11.230:6969/announce</span><br><span class="line"></span><br><span class="line">udp://185.70.187.79:6969/announce</span><br><span class="line"></span><br><span class="line">udp://185.134.22.3:6969/announce</span><br><span class="line"></span><br><span class="line">udp://185.21.216.185:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.sbsub.com:2710/announce</span><br><span class="line">http://open.acgtracker.com:1096/announce</span><br><span class="line">http://176.113.68.67:6961/announce</span><br><span class="line">http://176.113.71.60:6961/announce</span><br><span class="line">http://184.105.151.164:6969/announce</span><br><span class="line">http://185.83.214.123:6969/announce</span><br><span class="line">http://51.15.55.204:1337/announce</span><br><span class="line">http://51.38.230.101:80/announce</span><br><span class="line">http://93.158.213.92:1337/announce</span><br><span class="line">http://95.107.48.115:80/announce</span><br><span class="line">http://aaa.army:8866/announce</span><br><span class="line">http://bobbialbano.com:6969/announce</span><br><span class="line">http://derpyradio.net:6969/announce</span><br><span class="line">http://h4.trakx.nibba.trade:80/announce</span><br><span class="line">http://open.acgnxtracker.com/announce</span><br><span class="line">http://opentracker.i2p.rocks:6969/announce</span><br><span class="line">http://publictracker.ch:6969/announce</span><br><span class="line">http://retracker.sevstar.net:2710/announce</span><br><span class="line">http://rt.tace.ru:80/announce</span><br><span class="line">http://share.camoe.cn:8080/announce</span><br><span class="line">http://t.acg.rip:6699/announce</span><br><span class="line">http://t.nyaatracker.com/announce</span><br><span class="line">http://t.nyaatracker.com:80/announce</span><br><span class="line">http://t.overflow.biz:6969/announce</span><br><span class="line">http://tr.cili001.com:8070/announce</span><br><span class="line">http://tracker.anonwebz.xyz:8080/announce</span><br><span class="line">http://tracker.dler.org:6969/announce</span><br><span class="line">http://tracker.files.fm:6969/announce</span><br><span class="line">http://tracker.gbitt.info/announce</span><br><span class="line">http://tracker.gbitt.info:80/announce</span><br><span class="line">http://tracker.ipv6tracker.ru:80/announce</span><br><span class="line">http://tracker.kamigami.org:2710/announce</span><br><span class="line">http://tracker.lelux.fi:80/announce</span><br><span class="line">http://tracker.noobsubs.net:80/announce</span><br><span class="line">http://tracker.skyts.cn:6969/announce</span><br><span class="line">http://tracker.skyts.net:6969/announce</span><br><span class="line">http://tracker.ygsub.com:6969/announce</span><br><span class="line">http://tracker.zerobytes.xyz:1337/announce</span><br><span class="line">http://tracker1.itzmx.com:8080/announce</span><br><span class="line">http://tracker2.dler.org:80/announce</span><br><span class="line">http://tracker2.itzmx.com:6961/announce</span><br><span class="line">http://tracker3.itzmx.com:6961/announce</span><br><span class="line">http://tracker4.itzmx.com:2710/announce</span><br><span class="line">http://vpn.flying-datacenter.de:6969/announce</span><br><span class="line">http://vps02.net.orel.ru/announce</span><br><span class="line">http://vps02.net.orel.ru:80/announce</span><br><span class="line">https://1337.abcvg.info/announce</span><br><span class="line">https://1337.abcvg.info:443/announce</span><br><span class="line">https://aaa.army:8866/announce</span><br><span class="line">https://publictracker.pp.ua:443/announce</span><br><span class="line">https://tr.ready4.icu:443/announce</span><br><span class="line">https://tracker.gbitt.info/announce</span><br><span class="line">https://tracker.hama3.net:443/announce</span><br><span class="line">https://tracker.imgoingto.icu:443/announce</span><br><span class="line">https://tracker.lelux.fi:443/announce</span><br><span class="line">https://tracker.nitrix.me:443/announce</span><br><span class="line">https://tracker.tamersunion.org:443/announce</span><br><span class="line">https://trakx.herokuapp.com:443/announce</span><br><span class="line">https://w.wwwww.wtf:443/announce</span><br><span class="line">udp://176.113.68.67:6961/announce</span><br><span class="line">udp://176.113.71.60:6961/announce</span><br><span class="line">udp://185.181.60.67:80/announce</span><br><span class="line">udp://185.83.214.123:6969/announce</span><br><span class="line">udp://207.241.226.111:6969/announce</span><br><span class="line">udp://207.241.231.226:6969/announce</span><br><span class="line">udp://208.83.20.20:6969/announce</span><br><span class="line">udp://212.1.226.176:2710/announce</span><br><span class="line">udp://212.47.227.58:6969/announce</span><br><span class="line">udp://217.76.183.53:80/announce</span><br><span class="line">udp://37.235.174.46:2710/announce</span><br><span class="line">udp://46.148.18.250:2710/announce</span><br><span class="line">udp://46.148.18.254:2710/announce</span><br><span class="line">udp://47.ip-51-68-199.eu:6969/announce</span><br><span class="line">udp://5.226.148.20:6969/announce</span><br><span class="line">udp://61626c.net:6969/announce</span><br><span class="line">udp://62.210.97.59:1337/announce</span><br><span class="line">udp://6ahddutb1ucc3cp.ru:6969/announce</span><br><span class="line">udp://91.149.192.31:6969/announce</span><br><span class="line">udp://91.216.110.52:451/announce</span><br><span class="line">udp://93.158.213.92:1337/announce</span><br><span class="line">udp://adm.category5.tv:6969/announce</span><br><span class="line">udp://admin.videoenpoche.info:6969/announce</span><br><span class="line">udp://adminion.n-blade.ru:6969/announce</span><br><span class="line">udp://api.bitumconference.ru:6969/announce</span><br><span class="line">udp://aruacfilmes.com.br:6969/announce</span><br><span class="line">udp://bclearning.top:6969/announce</span><br><span class="line">udp://benouworldtrip.fr:6969/announce</span><br><span class="line">udp://bioquantum.co.za:6969/announce</span><br><span class="line">udp://bitsparadise.info:6969/announce</span><br><span class="line">udp://blokas.io:6969/announce</span><br><span class="line">udp://bms-hosxp.com:6969/announce</span><br><span class="line">udp://bubu.mapfactor.com:6969/announce</span><br><span class="line">udp://cdn-1.gamecoast.org:6969/announce</span><br><span class="line">udp://cdn-2.gamecoast.org:6969/announce</span><br><span class="line">udp://chanchan.uchuu.co.uk:6969/announce</span><br><span class="line">udp://cutiegirl.ru:6969/announce</span><br><span class="line">udp://daveking.com:6969/announce</span><br><span class="line">udp://discord.heihachi.pw:6969/announce</span><br><span class="line">udp://dpiui.reedlan.com:6969/announce</span><br><span class="line">udp://edu.uifr.ru:6969/announce</span><br><span class="line">udp://eliastre100.fr:6969/announce</span><br><span class="line">udp://engplus.ru:6969/announce</span><br><span class="line">udp://fe.dealclub.de:6969/announce</span><br><span class="line">udp://forever-tracker.zooki.xyz:6969/announce</span><br><span class="line">udp://inferno.demonoid.is:3391/announce</span><br><span class="line">udp://ipv4.tracker.harry.lu:80/announce</span><br><span class="line">udp://josueunhuit.com:6969/announce</span><br><span class="line">udp://kanal-4.de:6969/announce</span><br><span class="line">udp://koli.services:6969/announce</span><br><span class="line">udp://mail.realliferpg.de:6969/announce</span><br><span class="line">udp://movies.zsw.ca:6969/announce</span><br><span class="line">udp://mts.tvbit.co:6969/announce</span><br><span class="line">udp://nagios.tks.sumy.ua:80/announce</span><br><span class="line">udp://ns-1.x-fins.com:6969/announce</span><br><span class="line">udp://open.stealth.si:80/announce</span><br><span class="line">udp://opentor.org:2710/announce</span><br><span class="line">udp://opentracker.arg.bz:6969/announce</span><br><span class="line">udp://opentracker.i2p.rocks:6969/announce</span><br><span class="line">udp://publictracker.xyz:6969/announce</span><br><span class="line">udp://qg.lorzl.gq:2710/announce</span><br><span class="line">udp://retracker.akado-ural.ru:80/announce</span><br><span class="line">udp://retracker.lanta-net.ru:2710/announce</span><br><span class="line">udp://retracker.local.msn-net.ru:6969/announce</span><br><span class="line">udp://retracker.netbynet.ru:2710/announce</span><br><span class="line">udp://retracker.sevstar.net:2710/announce</span><br><span class="line">udp://rutorrent.frontline-mod.com:6969/announce</span><br><span class="line">udp://sd-161673.dedibox.fr:6969/announce</span><br><span class="line">udp://storage.groupees.com:6969/announce</span><br><span class="line">udp://teamspeak.value-wolf.org:6969/announce</span><br><span class="line">udp://torrent.tdjs.tech:6969/announce</span><br><span class="line">udp://tr.cili001.com:8070/announce</span><br><span class="line">udp://tracker.0x.tf:6969/announce</span><br><span class="line">udp://tracker.altrosky.nl:6969/announce</span><br><span class="line">udp://tracker.blacksparrowmedia.net:6969/announce</span><br><span class="line">udp://tracker.coppersurfer.tk:6969/announce</span><br><span class="line">udp://tracker.dler.org:6969/announce</span><br><span class="line">udp://tracker.ds.is:6969/announce</span><br><span class="line">udp://tracker.dyne.org:6969/announce</span><br><span class="line">udp://tracker.filemail.com:6969/announce</span><br><span class="line">udp://tracker.fortu.io:6969/announce</span><br><span class="line">udp://tracker.kamigami.org:2710/announce</span><br><span class="line">udp://tracker.leechers-paradise.org:6969/announce</span><br><span class="line">udp://tracker.lelux.fi:6969/announce</span><br><span class="line">udp://tracker.opentrackr.org:1337/announce</span><br><span class="line">udp://tracker.shkinev.me:6969/announce</span><br><span class="line">udp://tracker.skynetcloud.site:6969/announce</span><br><span class="line">udp://tracker.skyts.net:6969/announce</span><br><span class="line">udp://tracker.tiny-vps.com:6969/announce</span><br><span class="line">udp://tracker.uw0.xyz:6969/announce</span><br><span class="line">udp://tracker.v6speed.org:6969/announce</span><br><span class="line">udp://tracker.vulnix.sh:6969/announce</span><br><span class="line">udp://tracker.zemoj.com:6969/announce</span><br><span class="line">udp://tracker.zerobytes.xyz:1337/announce</span><br><span class="line">udp://tracker.zum.bi:6969/announce</span><br><span class="line">udp://tracker0.ufibox.com:6969/announce</span><br><span class="line">udp://tracker2.dler.org:80/announce</span><br><span class="line">udp://tracker2.itzmx.com:6961/announce</span><br><span class="line">udp://tracker3.itzmx.com:6961/announce</span><br><span class="line">udp://tracker6.dler.org:2710/announce</span><br><span class="line">udp://tracker-udp.gbitt.info:80/announce</span><br><span class="line">udp://ultra.zt.ua:6969/announce</span><br><span class="line">udp://us-tracker.publictracker.xyz:6969/announce</span><br><span class="line">udp://valakas.rollo.dnsabr.com:2710/announce</span><br><span class="line">udp://vibe.community:6969/announce</span><br><span class="line">udp://www.midea123.z-media.com.cn:6969/announce</span><br><span class="line">udp://zephir.monocul.us:6969/announce</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -528,6 +574,19 @@ props:&#123;a:1,b:&#39;hello&#39;&#125;
 ]]></content>
       <categories>
         <category>tools</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>pythonTricks</title>
+    <url>/2022/python/pythonTricks/</url>
+    <content><![CDATA[<h1 id="py-tricks"><a href="#py-tricks" class="headerlink" title="py tricks"></a>py tricks</h1><blockquote>
+<p>记录python编程的一些小技巧</p>
+</blockquote>
+<h1 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h1><p>最深处递归函数的值，会逐层被带回来</p>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h2 id="修改外部对象"><a href="#修改外部对象" class="headerlink" title="修改外部对象"></a>修改外部对象</h2><p>若参数是外部的对象</p>
+]]></content>
+      <categories>
+        <category>python</category>
       </categories>
   </entry>
   <entry>
@@ -545,19 +604,6 @@ props:&#123;a:1,b:&#39;hello&#39;&#125;
 <p>排版好</p>
 </li>
 </ul>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>pythonTricks</title>
-    <url>/2022/python/pythonTricks/</url>
-    <content><![CDATA[<h1 id="py-tricks"><a href="#py-tricks" class="headerlink" title="py tricks"></a>py tricks</h1><blockquote>
-<p>记录python编程的一些小技巧</p>
-</blockquote>
-<h1 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h1><p>最深处递归函数的值，会逐层被带回来</p>
-<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h2 id="修改外部对象"><a href="#修改外部对象" class="headerlink" title="修改外部对象"></a>修改外部对象</h2><p>若参数是外部的对象</p>
 ]]></content>
       <categories>
         <category>python</category>

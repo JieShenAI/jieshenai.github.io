@@ -155,6 +155,80 @@
     
     
     <article
+  id="post-this"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/javascript/this/"
+    >this</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/javascript/this/" class="article-date">
+  <time datetime="2022-09-21T01:54:35.000Z" itemprop="datePublished">2022-09-21</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="this"><a href="#this" class="headerlink" title="this"></a>this</h1><h2 id="函数的this"><a href="#函数的this" class="headerlink" title="函数的this"></a>函数的this</h2><h3 id="单个函数的this是什么"><a href="#单个函数的this是什么" class="headerlink" title="单个函数的this是什么"></a>单个函数的this是什么</h3><p>window</p>
+<h3 id="嵌套函数的this"><a href="#嵌套函数的this" class="headerlink" title="嵌套函数的this"></a>嵌套函数的this</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">parent</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> name = <span class="string">&quot;parent&quot;</span>;</span><br><span class="line">        <span class="keyword">function</span> <span class="title function_">son</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> name = <span class="string">&quot;son&quot;</span>;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">son</span>();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="title function_">parent</span>();</span><br></pre></td></tr></table></figure>
+
+<p>输出也是window</p>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="单层函数"><a href="#单层函数" class="headerlink" title="单层函数"></a>单层函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;obj&quot;</span>,</span><br><span class="line">    <span class="attr">sayHi</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="title function_">sayHi</span>();</span><br></pre></td></tr></table></figure>
+
+<p>obj 这个对象</p>
+<h3 id><a href="#" class="headerlink" title></a></h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">let</span> parent = &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">name</span>: <span class="string">&quot;parent&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">son</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">let</span> name = <span class="string">&quot;son&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">let</span> <span class="title function_">arrow</span> = (<span class="params"></span>) =&gt; &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;arrow&quot;</span>, <span class="variable language_">this</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">function</span> <span class="title function_">th</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;th&quot;</span>, <span class="variable language_">this</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">name</span>: <span class="string">&quot;re&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">                arrow,</span></span><br><span class="line"><span class="language-javascript">                th,</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">    parent.<span class="title function_">son</span>().<span class="title function_">arrow</span>();</span></span><br><span class="line"><span class="language-javascript">    parent.<span class="title function_">son</span>().<span class="title function_">th</span>();</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arrow &#123;name: &#x27;parent&#x27;, son: ƒ&#125;</span><br><span class="line">th &#123;name: &#x27;re&#x27;, arrow: ƒ, th: ƒ&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    grandPa = &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">name</span>: <span class="string">&quot;gradnPa&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">parent</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// let name = &quot;parent&quot;;</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> <span class="keyword">function</span> <span class="title function_">son</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">let</span> name = <span class="string">&quot;son&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">let</span> <span class="title function_">arrow</span> = (<span class="params"></span>) =&gt; &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;arrow&quot;</span>, <span class="variable language_">this</span>);</span></span><br><span class="line"><span class="language-javascript">                &#125;;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">function</span> <span class="title function_">th</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;th&quot;</span>, <span class="variable language_">this</span>);</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="attr">name</span>: <span class="string">&quot;re&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">                    arrow,</span></span><br><span class="line"><span class="language-javascript">                    th,</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">    grandPa.<span class="title function_">parent</span>()().<span class="title function_">arrow</span>();</span></span><br><span class="line"><span class="language-javascript">    grandPa.<span class="title function_">parent</span>()().<span class="title function_">th</span>();</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>arrow Window {window: Window, self: Window, document: document, name: ‘’, location: Location, …}<br>th {name: ‘re’, arrow: ƒ, th: ƒ}</p>
+</blockquote>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-less"
   class="article article-type-post"
   itemscope
@@ -406,8 +480,10 @@ props:&#123;a:1,b:&#39;hello&#39;&#125;
 <p>组件接收：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">props: [&#x27;id&#x27;, &#x27;title&#x27;, &#x27;a&#x27;, &#x27;b&#x27;],</span><br></pre></td></tr></table></figure>
 
-
-
+<p>问？组件的 props 和 路由的 props，都能在  <code>props: [&#39;id&#39;, &#39;title&#39;]</code>  中接收吗？</p>
+<blockquote>
+<p>试了一下，发现不能一起接收</p>
+</blockquote>
 <p>若觉得 <code>$route.query.id,</code> 写的很长可以使用结构赋值的连续写法</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">props</span>(<span class="params">&#123;query:&#123;id,title&#125;&#125;</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        id,</span><br><span class="line">        title,</span><br><span class="line">        <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">b</span>: <span class="string">&#x27;hello&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -461,19 +537,30 @@ props:&#123;a:1,b:&#39;hello&#39;&#125;
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h1><p>在header组件中 ，dispatch</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$store.dispatch(&quot;logout&quot;);</span><br></pre></td></tr></table></figure>
+  <h1 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h1><h2 id="模块化写法"><a href="#模块化写法" class="headerlink" title="模块化写法"></a>模块化写法</h2><h3 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h3><p><code>store/index.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="comment">//引入Vuex</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Vuex</span> <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"><span class="keyword">import</span> countOptions <span class="keyword">from</span> <span class="string">&#x27;./count&#x27;</span></span><br><span class="line"><span class="keyword">import</span> personOptions <span class="keyword">from</span> <span class="string">&#x27;./person&#x27;</span></span><br><span class="line"><span class="comment">//应用Vuex插件</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">use</span>(<span class="title class_">Vuex</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建并暴露store</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> <span class="title class_">Vuex</span>.<span class="title class_">Store</span>(&#123;</span><br><span class="line">	<span class="attr">modules</span>:&#123;</span><br><span class="line">		<span class="attr">countAbout</span>:countOptions,</span><br><span class="line">		<span class="attr">personAbout</span>:personOptions</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
-<p>我好奇的是，为何它无需指明是哪一个子store？</p>
-<ul>
-<li>监视数据变化</li>
-</ul>
-<p>​	当基本类型的 state 中的数据发生变化时，vue能感知到；但对象内部数据发生变化时，无法被vue感知到。</p>
-<p>​	采用 computed + watch的方式，v-if ，都失效了；</p>
-<p>​	我把这个 state的数据放在 data里，就好了, vuex中的数据更新后，data中的数据也会同步更新</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">return &#123;</span><br><span class="line">            chse: &quot;2-3&quot;,</span><br><span class="line">            paper: this.$store.state.paper.data[&quot;2-3&quot;],</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="子模块"><a href="#子模块" class="headerlink" title="子模块"></a>子模块</h3><p><code>store/子模块.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//求和相关的配置</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">	<span class="attr">namespaced</span>:<span class="literal">true</span>,</span><br><span class="line">	<span class="attr">actions</span>:&#123;</span><br><span class="line">		<span class="title function_">jiaOdd</span>(<span class="params">context,value</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span>(context.<span class="property">state</span>.<span class="property">sum</span> % <span class="number">2</span>)&#123;</span><br><span class="line">				context.<span class="title function_">commit</span>(<span class="string">&#x27;JIA&#x27;</span>,value)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="title function_">jiaWait</span>(<span class="params">context,value</span>)&#123;</span><br><span class="line">			<span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">				context.<span class="title function_">commit</span>(<span class="string">&#x27;JIA&#x27;</span>,value)</span><br><span class="line">			&#125;,<span class="number">500</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">mutations</span>:&#123;</span><br><span class="line">		<span class="title function_">JIA</span>(<span class="params">state,value</span>)&#123;</span><br><span class="line">			state.<span class="property">sum</span> += value</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="title function_">JIAN</span>(<span class="params">state,value</span>)&#123;</span><br><span class="line">			state.<span class="property">sum</span> -= value</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">state</span>:&#123;</span><br><span class="line">		<span class="attr">sum</span>:<span class="number">0</span>, <span class="comment">//当前的和</span></span><br><span class="line">		<span class="attr">school</span>:<span class="string">&#x27;尚硅谷&#x27;</span>,</span><br><span class="line">		<span class="attr">subject</span>:<span class="string">&#x27;前端&#x27;</span>,</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">getters</span>:&#123;</span><br><span class="line">		<span class="title function_">bigSum</span>(<span class="params">state</span>)&#123;</span><br><span class="line">			<span class="keyword">return</span> state.<span class="property">sum</span>*<span class="number">10</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
+
+<h3 id="分发请求"><a href="#分发请求" class="headerlink" title="分发请求"></a>分发请求</h3><p><code>personAbout/addPersonWang</code>:  前面是子仓库的模块名</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">$store</span>.<span class="title function_">dispatch</span>(<span class="string">&#x27;personAbout/addPersonWang&#x27;</span>,personObj);</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">$store</span>.<span class="title function_">commit</span>(<span class="string">&#x27;personAbout/ADD_PERSON&#x27;</span>,personObj);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="组件内简写形式"><a href="#组件内简写形式" class="headerlink" title="组件内简写形式"></a>组件内简写形式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">		&lt;h1&gt;当前求和为：&#123;&#123;sum&#125;&#125;&lt;/h1&gt;</span><br><span class="line">		&lt;h3&gt;当前求和放大10倍为：&#123;&#123;bigSum&#125;&#125;&lt;/h3&gt;</span><br><span class="line">		&lt;h3&gt;我在&#123;&#123;school&#125;&#125;，学习&#123;&#123;subject&#125;&#125;&lt;/h3&gt;</span><br><span class="line">		&lt;h3 style=&quot;color:red&quot;&gt;Person组件的总人数是：&#123;&#123;personList.length&#125;&#125;&lt;/h3&gt;</span><br><span class="line">		&lt;select v-model.number=&quot;n&quot;&gt;</span><br><span class="line">			&lt;option value=&quot;1&quot;&gt;1&lt;/option&gt;</span><br><span class="line">			&lt;option value=&quot;2&quot;&gt;2&lt;/option&gt;</span><br><span class="line">			&lt;option value=&quot;3&quot;&gt;3&lt;/option&gt;</span><br><span class="line">		&lt;/select&gt;</span><br><span class="line">		&lt;button @click=&quot;increment(n)&quot;&gt;+&lt;/button&gt;</span><br><span class="line">		&lt;button @click=&quot;decrement(n)&quot;&gt;-&lt;/button&gt;</span><br><span class="line">		&lt;button @click=&quot;incrementOdd(n)&quot;&gt;当前求和为奇数再加&lt;/button&gt;</span><br><span class="line">		&lt;button @click=&quot;incrementWait(n)&quot;&gt;等一等再加&lt;/button&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	import &#123;mapState,mapGetters,mapMutations,mapActions&#125; from &#x27;vuex&#x27;</span><br><span class="line">	export default &#123;</span><br><span class="line">		name:&#x27;Count&#x27;,</span><br><span class="line">		data() &#123;</span><br><span class="line">			return &#123;</span><br><span class="line">				n:1, //用户选择的数字</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		computed:&#123;</span><br><span class="line">			//借助mapState生成计算属性，从state中读取数据。（数组写法）</span><br><span class="line">			...mapState(&#x27;countAbout&#x27;,[&#x27;sum&#x27;,&#x27;school&#x27;,&#x27;subject&#x27;]),</span><br><span class="line">			...mapState(&#x27;personAbout&#x27;,[&#x27;personList&#x27;]),</span><br><span class="line">			//借助mapGetters生成计算属性，从getters中读取数据。（数组写法）</span><br><span class="line">			...mapGetters(&#x27;countAbout&#x27;,[&#x27;bigSum&#x27;])</span><br><span class="line">		&#125;,</span><br><span class="line">		methods: &#123;</span><br><span class="line">			//借助mapMutations生成对应的方法，方法中会调用commit去联系mutations(对象写法)</span><br><span class="line">			...mapMutations(&#x27;countAbout&#x27;,&#123;increment:&#x27;JIA&#x27;,decrement:&#x27;JIAN&#x27;&#125;),</span><br><span class="line">			//借助mapActions生成对应的方法，方法中会调用dispatch去联系actions(对象写法)</span><br><span class="line">			...mapActions(&#x27;countAbout&#x27;,&#123;incrementOdd:&#x27;jiaOdd&#x27;,incrementWait:&#x27;jiaWait&#x27;&#125;)</span><br><span class="line">		&#125;,</span><br><span class="line">		mounted() &#123;</span><br><span class="line">			console.log(this.$store)</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style lang=&quot;css&quot;&gt;</span><br><span class="line">	button&#123;</span><br><span class="line">		margin-left: 5px;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="全局写法"><a href="#全局写法" class="headerlink" title="全局写法"></a>全局写法</h2><blockquote>
+<p>不常用，不建议使用</p>
+</blockquote>
+<p>每个子仓库都可以写成独立js文件，模板如下；</p>
+<p>在分发请求时，无需写子仓库的模块名了；缺点很严重，不同子仓库里的函数不能重名；</p>
+<p><code>this.$store.dispatch(&#39;addPersonWang&#39;,personObj);</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> state = &#123;</span><br><span class="line">    <span class="attr">data</span>: &#123;&#125;,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> actions = &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> mutations = &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//仓库计算属性</span></span><br><span class="line"><span class="keyword">let</span> getters = &#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//对外暴露小仓库</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    state,</span><br><span class="line">    mutations,</span><br><span class="line">    actions,</span><br><span class="line">    getters</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
  
       <!-- reward -->
@@ -699,6 +786,7 @@ props:&#123;a:1,b:&#39;hello&#39;&#125;
     <div class="article-entry" itemprop="articleBody">
        
   <h1 id="结构设计"><a href="#结构设计" class="headerlink" title="结构设计"></a>结构设计</h1><h2 id="ShowPaper-vue加载不同文件"><a href="#ShowPaper-vue加载不同文件" class="headerlink" title="ShowPaper.vue加载不同文件"></a><code>ShowPaper.vue</code>加载不同文件</h2><p><code>showPaper</code> 带有不同的query参数，实现访问不同文件的效果。</p>
+<p>如何将一个query参数传给一个组件？</p>
  
       <!-- reward -->
       
@@ -842,191 +930,6 @@ props:&#123;a:1,b:&#39;hello&#39;&#125;
 <hr>
 
 <p>存储在浏览器内存的内容，保存时间多久，会不会存在用户一直在本地编辑不提交，从而丢失用户数据的问题？</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-basic"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/vue/basic/"
-    >basic</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/vue/basic/" class="article-date">
-  <time datetime="2022-09-04T08:01:44.000Z" itemprop="datePublished">2022-09-04</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/vue/">vue</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h1><h2 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h2><h3 id="允许组件名为单个单词"><a href="#允许组件名为单个单词" class="headerlink" title="允许组件名为单个单词"></a>允许组件名为单个单词</h3><p>在vue根目录下，增加<code>.eslintrc.js</code>文件，文件内容如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">root</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">env</span>: &#123;</span><br><span class="line">        <span class="attr">node</span>: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&#x27;extends&#x27;</span>: [</span><br><span class="line">        <span class="string">&#x27;plugin:vue/essential&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;eslint:recommended&#x27;</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">parserOptions</span>: &#123;</span><br><span class="line">        <span class="attr">parser</span>: <span class="string">&#x27;@babel/eslint-parser&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">rules</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;no-console&#x27;</span>: process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span> ? <span class="string">&#x27;warn&#x27;</span> : <span class="string">&#x27;off&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;no-debugger&#x27;</span>: process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span> ? <span class="string">&#x27;warn&#x27;</span> : <span class="string">&#x27;off&#x27;</span>,</span><br><span class="line">        <span class="comment">//在rules中添加自定义规则</span></span><br><span class="line">        <span class="comment">//关闭组件命名规则</span></span><br><span class="line">        <span class="string">&quot;vue/multi-word-component-names&quot;</span>: <span class="string">&quot;off&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">overrides</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">files</span>: [</span><br><span class="line">                <span class="string">&#x27;**/__tests__/*.&#123;j,t&#125;s?(x)&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;**/tests/unit/**/*.spec.&#123;j,t&#125;s?(x)&#x27;</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">env</span>: &#123;</span><br><span class="line">                <span class="attr">jest</span>: <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h2><h3 id="v-for-数据修改后，页面不变化原因"><a href="#v-for-数据修改后，页面不变化原因" class="headerlink" title="v-for 数据修改后，页面不变化原因"></a>v-for 数据修改后，页面不变化原因</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;data in paper&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;data.id&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">PImg</span> <span class="attr">:textObj</span>=<span class="string">&quot;data&quot;</span> /&gt;</span></span><br><span class="line">    &#123;&#123;data&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>paper的数据格式如下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">	&#123;</span><br><span class="line">        <span class="attr">id</span>:xxx,</span><br><span class="line">        <span class="attr">value</span>:xxx,</span><br><span class="line">    &#125;,</span><br><span class="line">    ...</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<p>若只更改paper某个value的数据:</p>
-<ul>
-<li> 中的数据会变化
-</li>
-<li><p><code>pImg</code>组件的数据不会变化</p>
-<p>只改变了value，:key&#x3D;”data.id”&#96;没有变，vue不知道数据发生了变化，仍然使用上一次的虚拟dom，故新数据显示不出来。</p>
-</li>
-</ul>
-<p>在修改数据时，用一个新对象替代原来对象的做法是不对的，这样也会导致vue感知到不到数据的变化</p>
-<p>❌</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">state.<span class="property">data</span>[key] = &#123;</span><br><span class="line">      <span class="attr">value</span>: newValue,</span><br><span class="line">      <span class="attr">id</span>: <span class="title function_">nanoid</span>(),</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>必须逐个修改对象的值：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> paper) &#123;</span><br><span class="line">    <span class="keyword">if</span> (paper[key].<span class="property">id</span> == id) &#123;</span><br><span class="line">        paper[key].<span class="property">id</span> = <span class="title function_">nanoid</span>();</span><br><span class="line">        paper[key].<span class="property">value</span> = newValue;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="消息订阅与发布"><a href="#消息订阅与发布" class="headerlink" title="消息订阅与发布"></a>消息订阅与发布</h2><blockquote>
-<p>用的不多，在vue中常用 事件总线</p>
-</blockquote>
-<p>推荐包:  <code>pubsub-js</code></p>
-<p>装包:  <code>npm i pubsub-js</code></p>
-<p>导入包：<code>import pubsub from &#39;pubsub-js&#39;</code></p>
-<h3 id="订阅消息"><a href="#订阅消息" class="headerlink" title="订阅消息"></a>订阅消息</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">this.pubId = pubsub.subscribe(&#x27;hello&#x27;,function(msgName,data)&#123;</span><br><span class="line">	// console.log(this); 问：这里的this为什么是undefined</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>订阅<code>hello</code>,当有人发布<code>hello</code>后，执行回调函数。<code>pubsub.subscribe</code>回调函数里的 this 不是vc 。因为vue承诺函数内的this是vc，而第三方库函数里的this不会这样设置。若需要使用vc，可参考下述的<strong>两种写法</strong>。</p>
-<p>每一次订阅后，都有一个订阅的id。避免取消订阅的函数读取不到pubId，所以把它放在 <code>this</code> 身上。</p>
-<ul>
-<li><p>msgName</p>
-<p>订阅名，即“hello”</p>
-</li>
-<li><p>data</p>
-<p>发布的数据</p>
-</li>
-</ul>
-<p>正确写法 √</p>
-<p>方式一,<strong>箭头函数</strong>：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mounted()&#123;</span><br><span class="line">    this.pubId = pubsub.subscribe(&#x27;hello&#x27;,(msgName,data) =&gt; &#123;</span><br><span class="line">        console.log(this); // 这里的this是vc</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>方式二：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">methods:&#123;</span><br><span class="line">	demo(msgName,data)&#123;</span><br><span class="line">		console.log(data,this);// 这里的this是vc</span><br><span class="line">	&#125;</span><br><span class="line">&#125;,</span><br><span class="line">mounted()&#123;</span><br><span class="line">    this.pubId = pubsub.subscribe(&#x27;hello&#x27;,this.demo)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="发布消息"><a href="#发布消息" class="headerlink" title="发布消息"></a>发布消息</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pubsub.publish(&#x27;hello&#x27;,666)</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="取消订阅"><a href="#取消订阅" class="headerlink" title="取消订阅"></a>取消订阅</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">beforeDestroy()&#123;</span><br><span class="line">	pubsub.unsubscribe(this.pubId)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h2><p>参考<a target="_blank" rel="noopener" href="https://www.csdn.net/tags/NtTaAgwsMTYxMjktYmxvZwO0O0OO0O0O.html">点击</a></p>
-<blockquote>
-<p>computed是在DOM执行完成后立马执行（如：赋值）</p>
-<p>created执行时挂载阶段还没有开始，模版还没有渲染成html，所以无法获取元素。created钩子函数主要用来初始化数据。通常在created钩子函数里执行访问数据库的方法，然后返回数据给前端，前端data中定义全局变量接收数据</p>
-<p>mounted钩子函数一般用来向后端发起请求，拿到数据后做一些业务处理。该函数在模版渲染完成后才被调用。DOM操作一般是在mounted钩子函数中进行。<br>methods方法有一定的触发条件，如click等。<br>watch用于检测vue实例上数据的变动</p>
-</blockquote>
-<ul>
-<li><p>需求一</p>
-<p>页面上的内容，由 axios 从服务器端拿回数据，并渲染到页面上。</p>
-<p>问题：当 axios 从服务器取回数据后，vue如何感知到数据发生了变化，并重新渲染模板。</p>
-</li>
-</ul>
-<h2 id="自定义事件"><a href="#自定义事件" class="headerlink" title="自定义事件"></a>自定义事件</h2><blockquote>
-<p>涉及到子给父传东西</p>
-</blockquote>
-<p>在父组件中，给子组件添加一个自定义事件，@后面跟事件名，再跟事件的回调函数。比如：<code>@getA=&quot;getA&quot;</code>。</p>
-<p>点击了子组件的按钮后，父组件接收到了子组件传过来的a。</p>
-<p>子组件执行 <code>this.$emit(&quot;getA&quot;, &quot;xxx&quot;)</code>后，只有对应的父组件才会对此响应。</p>
-<p>父组件代码</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>This is Father! A is &#123;&#123; a &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Son</span> @<span class="attr">getA</span>=<span class="string">&quot;getA&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Son</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">import</span> <span class="title class_">Son</span> <span class="keyword">from</span> <span class="string">&#x27;@/components/Son.vue&#x27;</span>;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="title function_">data</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">return</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="attr">a</span>: <span class="number">10</span>,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="attr">components</span>: &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="title class_">Son</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="attr">methods</span>: &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="title function_">getA</span>(<span class="params">value</span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="variable language_">this</span>.<span class="property">a</span> = value;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<p>子组件代码</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>This is son!<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">&quot;send&quot;</span>&gt;</span>点击<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="attr">methods</span>: &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="title function_">send</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">            <span class="variable language_">this</span>.$emit(<span class="string">&quot;getA&quot;</span>, <span class="string">&quot;A from son&quot;</span>);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="全局事件总线"><a href="#全局事件总线" class="headerlink" title="全局事件总线"></a>全局事件总线</h2><p>前面的自定义事件，只能是父子组件之间传递数据，孙子组件则不能传递数据；故引出了总线；</p>
-<h3 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h3><p>在<code>main.js</code>中，进行引入</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">new Vue(&#123;</span><br><span class="line">	el:&#x27;#app&#x27;,</span><br><span class="line">	render: h =&gt; h(App),</span><br><span class="line">	beforeCreate() &#123;</span><br><span class="line">		Vue.prototype.$bus = this</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="绑定"><a href="#绑定" class="headerlink" title="绑定"></a>绑定</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">mounted</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">$bus</span>.$on(<span class="string">&#x27;checkTodo&#x27;</span>,<span class="variable language_">this</span>.<span class="property">checkTodo</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="解绑"><a href="#解绑" class="headerlink" title="解绑"></a>解绑</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">beforeDestroy</span>(<span class="params"></span>) &#123;</span><br><span class="line">	<span class="variable language_">this</span>.<span class="property">$bus</span>.$off(<span class="string">&#x27;checkTodo&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="emit"><a href="#emit" class="headerlink" title="emit"></a>emit</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">methods</span>: &#123;</span><br><span class="line">    <span class="comment">//勾选or取消勾选</span></span><br><span class="line">    <span class="title function_">handleCheck</span>(<span class="params">id</span>)&#123;</span><br><span class="line">        <span class="comment">//通知App组件将对应的todo对象的done值取反</span></span><br><span class="line">        <span class="comment">// this.checkTodo(id)</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">$bus</span>.$emit(<span class="string">&#x27;checkTodo&#x27;</span>,id)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="本地存储"><a href="#本地存储" class="headerlink" title="本地存储"></a>本地存储</h2><h3 id="写入"><a href="#写入" class="headerlink" title="写入"></a>写入</h3><p><code>deep:true </code>表示当 <code>todos</code> 对象的数据发生变化后，也能监视到；若不写<code>deep</code>，则只能监视到值的变化，不能监视到对象内部值的变化。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">watch</span>: &#123;</span><br><span class="line">			<span class="attr">todos</span>:&#123;</span><br><span class="line">				<span class="attr">deep</span>:<span class="literal">true</span>,</span><br><span class="line">				<span class="title function_">handler</span>(<span class="params">value</span>)&#123;</span><br><span class="line">					<span class="variable language_">localStorage</span>.<span class="title function_">setItem</span>(<span class="string">&#x27;todos&#x27;</span>,<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(value))</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="读取"><a href="#读取" class="headerlink" title="读取"></a>读取</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data() &#123;</span><br><span class="line">			return &#123;</span><br><span class="line">				//由于todos是MyHeader组件和MyFooter组件都在使用，所以放在App中（状态提升）</span><br><span class="line">				todos:JSON.parse(localStorage.getItem(&#x27;todos&#x27;)) || []</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h2><p>在一个函数中，修改完数据后，网页模板会重新解析。</p>
-<p>希望在网页模板解析完成后执行某项操作，通常情况当前函数内容全部执行完，模板才会重新解析。</p>
-<p>解决方法：使用 <code>setTimeout</code> 将该操作添加到队尾。计时的参数可以不用填。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">obj</span> = <span class="variable language_">this</span>.<span class="title function_">getData</span>();</span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">arr</span> = <span class="variable language_">this</span>.<span class="title function_">fillParagraphText</span>();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h2><h3 id="确认删除"><a href="#确认删除" class="headerlink" title="确认删除"></a>确认删除</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">methods</span>: &#123;</span><br><span class="line">        <span class="title function_">handle</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="title function_">confirm</span>(<span class="string">&#x27;确定删除吗？&#x27;</span>)) &#123;</span><br><span class="line">                <span class="comment">//通知App组件将对应的todo对象删除</span></span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;已删除&quot;</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;取消&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><h3 id="set"><a href="#set" class="headerlink" title="$set"></a>$set</h3><p>在vc中添加一个数据后，这个数据的修改后不会重新加载模板</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$set(obj,&#x27;attr&#x27;,true);</span><br></pre></td></tr></table></figure>
-
-
-
-<p>案例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if(todo.hasOwnProperty(&#x27;isEdit&#x27;))&#123;</span><br><span class="line">    todo.isEdit = true;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    // console.log(&#x27;@&#x27;)</span><br><span class="line">    this.$set(todo,&#x27;isEdit&#x27;,true)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">todo.isEdit = false;</span><br></pre></td></tr></table></figure>
-
-<p>给对象绑定属性，得先用 <code>xxxobj.hasOwnProperty(&quot;xxxattr&quot;)</code>，判断它是否有某个属性。</p>
-<p>没有该属性，才 <code>this.$set(xxxobj,&quot;xxxattr&quot;,&quot;初始值&quot;)</code></p>
-<h3 id="nextTick"><a href="#nextTick" class="headerlink" title="$nextTick"></a>$nextTick</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">xxxfunc</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">//修改数据</span></span><br><span class="line">    <span class="variable language_">this</span>.$nextTick(</span><br><span class="line">        <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">			</span><br><span class="line">        &#125;</span><br><span class="line">    )</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
-
-<p>在xxxfunc函数内，修改了数据，会导致模板重新解析。</p>
-<p>比如，模板重新解析后，页面上会出现输入款，想拿到输入框的焦点，需要执行<code>this.$refs.xxx.focus()</code>。在<code>xxxfunc</code>函数内的操作全部执行完毕后，输入框才会解析出来。</p>
-<p>故将获取输入框的代码，放在 <code>$nextTick()</code>内，表示在本轮解决后，再执行。</p>
  
       <!-- reward -->
       

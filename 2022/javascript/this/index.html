@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>paperStruct |  Hidden yourself until New God appear!</title>
+      <title>this |  Hidden yourself until New God appear!</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -54,7 +54,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-paperStruct"
+  id="post-this"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -65,7 +65,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  paperStruct
+  this
 </h1>
  
 
@@ -73,11 +73,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2022/autoWrite/paperStruct/" class="article-date">
-  <time datetime="2022-09-05T08:46:00.000Z" itemprop="datePublished">2022-09-05</time>
+      <a href="/2022/javascript/this/" class="article-date">
+  <time datetime="2022-09-21T01:54:35.000Z" itemprop="datePublished">2022-09-21</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/autoWrite/">autoWrite</a>
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
   </div>
   
 <div class="word_count">
@@ -85,7 +85,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">45</span>
+            <span class="post-count">233</span>
         </span>
     </span>
 
@@ -109,8 +109,30 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="结构设计"><a href="#结构设计" class="headerlink" title="结构设计"></a>结构设计</h1><h2 id="ShowPaper-vue加载不同文件"><a href="#ShowPaper-vue加载不同文件" class="headerlink" title="ShowPaper.vue加载不同文件"></a><code>ShowPaper.vue</code>加载不同文件</h2><p><code>showPaper</code> 带有不同的query参数，实现访问不同文件的效果。</p>
-<p>如何将一个query参数传给一个组件？</p>
+  <h1 id="this"><a href="#this" class="headerlink" title="this"></a>this</h1><h2 id="函数的this"><a href="#函数的this" class="headerlink" title="函数的this"></a>函数的this</h2><h3 id="单个函数的this是什么"><a href="#单个函数的this是什么" class="headerlink" title="单个函数的this是什么"></a>单个函数的this是什么</h3><p>window</p>
+<h3 id="嵌套函数的this"><a href="#嵌套函数的this" class="headerlink" title="嵌套函数的this"></a>嵌套函数的this</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">parent</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> name = <span class="string">&quot;parent&quot;</span>;</span><br><span class="line">        <span class="keyword">function</span> <span class="title function_">son</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> name = <span class="string">&quot;son&quot;</span>;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">son</span>();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="title function_">parent</span>();</span><br></pre></td></tr></table></figure>
+
+<p>输出也是window</p>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="单层函数"><a href="#单层函数" class="headerlink" title="单层函数"></a>单层函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;obj&quot;</span>,</span><br><span class="line">    <span class="attr">sayHi</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="title function_">sayHi</span>();</span><br></pre></td></tr></table></figure>
+
+<p>obj 这个对象</p>
+<h3 id><a href="#" class="headerlink" title></a></h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">let</span> parent = &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">name</span>: <span class="string">&quot;parent&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">son</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">let</span> name = <span class="string">&quot;son&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">let</span> <span class="title function_">arrow</span> = (<span class="params"></span>) =&gt; &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;arrow&quot;</span>, <span class="variable language_">this</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">function</span> <span class="title function_">th</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;th&quot;</span>, <span class="variable language_">this</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">name</span>: <span class="string">&quot;re&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">                arrow,</span></span><br><span class="line"><span class="language-javascript">                th,</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">    parent.<span class="title function_">son</span>().<span class="title function_">arrow</span>();</span></span><br><span class="line"><span class="language-javascript">    parent.<span class="title function_">son</span>().<span class="title function_">th</span>();</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arrow &#123;name: &#x27;parent&#x27;, son: ƒ&#125;</span><br><span class="line">th &#123;name: &#x27;re&#x27;, arrow: ƒ, th: ƒ&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    grandPa = &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">name</span>: <span class="string">&quot;gradnPa&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">parent</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// let name = &quot;parent&quot;;</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> <span class="keyword">function</span> <span class="title function_">son</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">let</span> name = <span class="string">&quot;son&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">let</span> <span class="title function_">arrow</span> = (<span class="params"></span>) =&gt; &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;arrow&quot;</span>, <span class="variable language_">this</span>);</span></span><br><span class="line"><span class="language-javascript">                &#125;;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">function</span> <span class="title function_">th</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;th&quot;</span>, <span class="variable language_">this</span>);</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="attr">name</span>: <span class="string">&quot;re&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">                    arrow,</span></span><br><span class="line"><span class="language-javascript">                    th,</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">    grandPa.<span class="title function_">parent</span>()().<span class="title function_">arrow</span>();</span></span><br><span class="line"><span class="language-javascript">    grandPa.<span class="title function_">parent</span>()().<span class="title function_">th</span>();</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>arrow Window {window: Window, self: Window, document: document, name: ‘’, location: Location, …}<br>th {name: ‘re’, arrow: ƒ, th: ƒ}</p>
+</blockquote>
  
       <!-- reward -->
       
@@ -181,7 +203,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://jieshenai.github.io/2022/autoWrite/paperStruct/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://jieshenai.github.io/2022/javascript/this/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -192,19 +214,10 @@
    
   <nav class="article-nav">
     
-      <a href="/2022/python/%E6%AD%A3%E5%88%99/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            正则
-          
-        </div>
-      </a>
     
-    
-      <a href="/2022/javascript/jsIntro/" class="article-nav-link">
+      <a href="/2022/css/less/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">jsIntro</div>
+        <div class="article-nav-title">less</div>
       </a>
     
   </nav>

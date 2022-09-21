@@ -6,7 +6,7 @@
   <link href="https://jieshenai.github.io/atom.xml" rel="self"/>
   
   <link href="https://jieshenai.github.io/"/>
-  <updated>2022-09-17T03:17:55.498Z</updated>
+  <updated>2022-09-21T06:59:46.757Z</updated>
   <id>https://jieshenai.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>this</title>
+    <link href="https://jieshenai.github.io/2022/javascript/this/"/>
+    <id>https://jieshenai.github.io/2022/javascript/this/</id>
+    <published>2022-09-21T01:54:35.000Z</published>
+    <updated>2022-09-21T06:59:46.757Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;this&quot;&gt;&lt;a href=&quot;#this&quot; class=&quot;headerlink&quot; title=&quot;this&quot;&gt;&lt;/a&gt;this&lt;/h1&gt;&lt;h2 id=&quot;函数的this&quot;&gt;&lt;a href=&quot;#函数的this&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="javascript" scheme="https://jieshenai.github.io/categories/javascript/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>less</title>
@@ -44,7 +67,7 @@
     <link href="https://jieshenai.github.io/2022/vue/router/"/>
     <id>https://jieshenai.github.io/2022/vue/router/</id>
     <published>2022-09-16T01:53:06.000Z</published>
-    <updated>2022-09-17T08:40:15.605Z</updated>
+    <updated>2022-09-19T07:22:19.997Z</updated>
     
     
       
@@ -67,15 +90,14 @@
     <link href="https://jieshenai.github.io/2022/vue/vuex/"/>
     <id>https://jieshenai.github.io/2022/vue/vuex/</id>
     <published>2022-09-15T08:45:12.000Z</published>
-    <updated>2022-09-15T14:11:21.865Z</updated>
+    <updated>2022-09-21T08:13:07.606Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;vuex&quot;&gt;&lt;a href=&quot;#vuex&quot; class=&quot;headerlink&quot; title=&quot;vuex&quot;&gt;&lt;/a&gt;vuex&lt;/h1&gt;&lt;p&gt;在header组件中 ，dispatch&lt;/p&gt;
-&lt;figure class=&quot;highlight</summary>
+    <summary type="html">&lt;h1 id=&quot;vuex&quot;&gt;&lt;a href=&quot;#vuex&quot; class=&quot;headerlink&quot; title=&quot;vuex&quot;&gt;&lt;/a&gt;vuex&lt;/h1&gt;&lt;h2 id=&quot;模块化写法&quot;&gt;&lt;a href=&quot;#模块化写法&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -160,7 +182,7 @@
     <link href="https://jieshenai.github.io/2022/autoWrite/paperStruct/"/>
     <id>https://jieshenai.github.io/2022/autoWrite/paperStruct/</id>
     <published>2022-09-05T08:46:00.000Z</published>
-    <updated>2022-09-18T12:12:28.871Z</updated>
+    <updated>2022-09-19T06:57:52.545Z</updated>
     
     
       
