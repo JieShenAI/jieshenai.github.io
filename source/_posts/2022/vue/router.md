@@ -182,7 +182,9 @@ props($route){
 props: ['id', 'title', 'a', 'b'],
 ```
 
+问？组件的 props 和 路由的 props，都能在  `props: ['id', 'title']`  中接收吗？
 
+> 试了一下，发现不能一起接收
 
 若觉得 `$route.query.id,` 写的很长可以使用结构赋值的连续写法
 
