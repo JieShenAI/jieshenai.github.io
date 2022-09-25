@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>jsIntro |  Hidden yourself until New God appear!</title>
+      <title>token认证 |  Hidden yourself until New God appear!</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -54,7 +54,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-jsIntro"
+  id="post-token认证"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -65,7 +65,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  jsIntro
+  token认证
 </h1>
  
 
@@ -73,11 +73,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2022/javascript/jsIntro/" class="article-date">
-  <time datetime="2022-09-04T12:25:14.000Z" itemprop="datePublished">2022-09-04</time>
+      <a href="/2022/django/token%E8%AE%A4%E8%AF%81/" class="article-date">
+  <time datetime="2022-09-23T03:34:49.000Z" itemprop="datePublished">2022-09-23</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+    <a class="article-category-link" href="/categories/django/">django</a>
   </div>
   
 <div class="word_count">
@@ -85,7 +85,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">494</span>
+            <span class="post-count">484</span>
         </span>
     </span>
 
@@ -109,59 +109,21 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="js基础知识"><a href="#js基础知识" class="headerlink" title="js基础知识"></a>js基础知识</h1><p>建议阅读 <a target="_blank" rel="noopener" href="https://zh.javascript.info/">现代 JavaScript 教程</a> ，分类细，写的水平也高</p>
-<h2 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">proDemo</span>(<span class="params">num</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(</span><br><span class="line">        <span class="keyword">function</span> (<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> a = num;</span><br><span class="line">            <span class="keyword">if</span> (a % <span class="number">2</span>) &#123;</span><br><span class="line">                <span class="title function_">resolve</span>(a);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="title function_">reject</span>(a);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">odd</span>(<span class="params">params</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(params + <span class="string">&quot;是奇数&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">even</span>(<span class="params">params</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(params + <span class="string">&quot; even error&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> promise = <span class="title function_">proDemo</span>(<span class="number">10</span>);</span><br><span class="line">promise.<span class="title function_">then</span>(odd, even).<span class="title function_">catch</span>(<span class="function">(<span class="params">err</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(err + <span class="string">&quot; catch&quot;</span>));</span><br></pre></td></tr></table></figure>
+  <h1 id="token"><a href="#token" class="headerlink" title="token"></a>token</h1><p>token适用于前后端分离项目</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> django.core <span class="keyword">import</span> signing</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">HEADER = &#123;<span class="string">&#x27;typ&#x27;</span>: <span class="string">&#x27;JWP&#x27;</span>, <span class="string">&#x27;alg&#x27;</span>: <span class="string">&#x27;default&#x27;</span>&#125;</span><br><span class="line">KEY = <span class="string">&quot;jie220622-fd%HG56Fsgy-fdsM4&amp;%ghNh44da64&quot;</span></span><br><span class="line">SALT = <span class="string">&quot;jieshenai&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">encrypt</span>(<span class="params">obj</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;加密：signing 加密 and Base64 编码&quot;&quot;&quot;</span></span><br><span class="line">    value = signing.dumps(obj, key=KEY, salt=SALT)</span><br><span class="line">    value = signing.b64_encode(value.encode()).decode()</span><br><span class="line">    <span class="keyword">return</span> value</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt</span>(<span class="params">src</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;解密：Base64 解码 and signing 解密&quot;&quot;&quot;</span></span><br><span class="line">    src = signing.b64_decode(src.encode()).decode()</span><br><span class="line">    raw = signing.loads(src, key=KEY, salt=SALT)</span><br><span class="line">    <span class="keyword">return</span> raw</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_token</span>(<span class="params">username</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;生成token信息&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 1. 加密头信息</span></span><br><span class="line">    header = encrypt(HEADER)</span><br><span class="line">    <span class="comment"># 2. 构造Payload(有效期28天)</span></span><br><span class="line">    payload = &#123;<span class="string">&quot;username&quot;</span>: username, <span class="string">&quot;iat&quot;</span>: time.time(),</span><br><span class="line">               <span class="string">&quot;exp&quot;</span>: time.time() + <span class="number">2419200.0</span>&#125;</span><br><span class="line">    payload = encrypt(payload)</span><br><span class="line">    <span class="comment"># 3. MD5 生成签名</span></span><br><span class="line">    md5 = hashlib.md5()</span><br><span class="line">    md5.update((<span class="string">&quot;%s.%s&quot;</span> % (header, payload)).encode())</span><br><span class="line">    signature = md5.hexdigest()</span><br><span class="line">    token = <span class="string">&quot;%s.%s.%s&quot;</span> % (header, payload, signature)</span><br><span class="line">    <span class="keyword">return</span> token</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_payload</span>(<span class="params">token</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;解析 token 获取 payload 数据&quot;&quot;&quot;</span></span><br><span class="line">    payload = <span class="built_in">str</span>(token).split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">1</span>]</span><br><span class="line">    payload = decrypt(payload)</span><br><span class="line">    <span class="keyword">return</span> payload</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_username</span>(<span class="params">token</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;解析 token 获取 username&quot;&quot;&quot;</span></span><br><span class="line">    payload = get_payload(token)</span><br><span class="line">    <span class="keyword">return</span> payload[<span class="string">&#x27;username&#x27;</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_exp_time</span>(<span class="params">token</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;解析 token 获取过期时间&quot;&quot;&quot;</span></span><br><span class="line">    payload = get_payload(token)</span><br><span class="line">    <span class="keyword">return</span> payload[<span class="string">&#x27;exp&#x27;</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check_token</span>(<span class="params">username, token</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;验证 token：检查 username 和 token 是否一致且未过期&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> get_username(token) == username <span class="keyword">and</span> get_exp_time(token) &gt; time.time()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 
-
-
-<h2 id="读取值"><a href="#读取值" class="headerlink" title="读取值"></a>读取值</h2><p>从对象读取值，如果为undefied，则赋值为 [ ]</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;papers&#x27;</span>)) || []</span><br></pre></td></tr></table></figure>
-
-
+<p>用户在登录时，服务器端检查用户的账号和密码无误后:</p>
+<p>根据用户名创建token，token中设定了token的有效期,  将token返回给用户</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> JsonResponse(&#123;<span class="string">&quot;code&quot;</span>: <span class="number">200</span>, <span class="string">&quot;data&quot;</span>: &#123;<span class="string">&quot;token&quot;</span>: _token, <span class="string">&quot;nickName&quot;</span>: username&#125;&#125;)</span><br></pre></td></tr></table></figure>
 
 
 
-<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="键"><a href="#键" class="headerlink" title="键"></a>键</h3><h4 id="键为变量"><a href="#键为变量" class="headerlink" title="键为变量"></a>键为变量</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">&#123; [a] : <span class="string">&quot;xxx&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用<code>[]</code>把作为键的变量包起来</p>
-<h4 id="判断键是否存在"><a href="#判断键是否存在" class="headerlink" title="判断键是否存在"></a>判断键是否存在</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a[<span class="string">&quot;age&quot;</span>];</span><br><span class="line">a.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;ndfaame&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>在ECMAScript 5.1中，<code>Object.create</code>添加了该方法，该方法可以创建具有指定[[Prototype]]的对象。Object.create（null）是用于创建将用作Map的对象的常见模式。当假设对象将具有from的属性时，这可能会导致错误<code>Object.prototype</code>。该规则<code>no-prototype-builtins</code>防止<code>Object.prototype</code>直接从对象调用方法。有关no-prototype- <a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=FsNxJomTQgzXbjEhitvqQA==.VHkpcZJbNlgkWLgDbVrmZUUf0oaFItnP6OFYpnVwch8EUIDvlxoZVXfBu9ptwc32XsPU2YtpSE8BHFDohMKQK6aYUOAPcUxJUhm++KG8gF67svfB4U+Lv+tYAJVLQKPs">builtins的</a>更多信息，<a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=O9WgdPCmtM+R5WU8AcCEOg==.sDWCiaI0DokWtjXRjm286YDswrLZQB8se9fJvTytZEc37wSGXLSiDu9SwqQOvank35LfBI8G/eY02AYfqtvFJPnykog00DbdPfS5iAz6+3oUySi7xUX6iNk6ijPIX2Aq">请在此处访问ESLint的官方文档</a>。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">hasOwnProperty</span>.<span class="title function_">call</span>(a, <span class="string">&quot;jie&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="单对象键值"><a href="#单对象键值" class="headerlink" title="单对象键值"></a>单对象键值</h3><p>获取单个对象的键和值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = &#123; <span class="attr">name</span>: <span class="string">&#x27;jie&#x27;</span> &#125;;</span><br><span class="line"><span class="keyword">let</span> key = <span class="title class_">Object</span>.<span class="title function_">keys</span>(arr)[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">let</span> value = <span class="title class_">Object</span>.<span class="title function_">values</span>(arr)[<span class="number">0</span>];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(key, value);</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="结构赋值"><a href="#结构赋值" class="headerlink" title="结构赋值"></a>结构赋值</h3><p>直接拿到参数内部的属性，简化代码；</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">person</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;jie&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">show1</span> = (<span class="params">&#123; person &#125;</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(person);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结构赋值连续写法</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">show2</span> = (<span class="params">&#123; person: &#123; name &#125; &#125;</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">show1</span>(obj);</span><br><span class="line"><span class="title function_">show2</span>(obj);</span><br></pre></td></tr></table></figure>
-
-
-
-<p>输入结果如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123; name: &#x27;jie&#x27; &#125;</span><br><span class="line">jie</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><h3 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h3><p>指定声明数组的长度</p>
-<p><code>new Array(3)</code>;</p>
-<p>如下所示，即使不指定数组长度，也无需担心数组越界</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = <span class="keyword">new</span> <span class="title class_">Array</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr.<span class="property">length</span>);</span><br><span class="line"></span><br><span class="line">arr[<span class="number">10</span>] = <span class="number">11</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr.<span class="property">length</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>[&lt;10 empty items&gt;, 11 ]</p>
-</blockquote>
-<h3 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h3><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> m = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">let</span> n = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">const</span> mat = <span class="keyword">new</span> <span class="title class_">Array</span>(m).<span class="title function_">fill</span>(<span class="number">0</span>).<span class="title function_">map</span>(<span class="function">() =&gt;</span> <span class="keyword">new</span> <span class="title class_">Array</span>(n).<span class="title function_">fill</span>(<span class="number">0</span>));</span><br></pre></td></tr></table></figure>
-
+<p>用户的浏览器接收到token后，将token存到内存中，以后发起请求时，将token带上。(这一步不是浏览器自动完成，由前端程序员，使用js编码实现)</p>
+<p>后端在<code>app/middleware/auth.py</code> 中间件中，对用户的每一次请求进行token验证。</p>
+<p>前端的请求会将token, username放置到request.headers中，</p>
+<p>使用<code>request.headers.get(&quot;token&quot;)</code> 即可拿到token值。</p>
  
       <!-- reward -->
       
@@ -232,7 +194,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://jieshenai.github.io/2022/javascript/jsIntro/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://jieshenai.github.io/2022/django/token%E8%AE%A4%E8%AF%81/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -243,19 +205,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2022/autoWrite/paperStruct/" class="article-nav-link">
+      <a href="/2022/leetcode/leetcode%E5%85%A5%E9%97%A8/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            paperStruct
+            leetcode入门
           
         </div>
       </a>
     
     
-      <a href="/2022/autoWrite/nextDo/" class="article-nav-link">
+      <a href="/2022/vue/Vue%E7%AE%80%E6%B4%81%E4%B9%8B%E9%81%93/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">nextDo</div>
+        <div class="article-nav-title">Vue简洁之道</div>
       </a>
     
   </nav>

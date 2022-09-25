@@ -155,6 +155,188 @@
     
     
     <article
+  id="post-leetcode入门"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/leetcode/leetcode%E5%85%A5%E9%97%A8/"
+    >leetcode入门</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/leetcode/leetcode%E5%85%A5%E9%97%A8/" class="article-date">
+  <time datetime="2022-09-24T03:08:15.000Z" itemprop="datePublished">2022-09-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="leetcode"><a href="#leetcode" class="headerlink" title="leetcode"></a>leetcode</h1><h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><ul>
+<li><strong>节约空间</strong></li>
+</ul>
+<p>动态规划经常用到一个记录状态的数组，若始终只用到当前值和前一个值的话，只需使用一个变量存下前一个值即可。无需使用数组存一些以后不会用到的值。</p>
+<h2 id="结尾检查"><a href="#结尾检查" class="headerlink" title="结尾检查"></a>结尾检查</h2><h4 id="2414-最长的字母序连续子字符串的长度"><a href="#2414-最长的字母序连续子字符串的长度" class="headerlink" title="2414. 最长的字母序连续子字符串的长度"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/length-of-the-longest-alphabetical-continuous-substring/">2414. 最长的字母序连续子字符串的长度</a></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">longestContinuousSubstring</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        max_len = <span class="number">1</span></span><br><span class="line">        pre = s[<span class="number">0</span>]</span><br><span class="line">        cnt = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> ch <span class="keyword">in</span> s[<span class="number">1</span>::]:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">ord</span>(ch) - <span class="built_in">ord</span>(pre) == <span class="number">1</span>:</span><br><span class="line">                cnt += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                max_len = <span class="built_in">max</span>(max_len,cnt)</span><br><span class="line">                cnt = <span class="number">1</span></span><br><span class="line">            pre = ch</span><br><span class="line">        <span class="comment"># 容易遗漏</span></span><br><span class="line">        max_len = <span class="built_in">max</span>(max_len,cnt)</span><br><span class="line">        <span class="keyword">return</span> max_len</span><br></pre></td></tr></table></figure>
+
+<p>最后在循环外的 <code>max_len = max(max_len,cnt)</code> 检查，很容易遗漏。</p>
+<p>在for循环中的检查不会遗漏，但是若恰好在循坏的最后一个阶段得到了最后解，此时循环结束，没有下一个循环状态来更新，所以造成漏解。故若循环有状态更新，一定留意循环结束时的状态是否需要更新。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-token认证"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/django/token%E8%AE%A4%E8%AF%81/"
+    >token认证</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/django/token%E8%AE%A4%E8%AF%81/" class="article-date">
+  <time datetime="2022-09-23T03:34:49.000Z" itemprop="datePublished">2022-09-23</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/django/">django</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="token"><a href="#token" class="headerlink" title="token"></a>token</h1><p>token适用于前后端分离项目</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> django.core <span class="keyword">import</span> signing</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">HEADER = &#123;<span class="string">&#x27;typ&#x27;</span>: <span class="string">&#x27;JWP&#x27;</span>, <span class="string">&#x27;alg&#x27;</span>: <span class="string">&#x27;default&#x27;</span>&#125;</span><br><span class="line">KEY = <span class="string">&quot;jie220622-fd%HG56Fsgy-fdsM4&amp;%ghNh44da64&quot;</span></span><br><span class="line">SALT = <span class="string">&quot;jieshenai&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">encrypt</span>(<span class="params">obj</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;加密：signing 加密 and Base64 编码&quot;&quot;&quot;</span></span><br><span class="line">    value = signing.dumps(obj, key=KEY, salt=SALT)</span><br><span class="line">    value = signing.b64_encode(value.encode()).decode()</span><br><span class="line">    <span class="keyword">return</span> value</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt</span>(<span class="params">src</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;解密：Base64 解码 and signing 解密&quot;&quot;&quot;</span></span><br><span class="line">    src = signing.b64_decode(src.encode()).decode()</span><br><span class="line">    raw = signing.loads(src, key=KEY, salt=SALT)</span><br><span class="line">    <span class="keyword">return</span> raw</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_token</span>(<span class="params">username</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;生成token信息&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 1. 加密头信息</span></span><br><span class="line">    header = encrypt(HEADER)</span><br><span class="line">    <span class="comment"># 2. 构造Payload(有效期28天)</span></span><br><span class="line">    payload = &#123;<span class="string">&quot;username&quot;</span>: username, <span class="string">&quot;iat&quot;</span>: time.time(),</span><br><span class="line">               <span class="string">&quot;exp&quot;</span>: time.time() + <span class="number">2419200.0</span>&#125;</span><br><span class="line">    payload = encrypt(payload)</span><br><span class="line">    <span class="comment"># 3. MD5 生成签名</span></span><br><span class="line">    md5 = hashlib.md5()</span><br><span class="line">    md5.update((<span class="string">&quot;%s.%s&quot;</span> % (header, payload)).encode())</span><br><span class="line">    signature = md5.hexdigest()</span><br><span class="line">    token = <span class="string">&quot;%s.%s.%s&quot;</span> % (header, payload, signature)</span><br><span class="line">    <span class="keyword">return</span> token</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_payload</span>(<span class="params">token</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;解析 token 获取 payload 数据&quot;&quot;&quot;</span></span><br><span class="line">    payload = <span class="built_in">str</span>(token).split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">1</span>]</span><br><span class="line">    payload = decrypt(payload)</span><br><span class="line">    <span class="keyword">return</span> payload</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_username</span>(<span class="params">token</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;解析 token 获取 username&quot;&quot;&quot;</span></span><br><span class="line">    payload = get_payload(token)</span><br><span class="line">    <span class="keyword">return</span> payload[<span class="string">&#x27;username&#x27;</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_exp_time</span>(<span class="params">token</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;解析 token 获取过期时间&quot;&quot;&quot;</span></span><br><span class="line">    payload = get_payload(token)</span><br><span class="line">    <span class="keyword">return</span> payload[<span class="string">&#x27;exp&#x27;</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check_token</span>(<span class="params">username, token</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;验证 token：检查 username 和 token 是否一致且未过期&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> get_username(token) == username <span class="keyword">and</span> get_exp_time(token) &gt; time.time()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>用户在登录时，服务器端检查用户的账号和密码无误后:</p>
+<p>根据用户名创建token，token中设定了token的有效期,  将token返回给用户</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> JsonResponse(&#123;<span class="string">&quot;code&quot;</span>: <span class="number">200</span>, <span class="string">&quot;data&quot;</span>: &#123;<span class="string">&quot;token&quot;</span>: _token, <span class="string">&quot;nickName&quot;</span>: username&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>用户的浏览器接收到token后，将token存到内存中，以后发起请求时，将token带上。(这一步不是浏览器自动完成，由前端程序员，使用js编码实现)</p>
+<p>后端在<code>app/middleware/auth.py</code> 中间件中，对用户的每一次请求进行token验证。</p>
+<p>前端的请求会将token, username放置到request.headers中，</p>
+<p>使用<code>request.headers.get(&quot;token&quot;)</code> 即可拿到token值。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-Vue简洁之道"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/vue/Vue%E7%AE%80%E6%B4%81%E4%B9%8B%E9%81%93/"
+    >Vue简洁之道</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/vue/Vue%E7%AE%80%E6%B4%81%E4%B9%8B%E9%81%93/" class="article-date">
+  <time datetime="2022-09-22T13:56:49.000Z" itemprop="datePublished">2022-09-22</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/vue/">vue</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="Vue-简化代码"><a href="#Vue-简化代码" class="headerlink" title="Vue 简化代码"></a>Vue 简化代码</h1><p>下述代码是从组件中抽取出来的；</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">fillParagraphText</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> nodes = <span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">content</span>.<span class="property">childNodes</span>;</span><br><span class="line">    <span class="keyword">let</span> arr = <span class="title function_">paragraphTextArr</span>(nodes);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">$store</span>.<span class="title function_">commit</span>(<span class="string">&quot;paper/fill&quot;</span>, &#123; <span class="attr">paperId</span>: <span class="variable language_">this</span>.<span class="property">paperId</span>, <span class="attr">chse</span>: <span class="variable language_">this</span>.<span class="property">chse</span>, arr &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>我们希望下述函数体内的this指向依然是原来的组件；只需在组件的<code>method</code>中接收上述函数即可；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">        fillParagraphText,</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为javascript，this 它是动态的，this 由调用它的对象决定；</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-this"
   class="article article-type-post"
   itemscope
@@ -537,7 +719,19 @@ props:&#123;a:1,b:&#39;hello&#39;&#125;
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h1><h2 id="模块化写法"><a href="#模块化写法" class="headerlink" title="模块化写法"></a>模块化写法</h2><h3 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h3><p><code>store/index.js</code></p>
+  <h1 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h1><h2 id="main-js"><a href="#main-js" class="headerlink" title="main.js"></a>main.js</h2><p>平时在vue的函数中分发请求使用，<code>this.$store.dispatch(&#39;xxx&#39;);</code></p>
+<p>但如果不是vue的函数，那么this指向的不再是vue。</p>
+<p>以下<code>main.js</code>对外暴露了<code>vue</code>，从而使得在任何地方都可以拿到 <code>$store</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vuex</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">&#x27;./store&#x27;</span></span><br><span class="line"><span class="keyword">const</span> vue = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">  <span class="attr">el</span>: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">  <span class="comment">// 事件总线</span></span><br><span class="line">  <span class="title function_">beforeCreate</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$bus</span> = <span class="variable language_">this</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">components</span>: &#123; <span class="title class_">App</span> &#125;,</span><br><span class="line">  <span class="attr">router</span>: router,</span><br><span class="line">  store,</span><br><span class="line">  <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> <span class="title function_">h</span>(<span class="title class_">App</span>),</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> vue;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>通过暴露的 <code>vue </code>拿到 <code>$store</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> vue <span class="keyword">from</span> <span class="string">&#x27;@/main&#x27;</span>;</span><br><span class="line">vue.<span class="property">$store</span>.<span class="title function_">commit</span>(<span class="string">&#x27;paper/initPaper&#x27;</span>, paperId);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="模块化写法"><a href="#模块化写法" class="headerlink" title="模块化写法"></a>模块化写法</h2><h3 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h3><p><code>store/index.js</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="comment">//引入Vuex</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Vuex</span> <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"><span class="keyword">import</span> countOptions <span class="keyword">from</span> <span class="string">&#x27;./count&#x27;</span></span><br><span class="line"><span class="keyword">import</span> personOptions <span class="keyword">from</span> <span class="string">&#x27;./person&#x27;</span></span><br><span class="line"><span class="comment">//应用Vuex插件</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">use</span>(<span class="title class_">Vuex</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建并暴露store</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> <span class="title class_">Vuex</span>.<span class="title class_">Store</span>(&#123;</span><br><span class="line">	<span class="attr">modules</span>:&#123;</span><br><span class="line">		<span class="attr">countAbout</span>:countOptions,</span><br><span class="line">		<span class="attr">personAbout</span>:personOptions</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <h3 id="子模块"><a href="#子模块" class="headerlink" title="子模块"></a>子模块</h3><p><code>store/子模块.js</code></p>
@@ -735,201 +929,6 @@ props:&#123;a:1,b:&#39;hello&#39;&#125;
 <p>排版好</p>
 </li>
 </ul>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-paperStruct"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/autoWrite/paperStruct/"
-    >paperStruct</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/autoWrite/paperStruct/" class="article-date">
-  <time datetime="2022-09-05T08:46:00.000Z" itemprop="datePublished">2022-09-05</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/autoWrite/">autoWrite</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="结构设计"><a href="#结构设计" class="headerlink" title="结构设计"></a>结构设计</h1><h2 id="ShowPaper-vue加载不同文件"><a href="#ShowPaper-vue加载不同文件" class="headerlink" title="ShowPaper.vue加载不同文件"></a><code>ShowPaper.vue</code>加载不同文件</h2><p><code>showPaper</code> 带有不同的query参数，实现访问不同文件的效果。</p>
-<p>如何将一个query参数传给一个组件？</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-jsIntro"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/javascript/jsIntro/"
-    >jsIntro</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/javascript/jsIntro/" class="article-date">
-  <time datetime="2022-09-04T12:25:14.000Z" itemprop="datePublished">2022-09-04</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/javascript/">javascript</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="js基础知识"><a href="#js基础知识" class="headerlink" title="js基础知识"></a>js基础知识</h1><p>建议阅读 <a target="_blank" rel="noopener" href="https://zh.javascript.info/">现代 JavaScript 教程</a> ，分类细，写的水平也高</p>
-<h2 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">proDemo</span>(<span class="params">num</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(</span><br><span class="line">        <span class="keyword">function</span> (<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> a = num;</span><br><span class="line">            <span class="keyword">if</span> (a % <span class="number">2</span>) &#123;</span><br><span class="line">                <span class="title function_">resolve</span>(a);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="title function_">reject</span>(a);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">odd</span>(<span class="params">params</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(params + <span class="string">&quot;是奇数&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">even</span>(<span class="params">params</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(params + <span class="string">&quot; even error&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> promise = <span class="title function_">proDemo</span>(<span class="number">10</span>);</span><br><span class="line">promise.<span class="title function_">then</span>(odd, even).<span class="title function_">catch</span>(<span class="function">(<span class="params">err</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(err + <span class="string">&quot; catch&quot;</span>));</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="读取值"><a href="#读取值" class="headerlink" title="读取值"></a>读取值</h2><p>从对象读取值，如果为undefied，则赋值为 [ ]</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;papers&#x27;</span>)) || []</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="键为变量"><a href="#键为变量" class="headerlink" title="键为变量"></a>键为变量</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">&#123; [a] : <span class="string">&quot;xxx&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用<code>[]</code>把作为键的变量包起来</p>
-<h3 id="单对象键值"><a href="#单对象键值" class="headerlink" title="单对象键值"></a>单对象键值</h3><p>获取单个对象的键和值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = &#123; <span class="attr">name</span>: <span class="string">&#x27;jie&#x27;</span> &#125;;</span><br><span class="line"><span class="keyword">let</span> key = <span class="title class_">Object</span>.<span class="title function_">keys</span>(arr)[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">let</span> value = <span class="title class_">Object</span>.<span class="title function_">values</span>(arr)[<span class="number">0</span>];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(key, value);</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="结构赋值"><a href="#结构赋值" class="headerlink" title="结构赋值"></a>结构赋值</h3><p>直接拿到参数内部的属性，简化代码；</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">person</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;jie&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">show1</span> = (<span class="params">&#123; person &#125;</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(person);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结构赋值连续写法</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">show2</span> = (<span class="params">&#123; person: &#123; name &#125; &#125;</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">show1</span>(obj);</span><br><span class="line"><span class="title function_">show2</span>(obj);</span><br></pre></td></tr></table></figure>
-
-
-
-<p>输入结果如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123; name: &#x27;jie&#x27; &#125;</span><br><span class="line">jie</span><br></pre></td></tr></table></figure>
-
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-nextDo"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/autoWrite/nextDo/"
-    >nextDo</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/autoWrite/nextDo/" class="article-date">
-  <time datetime="2022-09-04T09:17:12.000Z" itemprop="datePublished">2022-09-04</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/autoWrite/">autoWrite</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">init(obj) &#123;</span><br><span class="line">    this.avgGdp = obj.avgGdp</span><br><span class="line">    this.avgProvinceGdp = obj.avgProvinceGdp</span><br><span class="line">    this.cityID = obj.cityID</span><br><span class="line">    this.countryGdp = obj.countryGdp</span><br><span class="line">    this.countryGdpIncrease = obj.countryGdpIncrease</span><br><span class="line">    this.gdp = obj.gdp</span><br><span class="line">    this.gdpIncrease = obj.gdpIncrease</span><br><span class="line">    this.provinceGdp = obj.provinceGdp</span><br><span class="line">    this.provinceGdpIncrease = obj.provinceGdpIncrease</span><br><span class="line">    this.year = obj.year</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
-
-<p>在每个页面都这样写，太丑了。遍历data中的数据，如果obj含有该属性则对data中的数据进行赋值。</p>
-<hr>
-
-<p>发起网络请求的代码，建议移到showPaper组件内。资源加载后，存放在浏览器的缓存内。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">getData() &#123;</span><br><span class="line">      let url = &quot;http://localhost:80/api/jsons/query?year=2021&amp;cityID=422801&quot;;</span><br><span class="line">      axios.get(url).then(</span><br><span class="line">        (response) =&gt; &#123;</span><br><span class="line">          console.log(&quot;请求成功了&quot;, response.data);</span><br><span class="line">          this.init(response.data);</span><br><span class="line"></span><br><span class="line">          setTimeout(() =&gt; &#123;</span><br><span class="line">            this.fillParagraphText();</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">        (error) =&gt; &#123;</span><br><span class="line">          console.log(&quot;请求失败了&quot;, error.message);</span><br><span class="line">        &#125;</span><br><span class="line">      );</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
-
-
-
-<hr>
-
-<p>存储在浏览器内存的内容，保存时间多久，会不会存在用户一直在本地编辑不提交，从而丢失用户数据的问题？</p>
  
       <!-- reward -->
       

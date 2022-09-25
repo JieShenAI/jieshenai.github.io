@@ -155,6 +155,224 @@
     
     
     <article
+  id="post-paperStruct"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/autoWrite/paperStruct/"
+    >paperStruct</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/autoWrite/paperStruct/" class="article-date">
+  <time datetime="2022-09-05T08:46:00.000Z" itemprop="datePublished">2022-09-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/autoWrite/">autoWrite</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="结构设计"><a href="#结构设计" class="headerlink" title="结构设计"></a>结构设计</h1><h2 id="ShowPaper-vue加载不同文件"><a href="#ShowPaper-vue加载不同文件" class="headerlink" title="ShowPaper.vue加载不同文件"></a><code>ShowPaper.vue</code>加载不同文件</h2><p><code>showPaper</code> 带有不同的query参数，实现访问不同文件的效果。</p>
+<p>如何将一个query参数传给一个组件？</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-jsIntro"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/javascript/jsIntro/"
+    >jsIntro</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/javascript/jsIntro/" class="article-date">
+  <time datetime="2022-09-04T12:25:14.000Z" itemprop="datePublished">2022-09-04</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="js基础知识"><a href="#js基础知识" class="headerlink" title="js基础知识"></a>js基础知识</h1><p>建议阅读 <a target="_blank" rel="noopener" href="https://zh.javascript.info/">现代 JavaScript 教程</a> ，分类细，写的水平也高</p>
+<h2 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">proDemo</span>(<span class="params">num</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(</span><br><span class="line">        <span class="keyword">function</span> (<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> a = num;</span><br><span class="line">            <span class="keyword">if</span> (a % <span class="number">2</span>) &#123;</span><br><span class="line">                <span class="title function_">resolve</span>(a);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="title function_">reject</span>(a);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">odd</span>(<span class="params">params</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(params + <span class="string">&quot;是奇数&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">even</span>(<span class="params">params</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(params + <span class="string">&quot; even error&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> promise = <span class="title function_">proDemo</span>(<span class="number">10</span>);</span><br><span class="line">promise.<span class="title function_">then</span>(odd, even).<span class="title function_">catch</span>(<span class="function">(<span class="params">err</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(err + <span class="string">&quot; catch&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="读取值"><a href="#读取值" class="headerlink" title="读取值"></a>读取值</h2><p>从对象读取值，如果为undefied，则赋值为 [ ]</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;papers&#x27;</span>)) || []</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="键"><a href="#键" class="headerlink" title="键"></a>键</h3><h4 id="键为变量"><a href="#键为变量" class="headerlink" title="键为变量"></a>键为变量</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">&#123; [a] : <span class="string">&quot;xxx&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>[]</code>把作为键的变量包起来</p>
+<h4 id="判断键是否存在"><a href="#判断键是否存在" class="headerlink" title="判断键是否存在"></a>判断键是否存在</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a[<span class="string">&quot;age&quot;</span>];</span><br><span class="line">a.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;ndfaame&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>在ECMAScript 5.1中，<code>Object.create</code>添加了该方法，该方法可以创建具有指定[[Prototype]]的对象。Object.create（null）是用于创建将用作Map的对象的常见模式。当假设对象将具有from的属性时，这可能会导致错误<code>Object.prototype</code>。该规则<code>no-prototype-builtins</code>防止<code>Object.prototype</code>直接从对象调用方法。有关no-prototype- <a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=FsNxJomTQgzXbjEhitvqQA==.VHkpcZJbNlgkWLgDbVrmZUUf0oaFItnP6OFYpnVwch8EUIDvlxoZVXfBu9ptwc32XsPU2YtpSE8BHFDohMKQK6aYUOAPcUxJUhm++KG8gF67svfB4U+Lv+tYAJVLQKPs">builtins的</a>更多信息，<a target="_blank" rel="noopener" href="https://link.segmentfault.com/?enc=O9WgdPCmtM+R5WU8AcCEOg==.sDWCiaI0DokWtjXRjm286YDswrLZQB8se9fJvTytZEc37wSGXLSiDu9SwqQOvank35LfBI8G/eY02AYfqtvFJPnykog00DbdPfS5iAz6+3oUySi7xUX6iNk6ijPIX2Aq">请在此处访问ESLint的官方文档</a>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">hasOwnProperty</span>.<span class="title function_">call</span>(a, <span class="string">&quot;jie&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="单对象键值"><a href="#单对象键值" class="headerlink" title="单对象键值"></a>单对象键值</h3><p>获取单个对象的键和值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = &#123; <span class="attr">name</span>: <span class="string">&#x27;jie&#x27;</span> &#125;;</span><br><span class="line"><span class="keyword">let</span> key = <span class="title class_">Object</span>.<span class="title function_">keys</span>(arr)[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">let</span> value = <span class="title class_">Object</span>.<span class="title function_">values</span>(arr)[<span class="number">0</span>];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(key, value);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="结构赋值"><a href="#结构赋值" class="headerlink" title="结构赋值"></a>结构赋值</h3><p>直接拿到参数内部的属性，简化代码；</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">person</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;jie&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">show1</span> = (<span class="params">&#123; person &#125;</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(person);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结构赋值连续写法</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">show2</span> = (<span class="params">&#123; person: &#123; name &#125; &#125;</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">show1</span>(obj);</span><br><span class="line"><span class="title function_">show2</span>(obj);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>输入结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123; name: &#x27;jie&#x27; &#125;</span><br><span class="line">jie</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><h3 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h3><p>指定声明数组的长度</p>
+<p><code>new Array(3)</code>;</p>
+<p>如下所示，即使不指定数组长度，也无需担心数组越界</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = <span class="keyword">new</span> <span class="title class_">Array</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr.<span class="property">length</span>);</span><br><span class="line"></span><br><span class="line">arr[<span class="number">10</span>] = <span class="number">11</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr.<span class="property">length</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[&lt;10 empty items&gt;, 11 ]</p>
+</blockquote>
+<h3 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h3><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> m = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">let</span> n = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">const</span> mat = <span class="keyword">new</span> <span class="title class_">Array</span>(m).<span class="title function_">fill</span>(<span class="number">0</span>).<span class="title function_">map</span>(<span class="function">() =&gt;</span> <span class="keyword">new</span> <span class="title class_">Array</span>(n).<span class="title function_">fill</span>(<span class="number">0</span>));</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-nextDo"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/autoWrite/nextDo/"
+    >nextDo</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/autoWrite/nextDo/" class="article-date">
+  <time datetime="2022-09-04T09:17:12.000Z" itemprop="datePublished">2022-09-04</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/autoWrite/">autoWrite</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">init(obj) &#123;</span><br><span class="line">    this.avgGdp = obj.avgGdp</span><br><span class="line">    this.avgProvinceGdp = obj.avgProvinceGdp</span><br><span class="line">    this.cityID = obj.cityID</span><br><span class="line">    this.countryGdp = obj.countryGdp</span><br><span class="line">    this.countryGdpIncrease = obj.countryGdpIncrease</span><br><span class="line">    this.gdp = obj.gdp</span><br><span class="line">    this.gdpIncrease = obj.gdpIncrease</span><br><span class="line">    this.provinceGdp = obj.provinceGdp</span><br><span class="line">    this.provinceGdpIncrease = obj.provinceGdpIncrease</span><br><span class="line">    this.year = obj.year</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>在每个页面都这样写，太丑了。遍历data中的数据，如果obj含有该属性则对data中的数据进行赋值。</p>
+<hr>
+
+<p>发起网络请求的代码，建议移到showPaper组件内。资源加载后，存放在浏览器的缓存内。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">getData() &#123;</span><br><span class="line">      let url = &quot;http://localhost:80/api/jsons/query?year=2021&amp;cityID=422801&quot;;</span><br><span class="line">      axios.get(url).then(</span><br><span class="line">        (response) =&gt; &#123;</span><br><span class="line">          console.log(&quot;请求成功了&quot;, response.data);</span><br><span class="line">          this.init(response.data);</span><br><span class="line"></span><br><span class="line">          setTimeout(() =&gt; &#123;</span><br><span class="line">            this.fillParagraphText();</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125;,</span><br><span class="line">        (error) =&gt; &#123;</span><br><span class="line">          console.log(&quot;请求失败了&quot;, error.message);</span><br><span class="line">        &#125;</span><br><span class="line">      );</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+
+<p>存储在浏览器内存的内容，保存时间多久，会不会存在用户一直在本地编辑不提交，从而丢失用户数据的问题？</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-basic"
   class="article article-type-post"
   itemscope
@@ -188,6 +406,10 @@
        
   <h1 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h1><h2 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h2><h3 id="允许组件名为单个单词"><a href="#允许组件名为单个单词" class="headerlink" title="允许组件名为单个单词"></a>允许组件名为单个单词</h3><p>在vue根目录下，增加<code>.eslintrc.js</code>文件，文件内容如下：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">root</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">env</span>: &#123;</span><br><span class="line">        <span class="attr">node</span>: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&#x27;extends&#x27;</span>: [</span><br><span class="line">        <span class="string">&#x27;plugin:vue/essential&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;eslint:recommended&#x27;</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">parserOptions</span>: &#123;</span><br><span class="line">        <span class="attr">parser</span>: <span class="string">&#x27;@babel/eslint-parser&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">rules</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;no-console&#x27;</span>: process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span> ? <span class="string">&#x27;warn&#x27;</span> : <span class="string">&#x27;off&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;no-debugger&#x27;</span>: process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span> ? <span class="string">&#x27;warn&#x27;</span> : <span class="string">&#x27;off&#x27;</span>,</span><br><span class="line">        <span class="comment">//在rules中添加自定义规则</span></span><br><span class="line">        <span class="comment">//关闭组件命名规则</span></span><br><span class="line">        <span class="string">&quot;vue/multi-word-component-names&quot;</span>: <span class="string">&quot;off&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">overrides</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">files</span>: [</span><br><span class="line">                <span class="string">&#x27;**/__tests__/*.&#123;j,t&#125;s?(x)&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;**/tests/unit/**/*.spec.&#123;j,t&#125;s?(x)&#x27;</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">env</span>: &#123;</span><br><span class="line">                <span class="attr">jest</span>: <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><h3 id="注册为全局-组件"><a href="#注册为全局-组件" class="headerlink" title="注册为全局 组件"></a>注册为全局 组件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//导入需要全局注册的组件</span><br><span class="line">import Count from &#x27;@/components/Count.vue&#x27;</span><br><span class="line"></span><br><span class="line">//参数1：字符串格式，表示组件的“注册名称”</span><br><span class="line">//参数2：需要被全局注册的那个组件</span><br><span class="line">Vue.component(&#x27;MyCount&#x27;,Count)</span><br></pre></td></tr></table></figure>
 
 
 
@@ -261,6 +483,18 @@
 <p>页面上的内容，由 axios 从服务器端拿回数据，并渲染到页面上。</p>
 <p>问题：当 axios 从服务器取回数据后，vue如何感知到数据发生了变化，并重新渲染模板。</p>
 </li>
+</ul>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Quindrich/article/details/123667962">https://blog.csdn.net/Quindrich/article/details/123667962</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45791692/article/details/124045505">https://blog.csdn.net/weixin_45791692/article/details/124045505</a></li>
+</ul>
+<h3 id="props"><a href="#props" class="headerlink" title="props"></a>props</h3><p>props，在<code>data</code>函数调用前就可以拿到；故可用props接收参数后，在data函数中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">props</span>: [<span class="string">&#x27;id&#x27;</span>],</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">id2</span>: <span class="variable language_">this</span>.<span class="property">id</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>建议在<code>created</code>阶段发起ajax请求</li>
 </ul>
 <h2 id="自定义事件"><a href="#自定义事件" class="headerlink" title="自定义事件"></a>自定义事件</h2><blockquote>
 <p>涉及到子给父传东西</p>

@@ -1,6 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>token认证</title>
+    <url>/2022/django/token%E8%AE%A4%E8%AF%81/</url>
+    <content><![CDATA[<h1 id="token"><a href="#token" class="headerlink" title="token"></a>token</h1><p>token适用于前后端分离项目</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> django.core <span class="keyword">import</span> signing</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">HEADER = &#123;<span class="string">&#x27;typ&#x27;</span>: <span class="string">&#x27;JWP&#x27;</span>, <span class="string">&#x27;alg&#x27;</span>: <span class="string">&#x27;default&#x27;</span>&#125;</span><br><span class="line">KEY = <span class="string">&quot;jie220622-fd%HG56Fsgy-fdsM4&amp;%ghNh44da64&quot;</span></span><br><span class="line">SALT = <span class="string">&quot;jieshenai&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">encrypt</span>(<span class="params">obj</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;加密：signing 加密 and Base64 编码&quot;&quot;&quot;</span></span><br><span class="line">    value = signing.dumps(obj, key=KEY, salt=SALT)</span><br><span class="line">    value = signing.b64_encode(value.encode()).decode()</span><br><span class="line">    <span class="keyword">return</span> value</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">decrypt</span>(<span class="params">src</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;解密：Base64 解码 and signing 解密&quot;&quot;&quot;</span></span><br><span class="line">    src = signing.b64_decode(src.encode()).decode()</span><br><span class="line">    raw = signing.loads(src, key=KEY, salt=SALT)</span><br><span class="line">    <span class="keyword">return</span> raw</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">create_token</span>(<span class="params">username</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;生成token信息&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 1. 加密头信息</span></span><br><span class="line">    header = encrypt(HEADER)</span><br><span class="line">    <span class="comment"># 2. 构造Payload(有效期28天)</span></span><br><span class="line">    payload = &#123;<span class="string">&quot;username&quot;</span>: username, <span class="string">&quot;iat&quot;</span>: time.time(),</span><br><span class="line">               <span class="string">&quot;exp&quot;</span>: time.time() + <span class="number">2419200.0</span>&#125;</span><br><span class="line">    payload = encrypt(payload)</span><br><span class="line">    <span class="comment"># 3. MD5 生成签名</span></span><br><span class="line">    md5 = hashlib.md5()</span><br><span class="line">    md5.update((<span class="string">&quot;%s.%s&quot;</span> % (header, payload)).encode())</span><br><span class="line">    signature = md5.hexdigest()</span><br><span class="line">    token = <span class="string">&quot;%s.%s.%s&quot;</span> % (header, payload, signature)</span><br><span class="line">    <span class="keyword">return</span> token</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_payload</span>(<span class="params">token</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;解析 token 获取 payload 数据&quot;&quot;&quot;</span></span><br><span class="line">    payload = <span class="built_in">str</span>(token).split(<span class="string">&#x27;.&#x27;</span>)[<span class="number">1</span>]</span><br><span class="line">    payload = decrypt(payload)</span><br><span class="line">    <span class="keyword">return</span> payload</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_username</span>(<span class="params">token</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;解析 token 获取 username&quot;&quot;&quot;</span></span><br><span class="line">    payload = get_payload(token)</span><br><span class="line">    <span class="keyword">return</span> payload[<span class="string">&#x27;username&#x27;</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_exp_time</span>(<span class="params">token</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;解析 token 获取过期时间&quot;&quot;&quot;</span></span><br><span class="line">    payload = get_payload(token)</span><br><span class="line">    <span class="keyword">return</span> payload[<span class="string">&#x27;exp&#x27;</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check_token</span>(<span class="params">username, token</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;验证 token：检查 username 和 token 是否一致且未过期&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> get_username(token) == username <span class="keyword">and</span> get_exp_time(token) &gt; time.time()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>用户在登录时，服务器端检查用户的账号和密码无误后:</p>
+<p>根据用户名创建token，token中设定了token的有效期,  将token返回给用户</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">return</span> JsonResponse(&#123;<span class="string">&quot;code&quot;</span>: <span class="number">200</span>, <span class="string">&quot;data&quot;</span>: &#123;<span class="string">&quot;token&quot;</span>: _token, <span class="string">&quot;nickName&quot;</span>: username&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>用户的浏览器接收到token后，将token存到内存中，以后发起请求时，将token带上。(这一步不是浏览器自动完成，由前端程序员，使用js编码实现)</p>
+<p>后端在<code>app/middleware/auth.py</code> 中间件中，对用户的每一次请求进行token验证。</p>
+<p>前端的请求会将token, username放置到request.headers中，</p>
+<p>使用<code>request.headers.get(&quot;token&quot;)</code> 即可拿到token值。</p>
+]]></content>
+      <categories>
+        <category>django</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>jsIntro</title>
+    <url>/2022/javascript/jsIntro/</url>
+    <content><![CDATA[<h1 id="js基础知识"><a href="#js基础知识" class="headerlink" title="js基础知识"></a>js基础知识</h1><p>建议阅读 <a href="https://zh.javascript.info/">现代 JavaScript 教程</a> ，分类细，写的水平也高</p>
+<h2 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">proDemo</span>(<span class="params">num</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(</span><br><span class="line">        <span class="keyword">function</span> (<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> a = num;</span><br><span class="line">            <span class="keyword">if</span> (a % <span class="number">2</span>) &#123;</span><br><span class="line">                <span class="title function_">resolve</span>(a);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="title function_">reject</span>(a);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">odd</span>(<span class="params">params</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(params + <span class="string">&quot;是奇数&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">even</span>(<span class="params">params</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(params + <span class="string">&quot; even error&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> promise = <span class="title function_">proDemo</span>(<span class="number">10</span>);</span><br><span class="line">promise.<span class="title function_">then</span>(odd, even).<span class="title function_">catch</span>(<span class="function">(<span class="params">err</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(err + <span class="string">&quot; catch&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="读取值"><a href="#读取值" class="headerlink" title="读取值"></a>读取值</h2><p>从对象读取值，如果为undefied，则赋值为 [ ]</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;papers&#x27;</span>)) || []</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="键"><a href="#键" class="headerlink" title="键"></a>键</h3><h4 id="键为变量"><a href="#键为变量" class="headerlink" title="键为变量"></a>键为变量</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">&#123; [a] : <span class="string">&quot;xxx&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>[]</code>把作为键的变量包起来</p>
+<h4 id="判断键是否存在"><a href="#判断键是否存在" class="headerlink" title="判断键是否存在"></a>判断键是否存在</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">a[<span class="string">&quot;age&quot;</span>];</span><br><span class="line">a.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;ndfaame&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>在ECMAScript 5.1中，<code>Object.create</code>添加了该方法，该方法可以创建具有指定[[Prototype]]的对象。Object.create（null）是用于创建将用作Map的对象的常见模式。当假设对象将具有from的属性时，这可能会导致错误<code>Object.prototype</code>。该规则<code>no-prototype-builtins</code>防止<code>Object.prototype</code>直接从对象调用方法。有关no-prototype- <a href="https://link.segmentfault.com/?enc=FsNxJomTQgzXbjEhitvqQA==.VHkpcZJbNlgkWLgDbVrmZUUf0oaFItnP6OFYpnVwch8EUIDvlxoZVXfBu9ptwc32XsPU2YtpSE8BHFDohMKQK6aYUOAPcUxJUhm++KG8gF67svfB4U+Lv+tYAJVLQKPs">builtins的</a>更多信息，<a href="https://link.segmentfault.com/?enc=O9WgdPCmtM+R5WU8AcCEOg==.sDWCiaI0DokWtjXRjm286YDswrLZQB8se9fJvTytZEc37wSGXLSiDu9SwqQOvank35LfBI8G/eY02AYfqtvFJPnykog00DbdPfS5iAz6+3oUySi7xUX6iNk6ijPIX2Aq">请在此处访问ESLint的官方文档</a>。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">hasOwnProperty</span>.<span class="title function_">call</span>(a, <span class="string">&quot;jie&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="单对象键值"><a href="#单对象键值" class="headerlink" title="单对象键值"></a>单对象键值</h3><p>获取单个对象的键和值</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = &#123; <span class="attr">name</span>: <span class="string">&#x27;jie&#x27;</span> &#125;;</span><br><span class="line"><span class="keyword">let</span> key = <span class="title class_">Object</span>.<span class="title function_">keys</span>(arr)[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">let</span> value = <span class="title class_">Object</span>.<span class="title function_">values</span>(arr)[<span class="number">0</span>];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(key, value);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="结构赋值"><a href="#结构赋值" class="headerlink" title="结构赋值"></a>结构赋值</h3><p>直接拿到参数内部的属性，简化代码；</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">person</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;jie&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">show1</span> = (<span class="params">&#123; person &#125;</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(person);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结构赋值连续写法</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">show2</span> = (<span class="params">&#123; person: &#123; name &#125; &#125;</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">show1</span>(obj);</span><br><span class="line"><span class="title function_">show2</span>(obj);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>输入结果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123; name: &#x27;jie&#x27; &#125;</span><br><span class="line">jie</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><h3 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h3><p>指定声明数组的长度</p>
+<p><code>new Array(3)</code>;</p>
+<p>如下所示，即使不指定数组长度，也无需担心数组越界</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = <span class="keyword">new</span> <span class="title class_">Array</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr.<span class="property">length</span>);</span><br><span class="line"></span><br><span class="line">arr[<span class="number">10</span>] = <span class="number">11</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr.<span class="property">length</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>[&lt;10 empty items&gt;, 11 ]</p>
+</blockquote>
+<h3 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h3><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> m = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">let</span> n = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">const</span> mat = <span class="keyword">new</span> <span class="title class_">Array</span>(m).<span class="title function_">fill</span>(<span class="number">0</span>).<span class="title function_">map</span>(<span class="function">() =&gt;</span> <span class="keyword">new</span> <span class="title class_">Array</span>(n).<span class="title function_">fill</span>(<span class="number">0</span>));</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>this</title>
+    <url>/2022/javascript/this/</url>
+    <content><![CDATA[<h1 id="this"><a href="#this" class="headerlink" title="this"></a>this</h1><h2 id="函数的this"><a href="#函数的this" class="headerlink" title="函数的this"></a>函数的this</h2><h3 id="单个函数的this是什么"><a href="#单个函数的this是什么" class="headerlink" title="单个函数的this是什么"></a>单个函数的this是什么</h3><p>window</p>
+<h3 id="嵌套函数的this"><a href="#嵌套函数的this" class="headerlink" title="嵌套函数的this"></a>嵌套函数的this</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">parent</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> name = <span class="string">&quot;parent&quot;</span>;</span><br><span class="line">        <span class="keyword">function</span> <span class="title function_">son</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> name = <span class="string">&quot;son&quot;</span>;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">son</span>();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="title function_">parent</span>();</span><br></pre></td></tr></table></figure>
+
+<p>输出也是window</p>
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="单层函数"><a href="#单层函数" class="headerlink" title="单层函数"></a>单层函数</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;obj&quot;</span>,</span><br><span class="line">    <span class="attr">sayHi</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="title function_">sayHi</span>();</span><br></pre></td></tr></table></figure>
+
+<p>obj 这个对象</p>
+<h3 id><a href="#" class="headerlink" title></a></h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">let</span> parent = &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">name</span>: <span class="string">&quot;parent&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">son</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">let</span> name = <span class="string">&quot;son&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">let</span> <span class="title function_">arrow</span> = (<span class="params"></span>) =&gt; &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;arrow&quot;</span>, <span class="variable language_">this</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">function</span> <span class="title function_">th</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;th&quot;</span>, <span class="variable language_">this</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">name</span>: <span class="string">&quot;re&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">                arrow,</span></span><br><span class="line"><span class="language-javascript">                th,</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">    parent.<span class="title function_">son</span>().<span class="title function_">arrow</span>();</span></span><br><span class="line"><span class="language-javascript">    parent.<span class="title function_">son</span>().<span class="title function_">th</span>();</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">arrow &#123;name: &#x27;parent&#x27;, son: ƒ&#125;</span><br><span class="line">th &#123;name: &#x27;re&#x27;, arrow: ƒ, th: ƒ&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    grandPa = &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">name</span>: <span class="string">&quot;gradnPa&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">parent</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// let name = &quot;parent&quot;;</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> <span class="keyword">function</span> <span class="title function_">son</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">let</span> name = <span class="string">&quot;son&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">let</span> <span class="title function_">arrow</span> = (<span class="params"></span>) =&gt; &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;arrow&quot;</span>, <span class="variable language_">this</span>);</span></span><br><span class="line"><span class="language-javascript">                &#125;;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">function</span> <span class="title function_">th</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;th&quot;</span>, <span class="variable language_">this</span>);</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="attr">name</span>: <span class="string">&quot;re&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">                    arrow,</span></span><br><span class="line"><span class="language-javascript">                    th,</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">    grandPa.<span class="title function_">parent</span>()().<span class="title function_">arrow</span>();</span></span><br><span class="line"><span class="language-javascript">    grandPa.<span class="title function_">parent</span>()().<span class="title function_">th</span>();</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>arrow Window {window: Window, self: Window, document: document, name: ‘’, location: Location, …}<br>th {name: ‘re’, arrow: ƒ, th: ƒ}</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>leetcode入门</title>
+    <url>/2022/leetcode/leetcode%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<h1 id="leetcode"><a href="#leetcode" class="headerlink" title="leetcode"></a>leetcode</h1><h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><ul>
+<li><strong>节约空间</strong></li>
+</ul>
+<p>动态规划经常用到一个记录状态的数组，若始终只用到当前值和前一个值的话，只需使用一个变量存下前一个值即可。无需使用数组存一些以后不会用到的值。</p>
+<h2 id="结尾检查"><a href="#结尾检查" class="headerlink" title="结尾检查"></a>结尾检查</h2><h4 id="2414-最长的字母序连续子字符串的长度"><a href="#2414-最长的字母序连续子字符串的长度" class="headerlink" title="2414. 最长的字母序连续子字符串的长度"></a><a href="https://leetcode.cn/problems/length-of-the-longest-alphabetical-continuous-substring/">2414. 最长的字母序连续子字符串的长度</a></h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">longestContinuousSubstring</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        max_len = <span class="number">1</span></span><br><span class="line">        pre = s[<span class="number">0</span>]</span><br><span class="line">        cnt = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> ch <span class="keyword">in</span> s[<span class="number">1</span>::]:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">ord</span>(ch) - <span class="built_in">ord</span>(pre) == <span class="number">1</span>:</span><br><span class="line">                cnt += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                max_len = <span class="built_in">max</span>(max_len,cnt)</span><br><span class="line">                cnt = <span class="number">1</span></span><br><span class="line">            pre = ch</span><br><span class="line">        <span class="comment"># 容易遗漏</span></span><br><span class="line">        max_len = <span class="built_in">max</span>(max_len,cnt)</span><br><span class="line">        <span class="keyword">return</span> max_len</span><br></pre></td></tr></table></figure>
+
+<p>最后在循环外的 <code>max_len = max(max_len,cnt)</code> 检查，很容易遗漏。</p>
+<p>在for循环中的检查不会遗漏，但是若恰好在循坏的最后一个阶段得到了最后解，此时循环结束，没有下一个循环状态来更新，所以造成漏解。故若循环有状态更新，一定留意循环结束时的状态是否需要更新。</p>
+]]></content>
+      <categories>
+        <category>leetcode</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>nginx</title>
+    <url>/2022/linux/nginx/</url>
+    <content><![CDATA[<h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><h3 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h3><p>尚硅谷 <strong>@张一明</strong></p>
+<blockquote>
+<p><a href="https://www.bilibili.com/video/BV1yS4y1N76R">https://www.bilibili.com/video/BV1yS4y1N76R</a></p>
+</blockquote>
+<blockquote>
+<p>笔记：<a href="https://blog.csdn.net/learning_xzj/category_11792194.html">https://blog.csdn.net/learning_xzj/category_11792194.html</a> @不知名架构师</p>
+</blockquote>
+<h3 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h3><h4 id="方式一："><a href="#方式一：" class="headerlink" title="方式一："></a>方式一：</h4><p><code>yum install nginx</code></p>
+<h4 id="方式二："><a href="#方式二：" class="headerlink" title="方式二："></a>方式二：</h4><p><a href="https://blog.csdn.net/qq_48721706/article/details/125577122">centos下载安装nginx在线版、离线版_hmb↑的博客-CSDN博客_centos 下载nginx</a></p>
+<blockquote>
+<p>在这篇文章中，给出了如何下载nginx的压缩包，编译安装的命令</p>
+</blockquote>
+<p>选择nginx的安装位置</p>
+<p><code>./configure --prefix=/usr/local/nginx</code></p>
+<h4 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h4><p>方式一：yum安装。自动添加进环境变量。文件分散在各处。</p>
+<p>方式二：编译安装。不会添加进环境变量，文件集中在一个文件夹下。</p>
+<p><code>ps aux|grep nginx</code> 查看运行的nginx的进程</p>
+<p><code>sudo /usr/sbin/nginx</code>  启动nginx</p>
+<p>如果出现端口占用，会启动失败，查出占用的端口的进程：</p>
+<p><code>netstat -ano | grep 80</code></p>
+<p>设置nginx开机自启动, 参考的是<a href="https://hashnode.blog.csdn.net/article/details/124502959">这篇文章</a>的做法。<code>systemctl start|enable nginx.service</code></p>
+<p>具体<code>nginx.conf</code>配置文件的配置参考的<a href="https://www.jb51.net/article/241964.htm">这篇文章</a>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">user  普通用户名|root;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>若不填写, nginx没有访问本地文件的权限</p>
+</blockquote>
+<h3 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h3><p>若出现 <code>500 Internal Server Error</code></p>
+<p>直接进入nginx的配置文件去找问题，进入<strong>nginx&#x2F;logs&#x2F;error.log文件</strong></p>
+<h2 id="django部署"><a href="#django部署" class="headerlink" title="django部署"></a>django部署</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">        listen 8080;</span><br><span class="line">        server_name 127.0.0.1;</span><br><span class="line">        access_log /home/jie/.logs/django/access.log;</span><br><span class="line">        charset utf-8;</span><br><span class="line">        gzip on;</span><br><span class="line">        gzip_types text/plain application/x-javascript text/css text/javascript application/x-httpd-php image/jpeg image/gif image/png;</span><br><span class="line">        error_page 404  /404.html;</span><br><span class="line">        error_page 500 502 503 504  /50x.html;</span><br><span class="line">        location / &#123;</span><br><span class="line">                include uwsgi_params;</span><br><span class="line">                uwsgi_connect_timeout 30;</span><br><span class="line">                uwsgi_pass 127.0.0.1:8000;</span><br><span class="line">        &#125;</span><br><span class="line">        location /static/ &#123;</span><br><span class="line">                alias /home/jie/site/mysite/app/static/;</span><br><span class="line">                index index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要修改的地方:</p>
+<ul>
+<li><code>access_log /home/jie/.logs/django;</code></li>
+<li><code>uwsgi_pass 127.0.0.1:8000;</code></li>
+<li><code>alias /opt/project_teacher/mysite/app/static/;</code></li>
+</ul>
+<p><code>uwsgi.ini</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[uwsgi]</span><br><span class="line">chdir=../mysite</span><br><span class="line">uid=root</span><br><span class="line">gid=root</span><br><span class="line">module=mysite.wsgi:application</span><br><span class="line">socket=127.0.0.1:8000</span><br><span class="line">master=true</span><br><span class="line">workers=2</span><br><span class="line">pidfile=uwsgi.pid</span><br><span class="line">vacuum=true </span><br><span class="line">thunder-lock=true</span><br><span class="line">enable-threads=true</span><br><span class="line">harakiri=30</span><br><span class="line">post-buffering=1024</span><br><span class="line">daemonize=uwsgi.log</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="django-装包"><a href="#django-装包" class="headerlink" title="django 装包"></a>django 装包</h3><p>以下以 vmware的centos7为例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip3.9 install pymysql</span><br><span class="line">pip3.9 install pillow</span><br><span class="line">pip3.9 install simplejson</span><br><span class="line">pip3.9 install python-docx</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>若pip装包时，遇到如下报错：</p>
+<p>This error originates from a subprocess, and is likely not a problem with pip</p>
+<p>只需要：<code>pip3 install --upgrade setuptools</code></p>
+</blockquote>
+<p><a href="http://192.168.31.103/">http://192.168.31.103/</a></p>
+<h2 id="vue部署"><a href="#vue部署" class="headerlink" title="vue部署"></a>vue部署</h2><p><code>npm run build</code>   在当前目录生成 dist文件夹</p>
+<p><code>scp -r dist/* root@xxx.xxx.xxx.69:/xxx/xxx/www</code></p>
+<p>在windows中，将window dist文件夹下的内容传到服务器上。</p>
+<h2 id="开启自启动"><a href="#开启自启动" class="headerlink" title="开启自启动"></a>开启自启动</h2><p>nginx 和 uwsgi 开机自启动</p>
+<p>nginx开机自启动，在前面已经给出了参考的<a href="https://hashnode.blog.csdn.net/article/details/124502959">链接</a>。 <code>systemctl start|stop|status nginx.service</code></p>
+<p>uwsgi开机自启动，还没设置。不过云服务器，不需要关机，这个也不用设置。</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+  </entry>
+  <entry>
     <title>less</title>
     <url>/2022/css/less/</url>
     <content><![CDATA[<h1 id="less"><a href="#less" class="headerlink" title="less"></a>less</h1><p>less官网： <a href="https://lesscss.org/">https://lesscss.org/</a></p>
@@ -118,80 +315,14 @@
       </categories>
   </entry>
   <entry>
-    <title>this</title>
-    <url>/2022/javascript/this/</url>
-    <content><![CDATA[<h1 id="this"><a href="#this" class="headerlink" title="this"></a>this</h1><h2 id="函数的this"><a href="#函数的this" class="headerlink" title="函数的this"></a>函数的this</h2><h3 id="单个函数的this是什么"><a href="#单个函数的this是什么" class="headerlink" title="单个函数的this是什么"></a>单个函数的this是什么</h3><p>window</p>
-<h3 id="嵌套函数的this"><a href="#嵌套函数的this" class="headerlink" title="嵌套函数的this"></a>嵌套函数的this</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">parent</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> name = <span class="string">&quot;parent&quot;</span>;</span><br><span class="line">        <span class="keyword">function</span> <span class="title function_">son</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> name = <span class="string">&quot;son&quot;</span>;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="title function_">son</span>();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="title function_">parent</span>();</span><br></pre></td></tr></table></figure>
-
-<p>输出也是window</p>
-<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="单层函数"><a href="#单层函数" class="headerlink" title="单层函数"></a>单层函数</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;obj&quot;</span>,</span><br><span class="line">    <span class="attr">sayHi</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    	<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br><span class="line">obj.<span class="title function_">sayHi</span>();</span><br></pre></td></tr></table></figure>
-
-<p>obj 这个对象</p>
-<h3 id><a href="#" class="headerlink" title></a></h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">let</span> parent = &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">name</span>: <span class="string">&quot;parent&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">son</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">let</span> name = <span class="string">&quot;son&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">let</span> <span class="title function_">arrow</span> = (<span class="params"></span>) =&gt; &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;arrow&quot;</span>, <span class="variable language_">this</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">function</span> <span class="title function_">th</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;th&quot;</span>, <span class="variable language_">this</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">name</span>: <span class="string">&quot;re&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">                arrow,</span></span><br><span class="line"><span class="language-javascript">                th,</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">    parent.<span class="title function_">son</span>().<span class="title function_">arrow</span>();</span></span><br><span class="line"><span class="language-javascript">    parent.<span class="title function_">son</span>().<span class="title function_">th</span>();</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">arrow &#123;name: &#x27;parent&#x27;, son: ƒ&#125;</span><br><span class="line">th &#123;name: &#x27;re&#x27;, arrow: ƒ, th: ƒ&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    grandPa = &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">name</span>: <span class="string">&quot;gradnPa&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">parent</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">// let name = &quot;parent&quot;;</span></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> <span class="keyword">function</span> <span class="title function_">son</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">let</span> name = <span class="string">&quot;son&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">let</span> <span class="title function_">arrow</span> = (<span class="params"></span>) =&gt; &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;arrow&quot;</span>, <span class="variable language_">this</span>);</span></span><br><span class="line"><span class="language-javascript">                &#125;;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">function</span> <span class="title function_">th</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;th&quot;</span>, <span class="variable language_">this</span>);</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="attr">name</span>: <span class="string">&quot;re&quot;</span>,</span></span><br><span class="line"><span class="language-javascript">                    arrow,</span></span><br><span class="line"><span class="language-javascript">                    th,</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">    grandPa.<span class="title function_">parent</span>()().<span class="title function_">arrow</span>();</span></span><br><span class="line"><span class="language-javascript">    grandPa.<span class="title function_">parent</span>()().<span class="title function_">th</span>();</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>arrow Window {window: Window, self: Window, document: document, name: ‘’, location: Location, …}<br>th {name: ‘re’, arrow: ƒ, th: ƒ}</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>jsIntro</title>
-    <url>/2022/javascript/jsIntro/</url>
-    <content><![CDATA[<h1 id="js基础知识"><a href="#js基础知识" class="headerlink" title="js基础知识"></a>js基础知识</h1><p>建议阅读 <a href="https://zh.javascript.info/">现代 JavaScript 教程</a> ，分类细，写的水平也高</p>
-<h2 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">proDemo</span>(<span class="params">num</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(</span><br><span class="line">        <span class="keyword">function</span> (<span class="params">resolve, reject</span>) &#123;</span><br><span class="line">            <span class="keyword">let</span> a = num;</span><br><span class="line">            <span class="keyword">if</span> (a % <span class="number">2</span>) &#123;</span><br><span class="line">                <span class="title function_">resolve</span>(a);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="title function_">reject</span>(a);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">odd</span>(<span class="params">params</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(params + <span class="string">&quot;是奇数&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">even</span>(<span class="params">params</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(params + <span class="string">&quot; even error&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> promise = <span class="title function_">proDemo</span>(<span class="number">10</span>);</span><br><span class="line">promise.<span class="title function_">then</span>(odd, even).<span class="title function_">catch</span>(<span class="function">(<span class="params">err</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(err + <span class="string">&quot; catch&quot;</span>));</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="读取值"><a href="#读取值" class="headerlink" title="读取值"></a>读取值</h2><p>从对象读取值，如果为undefied，则赋值为 [ ]</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;papers&#x27;</span>)) || []</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="键为变量"><a href="#键为变量" class="headerlink" title="键为变量"></a>键为变量</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="string">&quot;abc&quot;</span>;</span><br><span class="line">&#123; [a] : <span class="string">&quot;xxx&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用<code>[]</code>把作为键的变量包起来</p>
-<h3 id="单对象键值"><a href="#单对象键值" class="headerlink" title="单对象键值"></a>单对象键值</h3><p>获取单个对象的键和值</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = &#123; <span class="attr">name</span>: <span class="string">&#x27;jie&#x27;</span> &#125;;</span><br><span class="line"><span class="keyword">let</span> key = <span class="title class_">Object</span>.<span class="title function_">keys</span>(arr)[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">let</span> value = <span class="title class_">Object</span>.<span class="title function_">values</span>(arr)[<span class="number">0</span>];</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(key, value);</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="结构赋值"><a href="#结构赋值" class="headerlink" title="结构赋值"></a>结构赋值</h3><p>直接拿到参数内部的属性，简化代码；</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">    <span class="attr">person</span>: &#123;</span><br><span class="line">        <span class="attr">name</span>: <span class="string">&quot;jie&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">show1</span> = (<span class="params">&#123; person &#125;</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(person);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结构赋值连续写法</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">show2</span> = (<span class="params">&#123; person: &#123; name &#125; &#125;</span>) =&gt; &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">show1</span>(obj);</span><br><span class="line"><span class="title function_">show2</span>(obj);</span><br></pre></td></tr></table></figure>
-
-
-
-<p>输入结果如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123; name: &#x27;jie&#x27; &#125;</span><br><span class="line">jie</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>javascript</category>
-      </categories>
-  </entry>
-  <entry>
     <title>basic</title>
     <url>/2022/vue/basic/</url>
     <content><![CDATA[<h1 id="vue"><a href="#vue" class="headerlink" title="vue"></a>vue</h1><h2 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h2><h3 id="允许组件名为单个单词"><a href="#允许组件名为单个单词" class="headerlink" title="允许组件名为单个单词"></a>允许组件名为单个单词</h3><p>在vue根目录下，增加<code>.eslintrc.js</code>文件，文件内容如下：</p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">root</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">env</span>: &#123;</span><br><span class="line">        <span class="attr">node</span>: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&#x27;extends&#x27;</span>: [</span><br><span class="line">        <span class="string">&#x27;plugin:vue/essential&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;eslint:recommended&#x27;</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">parserOptions</span>: &#123;</span><br><span class="line">        <span class="attr">parser</span>: <span class="string">&#x27;@babel/eslint-parser&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">rules</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;no-console&#x27;</span>: process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span> ? <span class="string">&#x27;warn&#x27;</span> : <span class="string">&#x27;off&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;no-debugger&#x27;</span>: process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span> ? <span class="string">&#x27;warn&#x27;</span> : <span class="string">&#x27;off&#x27;</span>,</span><br><span class="line">        <span class="comment">//在rules中添加自定义规则</span></span><br><span class="line">        <span class="comment">//关闭组件命名规则</span></span><br><span class="line">        <span class="string">&quot;vue/multi-word-component-names&quot;</span>: <span class="string">&quot;off&quot;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">overrides</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">files</span>: [</span><br><span class="line">                <span class="string">&#x27;**/__tests__/*.&#123;j,t&#125;s?(x)&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;**/tests/unit/**/*.spec.&#123;j,t&#125;s?(x)&#x27;</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">env</span>: &#123;</span><br><span class="line">                <span class="attr">jest</span>: <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><h3 id="注册为全局-组件"><a href="#注册为全局-组件" class="headerlink" title="注册为全局 组件"></a>注册为全局 组件</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//导入需要全局注册的组件</span><br><span class="line">import Count from &#x27;@/components/Count.vue&#x27;</span><br><span class="line"></span><br><span class="line">//参数1：字符串格式，表示组件的“注册名称”</span><br><span class="line">//参数2：需要被全局注册的那个组件</span><br><span class="line">Vue.component(&#x27;MyCount&#x27;,Count)</span><br></pre></td></tr></table></figure>
 
 
 
@@ -265,6 +396,18 @@
 <p>页面上的内容，由 axios 从服务器端拿回数据，并渲染到页面上。</p>
 <p>问题：当 axios 从服务器取回数据后，vue如何感知到数据发生了变化，并重新渲染模板。</p>
 </li>
+</ul>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li><a href="https://blog.csdn.net/Quindrich/article/details/123667962">https://blog.csdn.net/Quindrich/article/details/123667962</a></li>
+<li><a href="https://blog.csdn.net/weixin_45791692/article/details/124045505">https://blog.csdn.net/weixin_45791692/article/details/124045505</a></li>
+</ul>
+<h3 id="props"><a href="#props" class="headerlink" title="props"></a>props</h3><p>props，在<code>data</code>函数调用前就可以拿到；故可用props接收参数后，在data函数中。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="attr">props</span>: [<span class="string">&#x27;id&#x27;</span>],</span><br><span class="line">  <span class="title function_">data</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">id2</span>: <span class="variable language_">this</span>.<span class="property">id</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>建议在<code>created</code>阶段发起ajax请求</li>
 </ul>
 <h2 id="自定义事件"><a href="#自定义事件" class="headerlink" title="自定义事件"></a>自定义事件</h2><blockquote>
 <p>涉及到子给父传东西</p>
@@ -407,9 +550,98 @@ props:&#123;a:1,b:&#39;hello&#39;&#125;
       </categories>
   </entry>
   <entry>
+    <title>Vue简洁之道</title>
+    <url>/2022/vue/Vue%E7%AE%80%E6%B4%81%E4%B9%8B%E9%81%93/</url>
+    <content><![CDATA[<h1 id="Vue-简化代码"><a href="#Vue-简化代码" class="headerlink" title="Vue 简化代码"></a>Vue 简化代码</h1><p>下述代码是从组件中抽取出来的；</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">fillParagraphText</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> nodes = <span class="variable language_">this</span>.<span class="property">$refs</span>.<span class="property">content</span>.<span class="property">childNodes</span>;</span><br><span class="line">    <span class="keyword">let</span> arr = <span class="title function_">paragraphTextArr</span>(nodes);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">$store</span>.<span class="title function_">commit</span>(<span class="string">&quot;paper/fill&quot;</span>, &#123; <span class="attr">paperId</span>: <span class="variable language_">this</span>.<span class="property">paperId</span>, <span class="attr">chse</span>: <span class="variable language_">this</span>.<span class="property">chse</span>, arr &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>我们希望下述函数体内的this指向依然是原来的组件；只需在组件的<code>method</code>中接收上述函数即可；</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">        fillParagraphText,</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为javascript，this 它是动态的，this 由调用它的对象决定；</p>
+]]></content>
+      <categories>
+        <category>vue</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>pythonTricks</title>
+    <url>/2022/python/pythonTricks/</url>
+    <content><![CDATA[<h1 id="py-tricks"><a href="#py-tricks" class="headerlink" title="py tricks"></a>py tricks</h1><blockquote>
+<p>记录python编程的一些小技巧</p>
+</blockquote>
+<h1 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h1><p>最深处递归函数的值，会逐层被带回来</p>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h2 id="修改外部对象"><a href="#修改外部对象" class="headerlink" title="修改外部对象"></a>修改外部对象</h2><p>若参数是外部的对象</p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>正则</title>
+    <url>/2022/python/%E6%AD%A3%E5%88%99/</url>
+    <content><![CDATA[<h1 id="正则化匹配"><a href="#正则化匹配" class="headerlink" title="正则化匹配"></a>正则化匹配</h1><blockquote>
+<p>python</p>
+</blockquote>
+<p>推荐阅读</p>
+<ul>
+<li><p><a href="https://blog.csdn.net/weixin_43696515/article/details/88978031">https://blog.csdn.net/weixin_43696515/article/details/88978031</a></p>
+<p>提到了使用 compile 避免重复解释</p>
+</li>
+<li><p><a href="https://blog.csdn.net/guo_qingxia/article/details/113979135">https://blog.csdn.net/guo_qingxia/article/details/113979135</a></p>
+<p>排版好</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>hexo</title>
+    <url>/2022/tools/hexo/</url>
+    <content><![CDATA[<h2 id="文章按类别存储"><a href="#文章按类别存储" class="headerlink" title="文章按类别存储"></a>文章按类别存储</h2><p>原来的博客文章全部保存在 <code>_post</code>目录下，显得很杂乱。在<code>_config.yml</code>中增加 <code>cate</code>，修改后的文件的链接和保存的地址</p>
+<ol>
+<li>在主目录的<code>_config.yml</code>指定目录的名</li>
+</ol>
+   <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">category_dir: cate</span><br><span class="line">permalink: :year/:category/:title/</span><br><span class="line">new_post_name: :year/:category/:title.md # File name of new posts</span><br></pre></td></tr></table></figure>
+
+<p>   在这里使用 <code>category</code> 而不是<code>categories</code>，因为<code>:categories</code>是一个对象，如果该文章有多个类别不易存储。</p>
+<ol start="2">
+<li><p>修改主题目录的<code>_config.yml</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">分类: /categories</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>新增文章时，指定<code>category</code>属性值</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new xxx --category 类别名</span><br></pre></td></tr></table></figure>
+
+<p>若想指定多个类别可以使用 <code>categories</code></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+  </entry>
+  <entry>
     <title>vuex</title>
     <url>/2022/vue/vuex/</url>
-    <content><![CDATA[<h1 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h1><h2 id="模块化写法"><a href="#模块化写法" class="headerlink" title="模块化写法"></a>模块化写法</h2><h3 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h3><p><code>store/index.js</code></p>
+    <content><![CDATA[<h1 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h1><h2 id="main-js"><a href="#main-js" class="headerlink" title="main.js"></a>main.js</h2><p>平时在vue的函数中分发请求使用，<code>this.$store.dispatch(&#39;xxx&#39;);</code></p>
+<p>但如果不是vue的函数，那么this指向的不再是vue。</p>
+<p>以下<code>main.js</code>对外暴露了<code>vue</code>，从而使得在任何地方都可以拿到 <code>$store</code>。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// vuex</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">&#x27;./store&#x27;</span></span><br><span class="line"><span class="keyword">const</span> vue = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">  <span class="attr">el</span>: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">  <span class="comment">// 事件总线</span></span><br><span class="line">  <span class="title function_">beforeCreate</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$bus</span> = <span class="variable language_">this</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">components</span>: &#123; <span class="title class_">App</span> &#125;,</span><br><span class="line">  <span class="attr">router</span>: router,</span><br><span class="line">  store,</span><br><span class="line">  <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> <span class="title function_">h</span>(<span class="title class_">App</span>),</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> vue;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>通过暴露的 <code>vue </code>拿到 <code>$store</code></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> vue <span class="keyword">from</span> <span class="string">&#x27;@/main&#x27;</span>;</span><br><span class="line">vue.<span class="property">$store</span>.<span class="title function_">commit</span>(<span class="string">&#x27;paper/initPaper&#x27;</span>, paperId);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="模块化写法"><a href="#模块化写法" class="headerlink" title="模块化写法"></a>模块化写法</h2><h3 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h3><p><code>store/index.js</code></p>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="comment">//引入Vuex</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Vuex</span> <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"><span class="keyword">import</span> countOptions <span class="keyword">from</span> <span class="string">&#x27;./count&#x27;</span></span><br><span class="line"><span class="keyword">import</span> personOptions <span class="keyword">from</span> <span class="string">&#x27;./person&#x27;</span></span><br><span class="line"><span class="comment">//应用Vuex插件</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">use</span>(<span class="title class_">Vuex</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建并暴露store</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> <span class="title class_">Vuex</span>.<span class="title class_">Store</span>(&#123;</span><br><span class="line">	<span class="attr">modules</span>:&#123;</span><br><span class="line">		<span class="attr">countAbout</span>:countOptions,</span><br><span class="line">		<span class="attr">personAbout</span>:personOptions</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <h3 id="子模块"><a href="#子模块" class="headerlink" title="子模块"></a>子模块</h3><p><code>store/子模块.js</code></p>
@@ -461,108 +693,6 @@ props:&#123;a:1,b:&#39;hello&#39;&#125;
       </categories>
   </entry>
   <entry>
-    <title>paperStruct</title>
-    <url>/2022/autoWrite/paperStruct/</url>
-    <content><![CDATA[<h1 id="结构设计"><a href="#结构设计" class="headerlink" title="结构设计"></a>结构设计</h1><h2 id="ShowPaper-vue加载不同文件"><a href="#ShowPaper-vue加载不同文件" class="headerlink" title="ShowPaper.vue加载不同文件"></a><code>ShowPaper.vue</code>加载不同文件</h2><p><code>showPaper</code> 带有不同的query参数，实现访问不同文件的效果。</p>
-<p>如何将一个query参数传给一个组件？</p>
-]]></content>
-      <categories>
-        <category>autoWrite</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>hexo</title>
-    <url>/2022/tools/hexo/</url>
-    <content><![CDATA[<h2 id="文章按类别存储"><a href="#文章按类别存储" class="headerlink" title="文章按类别存储"></a>文章按类别存储</h2><p>原来的博客文章全部保存在 <code>_post</code>目录下，显得很杂乱。在<code>_config.yml</code>中增加 <code>cate</code>，修改后的文件的链接和保存的地址</p>
-<ol>
-<li>在主目录的<code>_config.yml</code>指定目录的名</li>
-</ol>
-   <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">category_dir: cate</span><br><span class="line">permalink: :year/:category/:title/</span><br><span class="line">new_post_name: :year/:category/:title.md # File name of new posts</span><br></pre></td></tr></table></figure>
-
-<p>   在这里使用 <code>category</code> 而不是<code>categories</code>，因为<code>:categories</code>是一个对象，如果该文章有多个类别不易存储。</p>
-<ol start="2">
-<li><p>修改主题目录的<code>_config.yml</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">分类: /categories</span><br></pre></td></tr></table></figure>
-
-
-</li>
-<li><p>新增文章时，指定<code>category</code>属性值</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo new xxx --category 类别名</span><br></pre></td></tr></table></figure>
-
-<p>若想指定多个类别可以使用 <code>categories</code></p>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>tools</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>nginx</title>
-    <url>/2022/linux/nginx/</url>
-    <content><![CDATA[<h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><h3 id="相关资料"><a href="#相关资料" class="headerlink" title="相关资料"></a>相关资料</h3><p>尚硅谷 <strong>@张一明</strong></p>
-<blockquote>
-<p><a href="https://www.bilibili.com/video/BV1yS4y1N76R">https://www.bilibili.com/video/BV1yS4y1N76R</a></p>
-</blockquote>
-<blockquote>
-<p>笔记：<a href="https://blog.csdn.net/learning_xzj/category_11792194.html">https://blog.csdn.net/learning_xzj/category_11792194.html</a> @不知名架构师</p>
-</blockquote>
-<h3 id="安装方式"><a href="#安装方式" class="headerlink" title="安装方式"></a>安装方式</h3><h4 id="方式一："><a href="#方式一：" class="headerlink" title="方式一："></a>方式一：</h4><p><code>yum install nginx</code></p>
-<h4 id="方式二："><a href="#方式二：" class="headerlink" title="方式二："></a>方式二：</h4><p><a href="https://blog.csdn.net/qq_48721706/article/details/125577122">centos下载安装nginx在线版、离线版_hmb↑的博客-CSDN博客_centos 下载nginx</a></p>
-<blockquote>
-<p>在这篇文章中，给出了如何下载nginx的压缩包，编译安装的命令</p>
-</blockquote>
-<p>选择nginx的安装位置</p>
-<p><code>./configure --prefix=/usr/local/nginx</code></p>
-<h4 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h4><p>方式一：yum安装。自动添加进环境变量。文件分散在各处。</p>
-<p>方式二：编译安装。不会添加进环境变量，文件集中在一个文件夹下。</p>
-<p><code>ps aux|grep nginx</code> 查看运行的nginx的进程</p>
-<p><code>sudo /usr/sbin/nginx</code>  启动nginx</p>
-<p>如果出现端口占用，会启动失败，查出占用的端口的进程：</p>
-<p><code>netstat -ano | grep 80</code></p>
-<p>设置nginx开机自启动, 参考的是<a href="https://hashnode.blog.csdn.net/article/details/124502959">这篇文章</a>的做法。<code>systemctl start|enable nginx.service</code></p>
-<p>具体<code>nginx.conf</code>配置文件的配置参考的<a href="https://www.jb51.net/article/241964.htm">这篇文章</a>。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">user  普通用户名|root;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>若不填写, nginx没有访问本地文件的权限</p>
-</blockquote>
-<h3 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h3><p>若出现 <code>500 Internal Server Error</code></p>
-<p>直接进入nginx的配置文件去找问题，进入<strong>nginx&#x2F;logs&#x2F;error.log文件</strong></p>
-<h2 id="django部署"><a href="#django部署" class="headerlink" title="django部署"></a>django部署</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">server&#123;</span><br><span class="line">        listen 8080;</span><br><span class="line">        server_name 127.0.0.1;</span><br><span class="line">        access_log /home/jie/.logs/django/access.log;</span><br><span class="line">        charset utf-8;</span><br><span class="line">        gzip on;</span><br><span class="line">        gzip_types text/plain application/x-javascript text/css text/javascript application/x-httpd-php image/jpeg image/gif image/png;</span><br><span class="line">        error_page 404  /404.html;</span><br><span class="line">        error_page 500 502 503 504  /50x.html;</span><br><span class="line">        location / &#123;</span><br><span class="line">                include uwsgi_params;</span><br><span class="line">                uwsgi_connect_timeout 30;</span><br><span class="line">                uwsgi_pass 127.0.0.1:8000;</span><br><span class="line">        &#125;</span><br><span class="line">        location /static/ &#123;</span><br><span class="line">                alias /home/jie/site/mysite/app/static/;</span><br><span class="line">                index index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>要修改的地方:</p>
-<ul>
-<li><code>access_log /home/jie/.logs/django;</code></li>
-<li><code>uwsgi_pass 127.0.0.1:8000;</code></li>
-<li><code>alias /opt/project_teacher/mysite/app/static/;</code></li>
-</ul>
-<p><code>uwsgi.ini</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[uwsgi]</span><br><span class="line">chdir=../mysite</span><br><span class="line">uid=root</span><br><span class="line">gid=root</span><br><span class="line">module=mysite.wsgi:application</span><br><span class="line">socket=127.0.0.1:8000</span><br><span class="line">master=true</span><br><span class="line">workers=2</span><br><span class="line">pidfile=uwsgi.pid</span><br><span class="line">vacuum=true </span><br><span class="line">thunder-lock=true</span><br><span class="line">enable-threads=true</span><br><span class="line">harakiri=30</span><br><span class="line">post-buffering=1024</span><br><span class="line">daemonize=uwsgi.log</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="django-装包"><a href="#django-装包" class="headerlink" title="django 装包"></a>django 装包</h3><p>以下以 vmware的centos7为例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip3.9 install pymysql</span><br><span class="line">pip3.9 install pillow</span><br><span class="line">pip3.9 install simplejson</span><br><span class="line">pip3.9 install python-docx</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>若pip装包时，遇到如下报错：</p>
-<p>This error originates from a subprocess, and is likely not a problem with pip</p>
-<p>只需要：<code>pip3 install --upgrade setuptools</code></p>
-</blockquote>
-<p><a href="http://192.168.31.103/">http://192.168.31.103/</a></p>
-<h2 id="vue部署"><a href="#vue部署" class="headerlink" title="vue部署"></a>vue部署</h2><p><code>npm run build</code>   在当前目录生成 dist文件夹</p>
-<p><code>scp -r dist/* root@xxx.xxx.xxx.69:/xxx/xxx/www</code></p>
-<p>在windows中，将window dist文件夹下的内容传到服务器上。</p>
-<h2 id="开启自启动"><a href="#开启自启动" class="headerlink" title="开启自启动"></a>开启自启动</h2><p>nginx 和 uwsgi 开机自启动</p>
-<p>nginx开机自启动，在前面已经给出了参考的<a href="https://hashnode.blog.csdn.net/article/details/124502959">链接</a>。 <code>systemctl start|stop|status nginx.service</code></p>
-<p>uwsgi开机自启动，还没设置。不过云服务器，不需要关机，这个也不用设置。</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-  </entry>
-  <entry>
     <title>qB</title>
     <url>/2022/tools/qB/</url>
     <content><![CDATA[<h1 id="qBittorrent"><a href="#qBittorrent" class="headerlink" title="qBittorrent"></a>qBittorrent</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://1337.abcvg.info:80/announce</span><br><span class="line"></span><br><span class="line">http://fxtt.ru:80/announce</span><br><span class="line"></span><br><span class="line">http://milanesitracker.tekcities.com:80/announce</span><br><span class="line"></span><br><span class="line">http://nyaa.tracker.wf:7777/announce</span><br><span class="line"></span><br><span class="line">http://open.acgnxtracker.com:80/announce</span><br><span class="line"></span><br><span class="line">http://open.nyap2p.com:8080/announce</span><br><span class="line"></span><br><span class="line">http://open.tracker.ink:6969/announce</span><br><span class="line"></span><br><span class="line">http://opentracker.xyz:80/announce</span><br><span class="line"></span><br><span class="line">http://share.camoe.cn:8080/announce</span><br><span class="line"></span><br><span class="line">http://t.acg.rip:6699/announce</span><br><span class="line"></span><br><span class="line">http://t.nyaatracker.com:80/announce</span><br><span class="line"></span><br><span class="line">http://t.overflow.biz:6969/announce</span><br><span class="line"></span><br><span class="line">http://tr.cili001.com:8070/announce</span><br><span class="line"></span><br><span class="line">http://tracker.aeerso.space:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.bt4g.com:2095/announce</span><br><span class="line"></span><br><span class="line">http://tracker.files.fm:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.gbitt.info:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker.ipv6tracker.ru:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker.mywaifu.best:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker1.itzmx.com:8080/announce</span><br><span class="line"></span><br><span class="line">http://tracker2.itzmx.com:6961/announce</span><br><span class="line"></span><br><span class="line">http://tracker3.520.jp:2095/announce</span><br><span class="line"></span><br><span class="line">http://tracker3.itzmx.com:6961/announce</span><br><span class="line"></span><br><span class="line">http://tracker4.itzmx.com:2710/announce</span><br><span class="line"></span><br><span class="line">https://carbon-bonsai-621.appspot.com:443/announce</span><br><span class="line"></span><br><span class="line">https://opentracker.i2p.rocks:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.abiir.top:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.burnabyhighstar.com:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.ready4.icu:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.baka.ink:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.imgoingto.icu:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.lilithraws.cf:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.nanoha.org:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.tamersunion.org:443/announce</span><br><span class="line"></span><br><span class="line">https://trackme.theom.nz:443/announce</span><br><span class="line"></span><br><span class="line">udp://9.rarbg.com:2810/announce</span><br><span class="line"></span><br><span class="line">udp://exodus.desync.com:6969/announce</span><br><span class="line"></span><br><span class="line">udp://fe.dealclub.de:6969/announce</span><br><span class="line"></span><br><span class="line">udp://ipv4.tracker.harry.lu:80/announce</span><br><span class="line"></span><br><span class="line">udp://ipv6.babico.name.tr:8000/announce</span><br><span class="line"></span><br><span class="line">udp://mirror.aptus.co.tz:6969/announce</span><br><span class="line"></span><br><span class="line">udp://movies.zsw.ca:6969/announce</span><br><span class="line"></span><br><span class="line">udp://oldboystudy.com:6969/announce</span><br><span class="line"></span><br><span class="line">udp://open.demonii.com:1337/announce</span><br><span class="line"></span><br><span class="line">udp://open.dstud.io:6969/announce</span><br><span class="line"></span><br><span class="line">udp://open.free-tracker.ga:6969/announce</span><br><span class="line"></span><br><span class="line">udp://open.publictracker.xyz:6969/announce</span><br><span class="line"></span><br><span class="line">udp://open.stealth.si:80/announce</span><br><span class="line"></span><br><span class="line">udp://open.tracker.ink:6969/announce</span><br><span class="line"></span><br><span class="line">udp://open.xxtor.com:3074/announce</span><br><span class="line"></span><br><span class="line">udp://opentor.org:2710/announce</span><br><span class="line"></span><br><span class="line">udp://opentracker.i2p.rocks:6969/announce</span><br><span class="line"></span><br><span class="line">udp://p4p.arenabg.com:1337/announce</span><br><span class="line"></span><br><span class="line">udp://retracker.hotplug.ru:2710/announce</span><br><span class="line"></span><br><span class="line">udp://run.publictracker.xyz:6969/announce</span><br><span class="line"></span><br><span class="line">udp://thetracker.org:80/announce</span><br><span class="line"></span><br><span class="line">udp://torrentclub.space:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.0x.tf:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.altrosky.nl:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.auctor.tv:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.beeimg.com:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.birkenwald.de:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.bitsearch.to:1337/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.cyberia.is:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.edkj.club:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.jordan.im:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.leech.ie:1337/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.moeking.me:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.openbittorrent.com:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.opentrackr.org:1337/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.pomf.se:80/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.publictracker.xyz:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.srv00.com:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.theoks.net:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.tiny-vps.com:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.torrent.eu.org:451/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.zerobytes.xyz:1337/announce</span><br><span class="line"></span><br><span class="line">udp://tracker1.bt.moack.co.kr:80/announce</span><br><span class="line"></span><br><span class="line">udp://tracker2.dler.com:80/announce</span><br><span class="line"></span><br><span class="line">udp://tracker2.dler.org:80/announce</span><br><span class="line"></span><br><span class="line">udp://tracker6.lelux.fi:6969/announce</span><br><span class="line"></span><br><span class="line">udp://v2.iperson.xyz:6969/announce</span><br><span class="line"></span><br><span class="line">udp://vibe.sleepyinternetfun.xyz:1738/announce</span><br><span class="line"></span><br><span class="line">udp://www.torrent.eu.org:451/announce</span><br><span class="line"></span><br><span class="line">udp://zecircle.xyz:6969/announce</span><br><span class="line"></span><br><span class="line">ws://hub.bugout.link:80/announce</span><br><span class="line"></span><br><span class="line">wss://tracker.openwebtorrent.com:443/announce</span><br><span class="line"></span><br><span class="line">http://1337.abcvg.info:80/announce</span><br><span class="line"></span><br><span class="line">http://207.241.226.111:6969/announce</span><br><span class="line"></span><br><span class="line">http://207.241.231.226:6969/announce</span><br><span class="line"></span><br><span class="line">http://[2001:1b10:1000:8101:0:242:ac11:2]:6969/announce</span><br><span class="line"></span><br><span class="line">http://[2a04:ac00:1:3dd8::1:2710]:2710/announce</span><br><span class="line"></span><br><span class="line">http://fe.dealclub.de:6969/announce</span><br><span class="line"></span><br><span class="line">http://fxtt.ru:80/announce</span><br><span class="line"></span><br><span class="line">http://milanesitracker.tekcities.com:80/announce</span><br><span class="line"></span><br><span class="line">http://movies.zsw.ca:6969/announce</span><br><span class="line"></span><br><span class="line">http://nyaa.tracker.wf:7777/announce</span><br><span class="line"></span><br><span class="line">http://open.acgnxtracker.com:80/announce</span><br><span class="line"></span><br><span class="line">http://open.acgtracker.com:1096/announce</span><br><span class="line"></span><br><span class="line">http://open.nyap2p.com:8080/announce</span><br><span class="line"></span><br><span class="line">http://open.tracker.ink:6969/announce</span><br><span class="line"></span><br><span class="line">http://opentracker.i2p.rocks:6969/announce</span><br><span class="line"></span><br><span class="line">http://opentracker.xyz:80/announce</span><br><span class="line"></span><br><span class="line">http://retracker.hotplug.ru:2710/announce</span><br><span class="line"></span><br><span class="line">http://share.camoe.cn:8080/announce</span><br><span class="line"></span><br><span class="line">http://t.acg.rip:6699/announce</span><br><span class="line"></span><br><span class="line">http://t.nyaatracker.com:80/announce</span><br><span class="line"></span><br><span class="line">http://t.overflow.biz:6969/announce</span><br><span class="line"></span><br><span class="line">http://tr.cili001.com:8070/announce</span><br><span class="line"></span><br><span class="line">http://tracker.aeerso.space:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.birkenwald.de:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.bt4g.com:2095/announce</span><br><span class="line"></span><br><span class="line">http://tracker.dler.com:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.dler.org:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.edkj.club:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.files.fm:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.gbitt.info:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker.ipv6tracker.ru:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker.mywaifu.best:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.noobsubs.net:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker.opentrackr.org:1337/announce</span><br><span class="line"></span><br><span class="line">http://tracker.srv00.com:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.srv00.com:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker.zerobytes.xyz:1337/announce</span><br><span class="line"></span><br><span class="line">http://tracker1.bt.moack.co.kr:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker1.itzmx.com:8080/announce</span><br><span class="line"></span><br><span class="line">http://tracker2.520.jp:2095/announce</span><br><span class="line"></span><br><span class="line">http://tracker2.dler.org:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker2.itzmx.com:6961/announce</span><br><span class="line"></span><br><span class="line">http://tracker3.520.jp:2095/announce</span><br><span class="line"></span><br><span class="line">http://tracker3.ctix.cn:2095/announce</span><br><span class="line"></span><br><span class="line">http://tracker3.itzmx.com:6961/announce</span><br><span class="line"></span><br><span class="line">http://tracker4.itzmx.com:2710/announce</span><br><span class="line"></span><br><span class="line">http://vps02.net.orel.ru:80/announce</span><br><span class="line"></span><br><span class="line">https://1337.abcvg.info:443/announce</span><br><span class="line"></span><br><span class="line">https://carbon-bonsai-621.appspot.com:443/announce</span><br><span class="line"></span><br><span class="line">https://chihaya-heroku.120181311.xyz:443/announce</span><br><span class="line"></span><br><span class="line">https://opentracker.i2p.rocks:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.abiir.top:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.abir.ga:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.burnabyhighstar.com:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.ready4.icu:443/announce</span><br><span class="line"></span><br><span class="line">https://track.plop.pm:8989/announce</span><br><span class="line"></span><br><span class="line">https://tracker.babico.name.tr:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.baka.ink:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.dmhy.pw:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.foreverpirates.co:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.imgoingto.icu:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.kuroy.me:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.lelux.fi:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.lilithraws.cf:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.lilithraws.org:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.nanoha.org:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.nitrix.me:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.srv00.com:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.tamersunion.org:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker1.520.jp:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker1.loli.co.nz:443/announce</span><br><span class="line"></span><br><span class="line">https://trackme.theom.nz:443/announce</span><br><span class="line"></span><br><span class="line">https://xtremex.herokuapp.com:443/announce</span><br><span class="line"></span><br><span class="line">udp://93.158.213.92:1337/announce</span><br><span class="line"></span><br><span class="line">udp://151.80.120.114:2810/announce</span><br><span class="line"></span><br><span class="line">udp://45.154.253.8:6969/announce</span><br><span class="line"></span><br><span class="line">udp://89.234.156.205:451/announce</span><br><span class="line"></span><br><span class="line">udp://185.181.60.155:80/announce</span><br><span class="line"></span><br><span class="line">udp://5.79.216.168:6969/announce</span><br><span class="line"></span><br><span class="line">udp://208.83.20.20:6969/announce</span><br><span class="line"></span><br><span class="line">udp://149.28.47.87:1738/announce</span><br><span class="line"></span><br><span class="line">udp://156.234.201.18:80/announce</span><br><span class="line"></span><br><span class="line">udp://209.141.59.16:6969/announce</span><br><span class="line"></span><br><span class="line">udp://194.53.137.231:6969/announce</span><br><span class="line"></span><br><span class="line">udp://93.104.214.40:6969/announce</span><br><span class="line"></span><br><span class="line">udp://107.189.11.230:6969/announce</span><br><span class="line"></span><br><span class="line">udp://185.70.187.79:6969/announce</span><br><span class="line"></span><br><span class="line">udp://185.134.22.3:6969/announce</span><br><span class="line"></span><br><span class="line">udp://185.21.216.185:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.sbsub.com:2710/announce</span><br><span class="line">http://open.acgtracker.com:1096/announce</span><br><span class="line">http://176.113.68.67:6961/announce</span><br><span class="line">http://176.113.71.60:6961/announce</span><br><span class="line">http://184.105.151.164:6969/announce</span><br><span class="line">http://185.83.214.123:6969/announce</span><br><span class="line">http://51.15.55.204:1337/announce</span><br><span class="line">http://51.38.230.101:80/announce</span><br><span class="line">http://93.158.213.92:1337/announce</span><br><span class="line">http://95.107.48.115:80/announce</span><br><span class="line">http://aaa.army:8866/announce</span><br><span class="line">http://bobbialbano.com:6969/announce</span><br><span class="line">http://derpyradio.net:6969/announce</span><br><span class="line">http://h4.trakx.nibba.trade:80/announce</span><br><span class="line">http://open.acgnxtracker.com/announce</span><br><span class="line">http://opentracker.i2p.rocks:6969/announce</span><br><span class="line">http://publictracker.ch:6969/announce</span><br><span class="line">http://retracker.sevstar.net:2710/announce</span><br><span class="line">http://rt.tace.ru:80/announce</span><br><span class="line">http://share.camoe.cn:8080/announce</span><br><span class="line">http://t.acg.rip:6699/announce</span><br><span class="line">http://t.nyaatracker.com/announce</span><br><span class="line">http://t.nyaatracker.com:80/announce</span><br><span class="line">http://t.overflow.biz:6969/announce</span><br><span class="line">http://tr.cili001.com:8070/announce</span><br><span class="line">http://tracker.anonwebz.xyz:8080/announce</span><br><span class="line">http://tracker.dler.org:6969/announce</span><br><span class="line">http://tracker.files.fm:6969/announce</span><br><span class="line">http://tracker.gbitt.info/announce</span><br><span class="line">http://tracker.gbitt.info:80/announce</span><br><span class="line">http://tracker.ipv6tracker.ru:80/announce</span><br><span class="line">http://tracker.kamigami.org:2710/announce</span><br><span class="line">http://tracker.lelux.fi:80/announce</span><br><span class="line">http://tracker.noobsubs.net:80/announce</span><br><span class="line">http://tracker.skyts.cn:6969/announce</span><br><span class="line">http://tracker.skyts.net:6969/announce</span><br><span class="line">http://tracker.ygsub.com:6969/announce</span><br><span class="line">http://tracker.zerobytes.xyz:1337/announce</span><br><span class="line">http://tracker1.itzmx.com:8080/announce</span><br><span class="line">http://tracker2.dler.org:80/announce</span><br><span class="line">http://tracker2.itzmx.com:6961/announce</span><br><span class="line">http://tracker3.itzmx.com:6961/announce</span><br><span class="line">http://tracker4.itzmx.com:2710/announce</span><br><span class="line">http://vpn.flying-datacenter.de:6969/announce</span><br><span class="line">http://vps02.net.orel.ru/announce</span><br><span class="line">http://vps02.net.orel.ru:80/announce</span><br><span class="line">https://1337.abcvg.info/announce</span><br><span class="line">https://1337.abcvg.info:443/announce</span><br><span class="line">https://aaa.army:8866/announce</span><br><span class="line">https://publictracker.pp.ua:443/announce</span><br><span class="line">https://tr.ready4.icu:443/announce</span><br><span class="line">https://tracker.gbitt.info/announce</span><br><span class="line">https://tracker.hama3.net:443/announce</span><br><span class="line">https://tracker.imgoingto.icu:443/announce</span><br><span class="line">https://tracker.lelux.fi:443/announce</span><br><span class="line">https://tracker.nitrix.me:443/announce</span><br><span class="line">https://tracker.tamersunion.org:443/announce</span><br><span class="line">https://trakx.herokuapp.com:443/announce</span><br><span class="line">https://w.wwwww.wtf:443/announce</span><br><span class="line">udp://176.113.68.67:6961/announce</span><br><span class="line">udp://176.113.71.60:6961/announce</span><br><span class="line">udp://185.181.60.67:80/announce</span><br><span class="line">udp://185.83.214.123:6969/announce</span><br><span class="line">udp://207.241.226.111:6969/announce</span><br><span class="line">udp://207.241.231.226:6969/announce</span><br><span class="line">udp://208.83.20.20:6969/announce</span><br><span class="line">udp://212.1.226.176:2710/announce</span><br><span class="line">udp://212.47.227.58:6969/announce</span><br><span class="line">udp://217.76.183.53:80/announce</span><br><span class="line">udp://37.235.174.46:2710/announce</span><br><span class="line">udp://46.148.18.250:2710/announce</span><br><span class="line">udp://46.148.18.254:2710/announce</span><br><span class="line">udp://47.ip-51-68-199.eu:6969/announce</span><br><span class="line">udp://5.226.148.20:6969/announce</span><br><span class="line">udp://61626c.net:6969/announce</span><br><span class="line">udp://62.210.97.59:1337/announce</span><br><span class="line">udp://6ahddutb1ucc3cp.ru:6969/announce</span><br><span class="line">udp://91.149.192.31:6969/announce</span><br><span class="line">udp://91.216.110.52:451/announce</span><br><span class="line">udp://93.158.213.92:1337/announce</span><br><span class="line">udp://adm.category5.tv:6969/announce</span><br><span class="line">udp://admin.videoenpoche.info:6969/announce</span><br><span class="line">udp://adminion.n-blade.ru:6969/announce</span><br><span class="line">udp://api.bitumconference.ru:6969/announce</span><br><span class="line">udp://aruacfilmes.com.br:6969/announce</span><br><span class="line">udp://bclearning.top:6969/announce</span><br><span class="line">udp://benouworldtrip.fr:6969/announce</span><br><span class="line">udp://bioquantum.co.za:6969/announce</span><br><span class="line">udp://bitsparadise.info:6969/announce</span><br><span class="line">udp://blokas.io:6969/announce</span><br><span class="line">udp://bms-hosxp.com:6969/announce</span><br><span class="line">udp://bubu.mapfactor.com:6969/announce</span><br><span class="line">udp://cdn-1.gamecoast.org:6969/announce</span><br><span class="line">udp://cdn-2.gamecoast.org:6969/announce</span><br><span class="line">udp://chanchan.uchuu.co.uk:6969/announce</span><br><span class="line">udp://cutiegirl.ru:6969/announce</span><br><span class="line">udp://daveking.com:6969/announce</span><br><span class="line">udp://discord.heihachi.pw:6969/announce</span><br><span class="line">udp://dpiui.reedlan.com:6969/announce</span><br><span class="line">udp://edu.uifr.ru:6969/announce</span><br><span class="line">udp://eliastre100.fr:6969/announce</span><br><span class="line">udp://engplus.ru:6969/announce</span><br><span class="line">udp://fe.dealclub.de:6969/announce</span><br><span class="line">udp://forever-tracker.zooki.xyz:6969/announce</span><br><span class="line">udp://inferno.demonoid.is:3391/announce</span><br><span class="line">udp://ipv4.tracker.harry.lu:80/announce</span><br><span class="line">udp://josueunhuit.com:6969/announce</span><br><span class="line">udp://kanal-4.de:6969/announce</span><br><span class="line">udp://koli.services:6969/announce</span><br><span class="line">udp://mail.realliferpg.de:6969/announce</span><br><span class="line">udp://movies.zsw.ca:6969/announce</span><br><span class="line">udp://mts.tvbit.co:6969/announce</span><br><span class="line">udp://nagios.tks.sumy.ua:80/announce</span><br><span class="line">udp://ns-1.x-fins.com:6969/announce</span><br><span class="line">udp://open.stealth.si:80/announce</span><br><span class="line">udp://opentor.org:2710/announce</span><br><span class="line">udp://opentracker.arg.bz:6969/announce</span><br><span class="line">udp://opentracker.i2p.rocks:6969/announce</span><br><span class="line">udp://publictracker.xyz:6969/announce</span><br><span class="line">udp://qg.lorzl.gq:2710/announce</span><br><span class="line">udp://retracker.akado-ural.ru:80/announce</span><br><span class="line">udp://retracker.lanta-net.ru:2710/announce</span><br><span class="line">udp://retracker.local.msn-net.ru:6969/announce</span><br><span class="line">udp://retracker.netbynet.ru:2710/announce</span><br><span class="line">udp://retracker.sevstar.net:2710/announce</span><br><span class="line">udp://rutorrent.frontline-mod.com:6969/announce</span><br><span class="line">udp://sd-161673.dedibox.fr:6969/announce</span><br><span class="line">udp://storage.groupees.com:6969/announce</span><br><span class="line">udp://teamspeak.value-wolf.org:6969/announce</span><br><span class="line">udp://torrent.tdjs.tech:6969/announce</span><br><span class="line">udp://tr.cili001.com:8070/announce</span><br><span class="line">udp://tracker.0x.tf:6969/announce</span><br><span class="line">udp://tracker.altrosky.nl:6969/announce</span><br><span class="line">udp://tracker.blacksparrowmedia.net:6969/announce</span><br><span class="line">udp://tracker.coppersurfer.tk:6969/announce</span><br><span class="line">udp://tracker.dler.org:6969/announce</span><br><span class="line">udp://tracker.ds.is:6969/announce</span><br><span class="line">udp://tracker.dyne.org:6969/announce</span><br><span class="line">udp://tracker.filemail.com:6969/announce</span><br><span class="line">udp://tracker.fortu.io:6969/announce</span><br><span class="line">udp://tracker.kamigami.org:2710/announce</span><br><span class="line">udp://tracker.leechers-paradise.org:6969/announce</span><br><span class="line">udp://tracker.lelux.fi:6969/announce</span><br><span class="line">udp://tracker.opentrackr.org:1337/announce</span><br><span class="line">udp://tracker.shkinev.me:6969/announce</span><br><span class="line">udp://tracker.skynetcloud.site:6969/announce</span><br><span class="line">udp://tracker.skyts.net:6969/announce</span><br><span class="line">udp://tracker.tiny-vps.com:6969/announce</span><br><span class="line">udp://tracker.uw0.xyz:6969/announce</span><br><span class="line">udp://tracker.v6speed.org:6969/announce</span><br><span class="line">udp://tracker.vulnix.sh:6969/announce</span><br><span class="line">udp://tracker.zemoj.com:6969/announce</span><br><span class="line">udp://tracker.zerobytes.xyz:1337/announce</span><br><span class="line">udp://tracker.zum.bi:6969/announce</span><br><span class="line">udp://tracker0.ufibox.com:6969/announce</span><br><span class="line">udp://tracker2.dler.org:80/announce</span><br><span class="line">udp://tracker2.itzmx.com:6961/announce</span><br><span class="line">udp://tracker3.itzmx.com:6961/announce</span><br><span class="line">udp://tracker6.dler.org:2710/announce</span><br><span class="line">udp://tracker-udp.gbitt.info:80/announce</span><br><span class="line">udp://ultra.zt.ua:6969/announce</span><br><span class="line">udp://us-tracker.publictracker.xyz:6969/announce</span><br><span class="line">udp://valakas.rollo.dnsabr.com:2710/announce</span><br><span class="line">udp://vibe.community:6969/announce</span><br><span class="line">udp://www.midea123.z-media.com.cn:6969/announce</span><br><span class="line">udp://zephir.monocul.us:6969/announce</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -577,36 +707,13 @@ props:&#123;a:1,b:&#39;hello&#39;&#125;
       </categories>
   </entry>
   <entry>
-    <title>pythonTricks</title>
-    <url>/2022/python/pythonTricks/</url>
-    <content><![CDATA[<h1 id="py-tricks"><a href="#py-tricks" class="headerlink" title="py tricks"></a>py tricks</h1><blockquote>
-<p>记录python编程的一些小技巧</p>
-</blockquote>
-<h1 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h1><p>最深处递归函数的值，会逐层被带回来</p>
-<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h2 id="修改外部对象"><a href="#修改外部对象" class="headerlink" title="修改外部对象"></a>修改外部对象</h2><p>若参数是外部的对象</p>
+    <title>paperStruct</title>
+    <url>/2022/autoWrite/paperStruct/</url>
+    <content><![CDATA[<h1 id="结构设计"><a href="#结构设计" class="headerlink" title="结构设计"></a>结构设计</h1><h2 id="ShowPaper-vue加载不同文件"><a href="#ShowPaper-vue加载不同文件" class="headerlink" title="ShowPaper.vue加载不同文件"></a><code>ShowPaper.vue</code>加载不同文件</h2><p><code>showPaper</code> 带有不同的query参数，实现访问不同文件的效果。</p>
+<p>如何将一个query参数传给一个组件？</p>
 ]]></content>
       <categories>
-        <category>python</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>正则</title>
-    <url>/2022/python/%E6%AD%A3%E5%88%99/</url>
-    <content><![CDATA[<h1 id="正则化匹配"><a href="#正则化匹配" class="headerlink" title="正则化匹配"></a>正则化匹配</h1><blockquote>
-<p>python</p>
-</blockquote>
-<p>推荐阅读</p>
-<ul>
-<li><p><a href="https://blog.csdn.net/weixin_43696515/article/details/88978031">https://blog.csdn.net/weixin_43696515/article/details/88978031</a></p>
-<p>提到了使用 compile 避免重复解释</p>
-</li>
-<li><p><a href="https://blog.csdn.net/guo_qingxia/article/details/113979135">https://blog.csdn.net/guo_qingxia/article/details/113979135</a></p>
-<p>排版好</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>python</category>
+        <category>autoWrite</category>
       </categories>
   </entry>
 </search>
