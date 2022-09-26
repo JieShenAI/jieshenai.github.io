@@ -7,6 +7,41 @@ tags:
 
 # vuex
 
+## main.js
+
+平时在vue的函数中分发请求使用，`this.$store.dispatch('xxx');`
+
+但如果不是vue的函数，那么this指向的不再是vue。
+
+以下`main.js`对外暴露了`vue`，从而使得在任何地方都可以拿到 `$store`。
+
+```js
+// vuex
+import store from './store'
+const vue = new Vue({
+  el: '#app',
+  // 事件总线
+  beforeCreate() {
+    Vue.prototype.$bus = this;
+  },
+  components: { App },
+  router: router,
+  store,
+  render: h => h(App),
+});
+
+export default vue;
+```
+
+
+
+通过暴露的 `vue `拿到 `$store`
+
+```js
+import vue from '@/main';
+vue.$store.commit('paper/initPaper', paperId);
+```
+
 
 
 ## 模块化写法

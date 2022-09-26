@@ -57,7 +57,11 @@ JSON.parse(localStorage.getItem('papers')) || []
 
 ## 对象
 
-### 键为变量
+
+
+### 键
+
+#### 键为变量
 
 ```javascript
 let a = "abc";
@@ -65,6 +69,22 @@ let a = "abc";
 ```
 
 使用`[]`把作为键的变量包起来
+
+#### 判断键是否存在
+
+```js
+a["age"];
+a.hasOwnProperty('ndfaame');
+
+```
+
+
+
+在ECMAScript 5.1中，`Object.create`添加了该方法，该方法可以创建具有指定[[Prototype]]的对象。Object.create（null）是用于创建将用作Map的对象的常见模式。当假设对象将具有from的属性时，这可能会导致错误`Object.prototype`。该规则`no-prototype-builtins`防止`Object.prototype`直接从对象调用方法。有关no-prototype- [builtins的](https://link.segmentfault.com/?enc=FsNxJomTQgzXbjEhitvqQA%3D%3D.VHkpcZJbNlgkWLgDbVrmZUUf0oaFItnP6OFYpnVwch8EUIDvlxoZVXfBu9ptwc32XsPU2YtpSE8BHFDohMKQK6aYUOAPcUxJUhm%2B%2BKG8gF67svfB4U%2BLv%2BtYAJVLQKPs)更多信息，[请在此处访问ESLint的官方文档](https://link.segmentfault.com/?enc=O9WgdPCmtM%2BR5WU8AcCEOg%3D%3D.sDWCiaI0DokWtjXRjm286YDswrLZQB8se9fJvTytZEc37wSGXLSiDu9SwqQOvank35LfBI8G%2FeY02AYfqtvFJPnykog00DbdPfS5iAz6%2B3oUySi7xUX6iNk6ijPIX2Aq)。
+
+```js
+Object.prototype.hasOwnProperty.call(a, "jie");
+```
 
 
 
@@ -112,5 +132,42 @@ show2(obj);
 ```
 { name: 'jie' }
 jie
+```
+
+
+
+
+
+## 数组
+
+### 一维数组
+
+指定声明数组的长度
+
+`new Array(3)`;
+
+如下所示，即使不指定数组长度，也无需担心数组越界
+
+```js
+let arr = new Array();
+console.log(arr.length);
+
+arr[10] = 11;
+console.log(arr.length);
+console.log(arr);
+```
+
+> [<10 empty items>, 11 ]
+
+
+
+### 二维数组
+
+#### 初始化
+
+```js
+let m = 3;
+let n = 2;
+const mat = new Array(m).fill(0).map(() => new Array(n).fill(0));
 ```
 

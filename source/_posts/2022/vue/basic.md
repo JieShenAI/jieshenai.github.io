@@ -50,6 +50,21 @@ module.exports = {
 
 
 
+## 组件
+
+### 注册为全局 组件
+
+```
+//导入需要全局注册的组件
+import Count from '@/components/Count.vue'
+
+//参数1：字符串格式，表示组件的“注册名称”
+//参数2：需要被全局注册的那个组件
+Vue.component('MyCount',Count)
+```
+
+
+
 ## v-for
 
 ### v-for 数据修改后，页面不变化原因
@@ -203,6 +218,28 @@ beforeDestroy(){
   页面上的内容，由 axios 从服务器端拿回数据，并渲染到页面上。
 
   问题：当 axios 从服务器取回数据后，vue如何感知到数据发生了变化，并重新渲染模板。
+
+### 参考链接
+
+* https://blog.csdn.net/Quindrich/article/details/123667962
+* https://blog.csdn.net/weixin_45791692/article/details/124045505
+
+### props
+
+props，在`data`函数调用前就可以拿到；故可用props接收参数后，在data函数中。
+
+```js
+props: ['id'],
+  data() {
+    return {
+      id2: this.id,
+    }
+  },
+```
+
+
+
+* 建议在`created`阶段发起ajax请求
 
 
 
