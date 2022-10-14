@@ -155,6 +155,413 @@
     
     
     <article
+  id="post-hexo设置"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/other/hexo%E8%AE%BE%E7%BD%AE/"
+    >hexo设置</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/other/hexo%E8%AE%BE%E7%BD%AE/" class="article-date">
+  <time datetime="2022-10-14T08:11:19.000Z" itemprop="datePublished">2022-10-14</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/other/">other</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="hexo设置"><a href="#hexo设置" class="headerlink" title="hexo设置"></a>hexo设置</h1><p>typora编写的md文档，其中的图片会存放到 <code>文件同名.asset</code>文件夹下，编译成网页后，图片未显示出来；解决方案: 参考<a target="_blank" rel="noopener" href="https://blog.51cto.com/u_15477117/4919656">blog</a></p>
+<p>我采取的解决方案</p>
+<p><code>_config.yml</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">post_asset_folder: true</span><br></pre></td></tr></table></figure>
+
+<p>post_asset_folder 设置为True，在创建md文件时，才会创建同名的存放文件的文件夹</p>
+<p><img src="/2022/other/hexo%E8%AE%BE%E7%BD%AE/image-20221014162708065.png" alt="image-20221014162708065"></p>
+<blockquote>
+<p>若想hexo能读取到图片，图片必须存放在同名的文件夹下:</p>
+<p><img src="/2022/other/hexo%E8%AE%BE%E7%BD%AE/image-20221013xxx1.png" alt="image-20221013130807591"></p>
+<p><img src="/2022/other/hexo%E8%AE%BE%E7%BD%AE/image-20221013130xxx1.png" alt="image-20221013130807591"></p>
+<p>没有 <code>django设置.assets</code> 目录，图片存放在 <code>django设置</code> 目录下，<img src="/2022/other/hexo%E8%AE%BE%E7%BD%AE/image-20221013xxx1.png" alt="image-20221013130807591"></p>
+<p>在hexo编译后依然能显示出图片</p>
+</blockquote>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-django设置"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/django/django%E8%AE%BE%E7%BD%AE/"
+    >django设置</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/django/django%E8%AE%BE%E7%BD%AE/" class="article-date">
+  <time datetime="2022-10-11T09:24:01.000Z" itemprop="datePublished">2022-10-11</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/django/">django</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="Django设置"><a href="#Django设置" class="headerlink" title="Django设置"></a>Django设置</h1><h2 id="apps"><a href="#apps" class="headerlink" title="apps"></a>apps</h2><p>在项目根目录下创建<code>apps</code>目录，把<code>app</code>都放在<code>apps</code>文件夹下</p>
+<p><img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221012215758162.png" alt="image-20221012215758162"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">新建apps目录</span></span><br><span class="line">cd apps</span><br><span class="line">python ../manage.py startapp users</span><br></pre></td></tr></table></figure>
+
+
+
+<p>将<code>apps</code>目录添加进系统路径中</p>
+<p><code>settings.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># Build paths inside the project like this: BASE_DIR / &#x27;subdir&#x27;.</span></span><br><span class="line">BASE_DIR = Path(__file__).resolve().parent.parent</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加导包路径</span></span><br><span class="line">sys.path.insert(<span class="number">0</span>, os.path.join(BASE_DIR, <span class="string">&#x27;apps&#x27;</span>))</span><br><span class="line"></span><br><span class="line">INSTALLED_APPS = [</span><br><span class="line">    <span class="string">&quot;django.contrib.admin&quot;</span>,</span><br><span class="line">    <span class="string">&quot;django.contrib.auth&quot;</span>,</span><br><span class="line">    <span class="string">&quot;django.contrib.contenttypes&quot;</span>,</span><br><span class="line">    <span class="string">&quot;django.contrib.sessions&quot;</span>,</span><br><span class="line">    <span class="string">&quot;django.contrib.messages&quot;</span>,</span><br><span class="line">    <span class="string">&quot;django.contrib.staticfiles&quot;</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment"># apps for this project</span></span><br><span class="line">    <span class="string">&quot;users.apps.UsersConfig&quot;</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>由于<code>apps</code>已进入系统目录，故<code>&quot;users.apps.UsersConfig&quot;</code>，无需写前面的<code>apps</code>文件夹名</p>
+<h2 id="migrations"><a href="#migrations" class="headerlink" title="migrations"></a>migrations</h2><h3 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h3><p>出现了 如下报错</p>
+<blockquote>
+<p>django.db.migrations.exceptions.InconsistentMigrationHistory: Migration <strong>admin</strong>.0001_initial is applied before its dependency users.0001<br>_initial on database ‘default’.</p>
+</blockquote>
+<ul>
+<li>根据报错的信息，删除数据库中，该表的数据。</li>
+</ul>
+<p><img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221011172831519.png" alt="image-20221011172831519"></p>
+<ul>
+<li>鼠标右键点击删除</li>
+</ul>
+<img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221011172932906.png" alt="image-20221011172932906" style="zoom: 67%;">
+
+
+
+<ul>
+<li>提交，保存修改到数据库中</li>
+</ul>
+<img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221011173040345.png" alt="image-20221011173040345" style="zoom:80%;">
+
+
+
+<ul>
+<li><p>重新进行迁移，但是依然失败了<img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221011173333682.png" alt="image-20221011173333682"></p>
+</li>
+<li><p>根据报错信息，将表 <code>django_admin_log</code>删除</p>
+</li>
+<li><p>继续报错，继续删表</p>
+<p><img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221013130807591.png" alt="image-20221013130807591"></p>
+</li>
+<li><p>把数据库中的很多表删除后，重新迁移</p>
+</li>
+</ul>
+<p>若还遇到其他迁移失败的报错，可以尝试如下操作：</p>
+<ol>
+<li>删除数据库记录该model的记录</li>
+</ol>
+<p><img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221013161725041.png" alt="image-20221013161725041"></p>
+<ol start="2">
+<li>删除记录迁移的文件，接着重新迁移；</li>
+</ol>
+<p><img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221013161452474.png" alt="image-20221013161452474"></p>
+<h3 id="密码正确登录不上"><a href="#密码正确登录不上" class="headerlink" title="密码正确登录不上"></a>密码正确登录不上</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_49861340/article/details/123409143">修改管理员密码</a>后，发现还是登录不上，我是按如下方式处理的</p>
+<ul>
+<li>删除了数据库的所有表，除了sqlite_开头的两个表</li>
+</ul>
+<p><img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221013183956861.png" alt="image-20221013183956861"></p>
+<ul>
+<li><p>清理记录迁移的文件</p>
+<p><img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221013161452474.png" alt="image-20221013161452474"></p>
+</li>
+</ul>
+<h2 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h2><p>前后端在不同的域名下，需要解决跨域问题</p>
+<h2 id="Simple-JWT"><a href="#Simple-JWT" class="headerlink" title="Simple JWT"></a>Simple JWT</h2><p><code>djangorestframework-jwt</code>库，在17年已不再维护，推荐使用</p>
+<ul>
+<li><p>成功实现，参考的是这篇<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_52385631/article/details/126840331">博客</a>，这篇博客中给出的参考链接也有价值</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/roy8666/article/details/124948426">simple jwt实现登录注册</a> 但是博主没有公开他的 <code>tools.py</code>的代码，可参考他的思路</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43880991/article/details/121347569">simple-jwt</a> </p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42586468/article/details/112524452">抽象用户</a></p>
+</li>
+</ul>
+<h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>提交token时，被Django的CORS给拦截了</p>
+<p><code>pip install django-cors-headers</code></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/li944254211/article/details/109510278">Django项目关于跨域cors及解决方案（配置项）</a></p>
+<h3 id="Postman"><a href="#Postman" class="headerlink" title="Postman"></a>Postman</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yueguangMaNong/article/details/116797640">这篇文章</a> 关于 postman给 jwt 传递参数写的比较细</p>
+<blockquote>
+<p>我发现使用 postman，不会涉及到CORS，以及跨域访问的问题；即使没有在Django 的 setting.py中进行任何的设置，Postman也是可以使用</p>
+</blockquote>
+<p>使用Postman编辑传递的参数，使用网页端的postman失败了</p>
+<img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221013220548895.png" alt="image-20221013220548895" style="zoom: 50%;">
+
+
+
+<p>下载了桌面版的Postman传参，成功</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;refresh&quot;</span><span class="punctuation">:</span> <span class="string">&quot;xxx&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;access&quot;</span><span class="punctuation">:</span> <span class="string">&quot;xxx&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用access作为token，提交给服务器</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-pyVSjs"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/leetcode/pyVSjs/"
+    >pyVSjs</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/leetcode/pyVSjs/" class="article-date">
+  <time datetime="2022-10-08T02:40:25.000Z" itemprop="datePublished">2022-10-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="pyVSjs"><a href="#pyVSjs" class="headerlink" title="pyVSjs"></a>pyVSjs</h1><h2 id="数组赋值"><a href="#数组赋值" class="headerlink" title="数组赋值"></a>数组赋值</h2><h3 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h3><p>python</p>
+<p><code>arr = [0] * n;</code></p>
+<p>javascript</p>
+<p><code>const idx1 = new Array(n).fill(0);</code></p>
+<h2 id="判真"><a href="#判真" class="headerlink" title="判真"></a>判真</h2><p>经常会使用 <code>while(xxx)</code> 或者 <code>if(xxx)</code></p>
+<p><code>[ ]</code> 空数组</p>
+<p>python</p>
+<ul>
+<li><code>[ ]</code> 转 bool是 False</li>
+</ul>
+<p>javascript</p>
+<ul>
+<li><code>[ ]</code> 转bool是 true</li>
+</ul>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><h3 id="排序基础知识"><a href="#排序基础知识" class="headerlink" title="排序基础知识"></a>排序基础知识</h3><p>javascript</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr = [...];</span><br><span class="line">arr.<span class="title function_">sort</span>(<span class="function">(<span class="params">a,b</span>)=&gt;</span>a-b);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>arr.sort((a,b)=&gt;a-b); </code></p>
+<p>从小往大排序</p>
+</li>
+<li><p><code>arr.sort((a,b)=&gt;b-a); </code></p>
+<p>从大往小排序</p>
+</li>
+</ul>
+<p>js的 arr.sort()，与python不同，js有返回值的，但是返回值是原数组的引用，不是深拷贝；</p>
+<p>py的arr.sort()，无返回值；</p>
+<h3 id="保留下标排序"><a href="#保留下标排序" class="headerlink" title="保留下标排序"></a>保留下标排序</h3><p>希望数组经过排序后，依然保留着原先的下标</p>
+<p>python</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="built_in">len</span>(nums1)</span><br><span class="line">idx1 = <span class="built_in">list</span>(<span class="built_in">range</span>(n))</span><br><span class="line">idx1.sort(key=<span class="keyword">lambda</span> x: nums1[x])</span><br></pre></td></tr></table></figure>
+
+<p>javascript</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">idx1.<span class="title function_">sort</span>(<span class="function">(<span class="params">i, j</span>) =&gt;</span> nums1[i] - nums1[j]);</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-DRF"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/django/DRF/"
+    >DRF</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/django/DRF/" class="article-date">
+  <time datetime="2022-10-06T09:56:39.000Z" itemprop="datePublished">2022-10-06</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/django/">django</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="DRF"><a href="#DRF" class="headerlink" title="DRF"></a>DRF</h1><h2 id="创建Serializer对象"><a href="#创建Serializer对象" class="headerlink" title="创建Serializer对象"></a>创建Serializer对象</h2><p>除了instance和data参数外，在构造Serializer对象时，还可通过<strong>context</strong>参数额外添加数据，如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DepartmentSerializer(data=&#123;&#x27;name&#x27;: &#x27;运营&#x27;&#125;,context=&#123;&quot;add&quot;:&quot;end&quot;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><code>DepartmentSerializer</code>序列化器内部使用<code>context</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">validate_name</span>(<span class="params">self, attrs</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;部&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> attrs:</span><br><span class="line">        <span class="keyword">return</span> attrs + <span class="string">&quot;部&quot;</span> + self.context.get(<span class="string">&#x27;add&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> attrs</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>self.context</code>，即可拿到传入的额外参数值</p>
+<p>在序列化器定义的<code>create</code>和<code>update</code>函数的返回最后给到<code>save()</code>的返回值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">DepartmentSerializer</span>(serializers.Serializer):</span><br><span class="line">	...</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">update</span>(<span class="params">self, instance, validated_data</span>):</span><br><span class="line">        instance.name = validated_data.get(<span class="string">&#x27;name&#x27;</span>, instance.name)</span><br><span class="line">        instance.save()</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;instance&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2022/django/DRF/image-20221006180904208.png"></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
+  id="post-mysql"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/django/mysql/"
+    >mysql</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/django/mysql/" class="article-date">
+  <time datetime="2022-09-26T01:59:50.000Z" itemprop="datePublished">2022-09-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/django/">django</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><img src="https://upload-images.jianshu.io/upload_images/23760537-8e4835c41def68c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/format/webp"></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--两种情况</span></span><br><span class="line"><span class="comment">--1.新建数据库</span></span><br><span class="line"><span class="keyword">CREATE</span> DATABASE 数据库名称 <span class="keyword">DEFAULT</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci;</span><br><span class="line"><span class="comment">--2.修改原有数据库</span></span><br><span class="line"><span class="keyword">ALTER</span> DATABASE 数据库名称 <span class="keyword">DEFAULT</span> <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci;</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://docs.djangoproject.com/zh-hans/4.0/ref/databases/#mysql-notes">sql django文档</a></p>
+<p> <code>utf8_general_ci</code> 字符序。这将导致所有字符串的平等比较以一种 <em>不区分大小写</em> 的方式</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-leetcode入门"
   class="article article-type-post"
   itemscope
@@ -569,391 +976,13 @@
 </article>
 
     
-    <article
-  id="post-router"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/vue/router/"
-    >router</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/vue/router/" class="article-date">
-  <time datetime="2022-09-16T01:53:06.000Z" itemprop="datePublished">2022-09-16</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/vue/">vue</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h1><h2 id="main-js-引入"><a href="#main-js-引入" class="headerlink" title="main.js 引入"></a>main.js 引入</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//引入VueRouter</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">VueRouter</span> <span class="keyword">from</span> <span class="string">&#x27;vue-router&#x27;</span></span><br><span class="line"><span class="comment">//引入路由器</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&#x27;./router&#x27;</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">use</span>(<span class="title class_">VueRouter</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">	<span class="attr">el</span>:<span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">	<span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> <span class="title function_">h</span>(<span class="title class_">App</span>),</span><br><span class="line">	<span class="attr">router</span>:router</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h2 id="基本路由"><a href="#基本路由" class="headerlink" title="基本路由"></a>基本路由</h2><h3 id="path"><a href="#path" class="headerlink" title="path"></a>path</h3><p>使用路由的path</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link to=&quot;&#123;</span><br><span class="line">	path: &quot;/home/news&quot;                                         </span><br><span class="line">    &#125;&quot;&gt;</span><br><span class="line">    ...</span><br><span class="line">&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>若有<code>&lt;router-link&gt;</code> 必须在当前组件指定 <code>&lt;router-view&gt;&lt;/router-view&gt;</code></p>
-<h3 id="name"><a href="#name" class="headerlink" title="name"></a>name</h3><p>使用路由的name</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link :to=&quot;&#123;</span><br><span class="line">	name:&#x27;xiangqing&#x27;,				</span><br><span class="line">    &#125;&quot;&gt;</span><br><span class="line">&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="路由传参"><a href="#路由传参" class="headerlink" title="路由传参"></a>路由传参</h2><h3 id="query参数"><a href="#query参数" class="headerlink" title="query参数"></a>query参数</h3><p>传递query参数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link :to=&quot;&#123;</span><br><span class="line">	...</span><br><span class="line">	query:&#123;</span><br><span class="line">		id:m.id,</span><br><span class="line">		title:m.title</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;&quot;&gt;</span><br><span class="line">&#123;&#123;m.title&#125;&#125;</span><br><span class="line">&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
-
-<p>接收query参数</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; $route.query.id &#125;&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="params-参数"><a href="#params-参数" class="headerlink" title="params 参数"></a>params 参数</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link :to=&quot;&#123;</span><br><span class="line">	...</span><br><span class="line">	params:&#123;</span><br><span class="line">		id:m.id,</span><br><span class="line">		title:m.title</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;&quot;&gt;</span><br><span class="line">&lt;/router-link&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="路由props"><a href="#路由props" class="headerlink" title="路由props"></a>路由props</h3><p>目的：为了让路由读参数读的更容易；</p>
-<p>不使用props接收参数，如下所示，这样很繁琐：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">$route</span>.<span class="property">query</span>.<span class="property">xxx</span>;</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">$route</span>.<span class="property">params</span>.<span class="property">xxx</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>路由的props与组件的props一样，都需要在组件中使用：<code>props: [&#39;id&#39;, &#39;title&#39;, ...],</code> 来接收</p>
-<p>不同的是，路由的props，在 <code>router/index.js</code> 中，进行配置</p>
-<h4 id="方式一-不常用"><a href="#方式一-不常用" class="headerlink" title="方式一 不常用"></a>方式一 不常用</h4><pre><code>//props的第一种写法，值为对象，该对象中的所有key-value都会以props的形式传给组件。
-props:&#123;a:1,b:&#39;hello&#39;&#125;
-</code></pre>
-<p>组件接收：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">props:[&#x27;a&#x27;,&#x27;b&#x27;]</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h4><p>props的第二种写法，值为布尔值;</p>
-<p>若布尔值为真，就会把该路由组件收到的所有params参数，以props的形式传给Detail组件。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">props</span>:<span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
-
-<p>组件接收：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">props</span>: [<span class="string">&#x27;xxx&#x27;</span>,..]</span><br></pre></td></tr></table></figure>
-
-<p>缺点：</p>
-<p><strong>只处理param参数，不处理query参数</strong></p>
-<h4 id="方式三"><a href="#方式三" class="headerlink" title="方式三"></a>方式三</h4><p>props的第三种写法，值为函数</p>
-<p>其实工作量没有减少，将本应在组件内写的代码，移到<code>router/index.js</code>中</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">props</span>(<span class="params">$route</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">id</span>: $route.<span class="property">query</span>.<span class="property">id</span>,</span><br><span class="line">        <span class="attr">title</span>: $route.<span class="property">query</span>.<span class="property">title</span>,</span><br><span class="line">        <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">b</span>: <span class="string">&#x27;hello&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>组件接收：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">props: [&#x27;id&#x27;, &#x27;title&#x27;, &#x27;a&#x27;, &#x27;b&#x27;],</span><br></pre></td></tr></table></figure>
-
-<p>问？组件的 props 和 路由的 props，都能在  <code>props: [&#39;id&#39;, &#39;title&#39;]</code>  中接收吗？</p>
-<blockquote>
-<p>试了一下，发现不能一起接收</p>
-</blockquote>
-<p>若觉得 <code>$route.query.id,</code> 写的很长可以使用结构赋值的连续写法</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">props</span>(<span class="params">&#123;query:&#123;id,title&#125;&#125;</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        id,</span><br><span class="line">        title,</span><br><span class="line">        <span class="attr">a</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">b</span>: <span class="string">&#x27;hello&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-vuex"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/vue/vuex/"
-    >vuex</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/vue/vuex/" class="article-date">
-  <time datetime="2022-09-15T08:45:12.000Z" itemprop="datePublished">2022-09-15</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/vue/">vue</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h1><h2 id="main-js"><a href="#main-js" class="headerlink" title="main.js"></a>main.js</h2><p>平时在vue的函数中分发请求使用，<code>this.$store.dispatch(&#39;xxx&#39;);</code></p>
-<p>但如果不是vue的函数，那么this指向的不再是vue。</p>
-<p>以下<code>main.js</code>对外暴露了<code>vue</code>，从而使得在任何地方都可以拿到 <code>$store</code>。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vuex</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">&#x27;./store&#x27;</span></span><br><span class="line"><span class="keyword">const</span> vue = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span><br><span class="line">  <span class="attr">el</span>: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">  <span class="comment">// 事件总线</span></span><br><span class="line">  <span class="title function_">beforeCreate</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">Vue</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">$bus</span> = <span class="variable language_">this</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">components</span>: &#123; <span class="title class_">App</span> &#125;,</span><br><span class="line">  <span class="attr">router</span>: router,</span><br><span class="line">  store,</span><br><span class="line">  <span class="attr">render</span>: <span class="function"><span class="params">h</span> =&gt;</span> <span class="title function_">h</span>(<span class="title class_">App</span>),</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> vue;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>通过暴露的 <code>vue </code>拿到 <code>$store</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> vue <span class="keyword">from</span> <span class="string">&#x27;@/main&#x27;</span>;</span><br><span class="line">vue.<span class="property">$store</span>.<span class="title function_">commit</span>(<span class="string">&#x27;paper/initPaper&#x27;</span>, paperId);</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="模块化写法"><a href="#模块化写法" class="headerlink" title="模块化写法"></a>模块化写法</h2><h3 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h3><p><code>store/index.js</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Vue</span> <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="comment">//引入Vuex</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Vuex</span> <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"><span class="keyword">import</span> countOptions <span class="keyword">from</span> <span class="string">&#x27;./count&#x27;</span></span><br><span class="line"><span class="keyword">import</span> personOptions <span class="keyword">from</span> <span class="string">&#x27;./person&#x27;</span></span><br><span class="line"><span class="comment">//应用Vuex插件</span></span><br><span class="line"><span class="title class_">Vue</span>.<span class="title function_">use</span>(<span class="title class_">Vuex</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建并暴露store</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> <span class="title class_">Vuex</span>.<span class="title class_">Store</span>(&#123;</span><br><span class="line">	<span class="attr">modules</span>:&#123;</span><br><span class="line">		<span class="attr">countAbout</span>:countOptions,</span><br><span class="line">		<span class="attr">personAbout</span>:personOptions</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="子模块"><a href="#子模块" class="headerlink" title="子模块"></a>子模块</h3><p><code>store/子模块.js</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//求和相关的配置</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">	<span class="attr">namespaced</span>:<span class="literal">true</span>,</span><br><span class="line">	<span class="attr">actions</span>:&#123;</span><br><span class="line">		<span class="title function_">jiaOdd</span>(<span class="params">context,value</span>)&#123;</span><br><span class="line">			<span class="keyword">if</span>(context.<span class="property">state</span>.<span class="property">sum</span> % <span class="number">2</span>)&#123;</span><br><span class="line">				context.<span class="title function_">commit</span>(<span class="string">&#x27;JIA&#x27;</span>,value)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="title function_">jiaWait</span>(<span class="params">context,value</span>)&#123;</span><br><span class="line">			<span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">				context.<span class="title function_">commit</span>(<span class="string">&#x27;JIA&#x27;</span>,value)</span><br><span class="line">			&#125;,<span class="number">500</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">mutations</span>:&#123;</span><br><span class="line">		<span class="title function_">JIA</span>(<span class="params">state,value</span>)&#123;</span><br><span class="line">			state.<span class="property">sum</span> += value</span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="title function_">JIAN</span>(<span class="params">state,value</span>)&#123;</span><br><span class="line">			state.<span class="property">sum</span> -= value</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">state</span>:&#123;</span><br><span class="line">		<span class="attr">sum</span>:<span class="number">0</span>, <span class="comment">//当前的和</span></span><br><span class="line">		<span class="attr">school</span>:<span class="string">&#x27;尚硅谷&#x27;</span>,</span><br><span class="line">		<span class="attr">subject</span>:<span class="string">&#x27;前端&#x27;</span>,</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">getters</span>:&#123;</span><br><span class="line">		<span class="title function_">bigSum</span>(<span class="params">state</span>)&#123;</span><br><span class="line">			<span class="keyword">return</span> state.<span class="property">sum</span>*<span class="number">10</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="分发请求"><a href="#分发请求" class="headerlink" title="分发请求"></a>分发请求</h3><p><code>personAbout/addPersonWang</code>:  前面是子仓库的模块名</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="property">$store</span>.<span class="title function_">dispatch</span>(<span class="string">&#x27;personAbout/addPersonWang&#x27;</span>,personObj);</span><br><span class="line"><span class="variable language_">this</span>.<span class="property">$store</span>.<span class="title function_">commit</span>(<span class="string">&#x27;personAbout/ADD_PERSON&#x27;</span>,personObj);</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="组件内简写形式"><a href="#组件内简写形式" class="headerlink" title="组件内简写形式"></a>组件内简写形式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">		&lt;h1&gt;当前求和为：&#123;&#123;sum&#125;&#125;&lt;/h1&gt;</span><br><span class="line">		&lt;h3&gt;当前求和放大10倍为：&#123;&#123;bigSum&#125;&#125;&lt;/h3&gt;</span><br><span class="line">		&lt;h3&gt;我在&#123;&#123;school&#125;&#125;，学习&#123;&#123;subject&#125;&#125;&lt;/h3&gt;</span><br><span class="line">		&lt;h3 style=&quot;color:red&quot;&gt;Person组件的总人数是：&#123;&#123;personList.length&#125;&#125;&lt;/h3&gt;</span><br><span class="line">		&lt;select v-model.number=&quot;n&quot;&gt;</span><br><span class="line">			&lt;option value=&quot;1&quot;&gt;1&lt;/option&gt;</span><br><span class="line">			&lt;option value=&quot;2&quot;&gt;2&lt;/option&gt;</span><br><span class="line">			&lt;option value=&quot;3&quot;&gt;3&lt;/option&gt;</span><br><span class="line">		&lt;/select&gt;</span><br><span class="line">		&lt;button @click=&quot;increment(n)&quot;&gt;+&lt;/button&gt;</span><br><span class="line">		&lt;button @click=&quot;decrement(n)&quot;&gt;-&lt;/button&gt;</span><br><span class="line">		&lt;button @click=&quot;incrementOdd(n)&quot;&gt;当前求和为奇数再加&lt;/button&gt;</span><br><span class="line">		&lt;button @click=&quot;incrementWait(n)&quot;&gt;等一等再加&lt;/button&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	import &#123;mapState,mapGetters,mapMutations,mapActions&#125; from &#x27;vuex&#x27;</span><br><span class="line">	export default &#123;</span><br><span class="line">		name:&#x27;Count&#x27;,</span><br><span class="line">		data() &#123;</span><br><span class="line">			return &#123;</span><br><span class="line">				n:1, //用户选择的数字</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		computed:&#123;</span><br><span class="line">			//借助mapState生成计算属性，从state中读取数据。（数组写法）</span><br><span class="line">			...mapState(&#x27;countAbout&#x27;,[&#x27;sum&#x27;,&#x27;school&#x27;,&#x27;subject&#x27;]),</span><br><span class="line">			...mapState(&#x27;personAbout&#x27;,[&#x27;personList&#x27;]),</span><br><span class="line">			//借助mapGetters生成计算属性，从getters中读取数据。（数组写法）</span><br><span class="line">			...mapGetters(&#x27;countAbout&#x27;,[&#x27;bigSum&#x27;])</span><br><span class="line">		&#125;,</span><br><span class="line">		methods: &#123;</span><br><span class="line">			//借助mapMutations生成对应的方法，方法中会调用commit去联系mutations(对象写法)</span><br><span class="line">			...mapMutations(&#x27;countAbout&#x27;,&#123;increment:&#x27;JIA&#x27;,decrement:&#x27;JIAN&#x27;&#125;),</span><br><span class="line">			//借助mapActions生成对应的方法，方法中会调用dispatch去联系actions(对象写法)</span><br><span class="line">			...mapActions(&#x27;countAbout&#x27;,&#123;incrementOdd:&#x27;jiaOdd&#x27;,incrementWait:&#x27;jiaWait&#x27;&#125;)</span><br><span class="line">		&#125;,</span><br><span class="line">		mounted() &#123;</span><br><span class="line">			console.log(this.$store)</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style lang=&quot;css&quot;&gt;</span><br><span class="line">	button&#123;</span><br><span class="line">		margin-left: 5px;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="全局写法"><a href="#全局写法" class="headerlink" title="全局写法"></a>全局写法</h2><blockquote>
-<p>不常用，不建议使用</p>
-</blockquote>
-<p>每个子仓库都可以写成独立js文件，模板如下；</p>
-<p>在分发请求时，无需写子仓库的模块名了；缺点很严重，不同子仓库里的函数不能重名；</p>
-<p><code>this.$store.dispatch(&#39;addPersonWang&#39;,personObj);</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> state = &#123;</span><br><span class="line">    <span class="attr">data</span>: &#123;&#125;,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">18</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> actions = &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> mutations = &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//仓库计算属性</span></span><br><span class="line"><span class="keyword">let</span> getters = &#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//对外暴露小仓库</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    state,</span><br><span class="line">    mutations,</span><br><span class="line">    actions,</span><br><span class="line">    getters</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-pythonTricks"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/python/pythonTricks/"
-    >pythonTricks</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/python/pythonTricks/" class="article-date">
-  <time datetime="2022-09-10T13:57:04.000Z" itemprop="datePublished">2022-09-10</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/python/">python</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="py-tricks"><a href="#py-tricks" class="headerlink" title="py tricks"></a>py tricks</h1><blockquote>
-<p>记录python编程的一些小技巧</p>
-</blockquote>
-<h1 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h1><p>最深处递归函数的值，会逐层被带回来</p>
-<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><h2 id="修改外部对象"><a href="#修改外部对象" class="headerlink" title="修改外部对象"></a>修改外部对象</h2><p>若参数是外部的对象</p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-qB"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/tools/qB/"
-    >qB</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/tools/qB/" class="article-date">
-  <time datetime="2022-09-09T03:32:40.000Z" itemprop="datePublished">2022-09-09</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/tools/">tools</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="qBittorrent"><a href="#qBittorrent" class="headerlink" title="qBittorrent"></a>qBittorrent</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br></pre></td><td class="code"><pre><span class="line">http://1337.abcvg.info:80/announce</span><br><span class="line"></span><br><span class="line">http://fxtt.ru:80/announce</span><br><span class="line"></span><br><span class="line">http://milanesitracker.tekcities.com:80/announce</span><br><span class="line"></span><br><span class="line">http://nyaa.tracker.wf:7777/announce</span><br><span class="line"></span><br><span class="line">http://open.acgnxtracker.com:80/announce</span><br><span class="line"></span><br><span class="line">http://open.nyap2p.com:8080/announce</span><br><span class="line"></span><br><span class="line">http://open.tracker.ink:6969/announce</span><br><span class="line"></span><br><span class="line">http://opentracker.xyz:80/announce</span><br><span class="line"></span><br><span class="line">http://share.camoe.cn:8080/announce</span><br><span class="line"></span><br><span class="line">http://t.acg.rip:6699/announce</span><br><span class="line"></span><br><span class="line">http://t.nyaatracker.com:80/announce</span><br><span class="line"></span><br><span class="line">http://t.overflow.biz:6969/announce</span><br><span class="line"></span><br><span class="line">http://tr.cili001.com:8070/announce</span><br><span class="line"></span><br><span class="line">http://tracker.aeerso.space:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.bt4g.com:2095/announce</span><br><span class="line"></span><br><span class="line">http://tracker.files.fm:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.gbitt.info:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker.ipv6tracker.ru:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker.mywaifu.best:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker1.itzmx.com:8080/announce</span><br><span class="line"></span><br><span class="line">http://tracker2.itzmx.com:6961/announce</span><br><span class="line"></span><br><span class="line">http://tracker3.520.jp:2095/announce</span><br><span class="line"></span><br><span class="line">http://tracker3.itzmx.com:6961/announce</span><br><span class="line"></span><br><span class="line">http://tracker4.itzmx.com:2710/announce</span><br><span class="line"></span><br><span class="line">https://carbon-bonsai-621.appspot.com:443/announce</span><br><span class="line"></span><br><span class="line">https://opentracker.i2p.rocks:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.abiir.top:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.burnabyhighstar.com:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.ready4.icu:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.baka.ink:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.imgoingto.icu:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.lilithraws.cf:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.nanoha.org:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.tamersunion.org:443/announce</span><br><span class="line"></span><br><span class="line">https://trackme.theom.nz:443/announce</span><br><span class="line"></span><br><span class="line">udp://9.rarbg.com:2810/announce</span><br><span class="line"></span><br><span class="line">udp://exodus.desync.com:6969/announce</span><br><span class="line"></span><br><span class="line">udp://fe.dealclub.de:6969/announce</span><br><span class="line"></span><br><span class="line">udp://ipv4.tracker.harry.lu:80/announce</span><br><span class="line"></span><br><span class="line">udp://ipv6.babico.name.tr:8000/announce</span><br><span class="line"></span><br><span class="line">udp://mirror.aptus.co.tz:6969/announce</span><br><span class="line"></span><br><span class="line">udp://movies.zsw.ca:6969/announce</span><br><span class="line"></span><br><span class="line">udp://oldboystudy.com:6969/announce</span><br><span class="line"></span><br><span class="line">udp://open.demonii.com:1337/announce</span><br><span class="line"></span><br><span class="line">udp://open.dstud.io:6969/announce</span><br><span class="line"></span><br><span class="line">udp://open.free-tracker.ga:6969/announce</span><br><span class="line"></span><br><span class="line">udp://open.publictracker.xyz:6969/announce</span><br><span class="line"></span><br><span class="line">udp://open.stealth.si:80/announce</span><br><span class="line"></span><br><span class="line">udp://open.tracker.ink:6969/announce</span><br><span class="line"></span><br><span class="line">udp://open.xxtor.com:3074/announce</span><br><span class="line"></span><br><span class="line">udp://opentor.org:2710/announce</span><br><span class="line"></span><br><span class="line">udp://opentracker.i2p.rocks:6969/announce</span><br><span class="line"></span><br><span class="line">udp://p4p.arenabg.com:1337/announce</span><br><span class="line"></span><br><span class="line">udp://retracker.hotplug.ru:2710/announce</span><br><span class="line"></span><br><span class="line">udp://run.publictracker.xyz:6969/announce</span><br><span class="line"></span><br><span class="line">udp://thetracker.org:80/announce</span><br><span class="line"></span><br><span class="line">udp://torrentclub.space:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.0x.tf:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.altrosky.nl:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.auctor.tv:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.beeimg.com:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.birkenwald.de:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.bitsearch.to:1337/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.cyberia.is:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.edkj.club:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.jordan.im:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.leech.ie:1337/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.moeking.me:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.openbittorrent.com:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.opentrackr.org:1337/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.pomf.se:80/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.publictracker.xyz:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.srv00.com:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.theoks.net:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.tiny-vps.com:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.torrent.eu.org:451/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.zerobytes.xyz:1337/announce</span><br><span class="line"></span><br><span class="line">udp://tracker1.bt.moack.co.kr:80/announce</span><br><span class="line"></span><br><span class="line">udp://tracker2.dler.com:80/announce</span><br><span class="line"></span><br><span class="line">udp://tracker2.dler.org:80/announce</span><br><span class="line"></span><br><span class="line">udp://tracker6.lelux.fi:6969/announce</span><br><span class="line"></span><br><span class="line">udp://v2.iperson.xyz:6969/announce</span><br><span class="line"></span><br><span class="line">udp://vibe.sleepyinternetfun.xyz:1738/announce</span><br><span class="line"></span><br><span class="line">udp://www.torrent.eu.org:451/announce</span><br><span class="line"></span><br><span class="line">udp://zecircle.xyz:6969/announce</span><br><span class="line"></span><br><span class="line">ws://hub.bugout.link:80/announce</span><br><span class="line"></span><br><span class="line">wss://tracker.openwebtorrent.com:443/announce</span><br><span class="line"></span><br><span class="line">http://1337.abcvg.info:80/announce</span><br><span class="line"></span><br><span class="line">http://207.241.226.111:6969/announce</span><br><span class="line"></span><br><span class="line">http://207.241.231.226:6969/announce</span><br><span class="line"></span><br><span class="line">http://[2001:1b10:1000:8101:0:242:ac11:2]:6969/announce</span><br><span class="line"></span><br><span class="line">http://[2a04:ac00:1:3dd8::1:2710]:2710/announce</span><br><span class="line"></span><br><span class="line">http://fe.dealclub.de:6969/announce</span><br><span class="line"></span><br><span class="line">http://fxtt.ru:80/announce</span><br><span class="line"></span><br><span class="line">http://milanesitracker.tekcities.com:80/announce</span><br><span class="line"></span><br><span class="line">http://movies.zsw.ca:6969/announce</span><br><span class="line"></span><br><span class="line">http://nyaa.tracker.wf:7777/announce</span><br><span class="line"></span><br><span class="line">http://open.acgnxtracker.com:80/announce</span><br><span class="line"></span><br><span class="line">http://open.acgtracker.com:1096/announce</span><br><span class="line"></span><br><span class="line">http://open.nyap2p.com:8080/announce</span><br><span class="line"></span><br><span class="line">http://open.tracker.ink:6969/announce</span><br><span class="line"></span><br><span class="line">http://opentracker.i2p.rocks:6969/announce</span><br><span class="line"></span><br><span class="line">http://opentracker.xyz:80/announce</span><br><span class="line"></span><br><span class="line">http://retracker.hotplug.ru:2710/announce</span><br><span class="line"></span><br><span class="line">http://share.camoe.cn:8080/announce</span><br><span class="line"></span><br><span class="line">http://t.acg.rip:6699/announce</span><br><span class="line"></span><br><span class="line">http://t.nyaatracker.com:80/announce</span><br><span class="line"></span><br><span class="line">http://t.overflow.biz:6969/announce</span><br><span class="line"></span><br><span class="line">http://tr.cili001.com:8070/announce</span><br><span class="line"></span><br><span class="line">http://tracker.aeerso.space:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.birkenwald.de:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.bt4g.com:2095/announce</span><br><span class="line"></span><br><span class="line">http://tracker.dler.com:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.dler.org:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.edkj.club:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.files.fm:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.gbitt.info:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker.ipv6tracker.ru:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker.mywaifu.best:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.noobsubs.net:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker.opentrackr.org:1337/announce</span><br><span class="line"></span><br><span class="line">http://tracker.srv00.com:6969/announce</span><br><span class="line"></span><br><span class="line">http://tracker.srv00.com:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker.zerobytes.xyz:1337/announce</span><br><span class="line"></span><br><span class="line">http://tracker1.bt.moack.co.kr:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker1.itzmx.com:8080/announce</span><br><span class="line"></span><br><span class="line">http://tracker2.520.jp:2095/announce</span><br><span class="line"></span><br><span class="line">http://tracker2.dler.org:80/announce</span><br><span class="line"></span><br><span class="line">http://tracker2.itzmx.com:6961/announce</span><br><span class="line"></span><br><span class="line">http://tracker3.520.jp:2095/announce</span><br><span class="line"></span><br><span class="line">http://tracker3.ctix.cn:2095/announce</span><br><span class="line"></span><br><span class="line">http://tracker3.itzmx.com:6961/announce</span><br><span class="line"></span><br><span class="line">http://tracker4.itzmx.com:2710/announce</span><br><span class="line"></span><br><span class="line">http://vps02.net.orel.ru:80/announce</span><br><span class="line"></span><br><span class="line">https://1337.abcvg.info:443/announce</span><br><span class="line"></span><br><span class="line">https://carbon-bonsai-621.appspot.com:443/announce</span><br><span class="line"></span><br><span class="line">https://chihaya-heroku.120181311.xyz:443/announce</span><br><span class="line"></span><br><span class="line">https://opentracker.i2p.rocks:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.abiir.top:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.abir.ga:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.burnabyhighstar.com:443/announce</span><br><span class="line"></span><br><span class="line">https://tr.ready4.icu:443/announce</span><br><span class="line"></span><br><span class="line">https://track.plop.pm:8989/announce</span><br><span class="line"></span><br><span class="line">https://tracker.babico.name.tr:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.baka.ink:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.dmhy.pw:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.foreverpirates.co:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.imgoingto.icu:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.kuroy.me:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.lelux.fi:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.lilithraws.cf:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.lilithraws.org:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.nanoha.org:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.nitrix.me:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.srv00.com:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker.tamersunion.org:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker1.520.jp:443/announce</span><br><span class="line"></span><br><span class="line">https://tracker1.loli.co.nz:443/announce</span><br><span class="line"></span><br><span class="line">https://trackme.theom.nz:443/announce</span><br><span class="line"></span><br><span class="line">https://xtremex.herokuapp.com:443/announce</span><br><span class="line"></span><br><span class="line">udp://93.158.213.92:1337/announce</span><br><span class="line"></span><br><span class="line">udp://151.80.120.114:2810/announce</span><br><span class="line"></span><br><span class="line">udp://45.154.253.8:6969/announce</span><br><span class="line"></span><br><span class="line">udp://89.234.156.205:451/announce</span><br><span class="line"></span><br><span class="line">udp://185.181.60.155:80/announce</span><br><span class="line"></span><br><span class="line">udp://5.79.216.168:6969/announce</span><br><span class="line"></span><br><span class="line">udp://208.83.20.20:6969/announce</span><br><span class="line"></span><br><span class="line">udp://149.28.47.87:1738/announce</span><br><span class="line"></span><br><span class="line">udp://156.234.201.18:80/announce</span><br><span class="line"></span><br><span class="line">udp://209.141.59.16:6969/announce</span><br><span class="line"></span><br><span class="line">udp://194.53.137.231:6969/announce</span><br><span class="line"></span><br><span class="line">udp://93.104.214.40:6969/announce</span><br><span class="line"></span><br><span class="line">udp://107.189.11.230:6969/announce</span><br><span class="line"></span><br><span class="line">udp://185.70.187.79:6969/announce</span><br><span class="line"></span><br><span class="line">udp://185.134.22.3:6969/announce</span><br><span class="line"></span><br><span class="line">udp://185.21.216.185:6969/announce</span><br><span class="line"></span><br><span class="line">udp://tracker.sbsub.com:2710/announce</span><br><span class="line">http://open.acgtracker.com:1096/announce</span><br><span class="line">http://176.113.68.67:6961/announce</span><br><span class="line">http://176.113.71.60:6961/announce</span><br><span class="line">http://184.105.151.164:6969/announce</span><br><span class="line">http://185.83.214.123:6969/announce</span><br><span class="line">http://51.15.55.204:1337/announce</span><br><span class="line">http://51.38.230.101:80/announce</span><br><span class="line">http://93.158.213.92:1337/announce</span><br><span class="line">http://95.107.48.115:80/announce</span><br><span class="line">http://aaa.army:8866/announce</span><br><span class="line">http://bobbialbano.com:6969/announce</span><br><span class="line">http://derpyradio.net:6969/announce</span><br><span class="line">http://h4.trakx.nibba.trade:80/announce</span><br><span class="line">http://open.acgnxtracker.com/announce</span><br><span class="line">http://opentracker.i2p.rocks:6969/announce</span><br><span class="line">http://publictracker.ch:6969/announce</span><br><span class="line">http://retracker.sevstar.net:2710/announce</span><br><span class="line">http://rt.tace.ru:80/announce</span><br><span class="line">http://share.camoe.cn:8080/announce</span><br><span class="line">http://t.acg.rip:6699/announce</span><br><span class="line">http://t.nyaatracker.com/announce</span><br><span class="line">http://t.nyaatracker.com:80/announce</span><br><span class="line">http://t.overflow.biz:6969/announce</span><br><span class="line">http://tr.cili001.com:8070/announce</span><br><span class="line">http://tracker.anonwebz.xyz:8080/announce</span><br><span class="line">http://tracker.dler.org:6969/announce</span><br><span class="line">http://tracker.files.fm:6969/announce</span><br><span class="line">http://tracker.gbitt.info/announce</span><br><span class="line">http://tracker.gbitt.info:80/announce</span><br><span class="line">http://tracker.ipv6tracker.ru:80/announce</span><br><span class="line">http://tracker.kamigami.org:2710/announce</span><br><span class="line">http://tracker.lelux.fi:80/announce</span><br><span class="line">http://tracker.noobsubs.net:80/announce</span><br><span class="line">http://tracker.skyts.cn:6969/announce</span><br><span class="line">http://tracker.skyts.net:6969/announce</span><br><span class="line">http://tracker.ygsub.com:6969/announce</span><br><span class="line">http://tracker.zerobytes.xyz:1337/announce</span><br><span class="line">http://tracker1.itzmx.com:8080/announce</span><br><span class="line">http://tracker2.dler.org:80/announce</span><br><span class="line">http://tracker2.itzmx.com:6961/announce</span><br><span class="line">http://tracker3.itzmx.com:6961/announce</span><br><span class="line">http://tracker4.itzmx.com:2710/announce</span><br><span class="line">http://vpn.flying-datacenter.de:6969/announce</span><br><span class="line">http://vps02.net.orel.ru/announce</span><br><span class="line">http://vps02.net.orel.ru:80/announce</span><br><span class="line">https://1337.abcvg.info/announce</span><br><span class="line">https://1337.abcvg.info:443/announce</span><br><span class="line">https://aaa.army:8866/announce</span><br><span class="line">https://publictracker.pp.ua:443/announce</span><br><span class="line">https://tr.ready4.icu:443/announce</span><br><span class="line">https://tracker.gbitt.info/announce</span><br><span class="line">https://tracker.hama3.net:443/announce</span><br><span class="line">https://tracker.imgoingto.icu:443/announce</span><br><span class="line">https://tracker.lelux.fi:443/announce</span><br><span class="line">https://tracker.nitrix.me:443/announce</span><br><span class="line">https://tracker.tamersunion.org:443/announce</span><br><span class="line">https://trakx.herokuapp.com:443/announce</span><br><span class="line">https://w.wwwww.wtf:443/announce</span><br><span class="line">udp://176.113.68.67:6961/announce</span><br><span class="line">udp://176.113.71.60:6961/announce</span><br><span class="line">udp://185.181.60.67:80/announce</span><br><span class="line">udp://185.83.214.123:6969/announce</span><br><span class="line">udp://207.241.226.111:6969/announce</span><br><span class="line">udp://207.241.231.226:6969/announce</span><br><span class="line">udp://208.83.20.20:6969/announce</span><br><span class="line">udp://212.1.226.176:2710/announce</span><br><span class="line">udp://212.47.227.58:6969/announce</span><br><span class="line">udp://217.76.183.53:80/announce</span><br><span class="line">udp://37.235.174.46:2710/announce</span><br><span class="line">udp://46.148.18.250:2710/announce</span><br><span class="line">udp://46.148.18.254:2710/announce</span><br><span class="line">udp://47.ip-51-68-199.eu:6969/announce</span><br><span class="line">udp://5.226.148.20:6969/announce</span><br><span class="line">udp://61626c.net:6969/announce</span><br><span class="line">udp://62.210.97.59:1337/announce</span><br><span class="line">udp://6ahddutb1ucc3cp.ru:6969/announce</span><br><span class="line">udp://91.149.192.31:6969/announce</span><br><span class="line">udp://91.216.110.52:451/announce</span><br><span class="line">udp://93.158.213.92:1337/announce</span><br><span class="line">udp://adm.category5.tv:6969/announce</span><br><span class="line">udp://admin.videoenpoche.info:6969/announce</span><br><span class="line">udp://adminion.n-blade.ru:6969/announce</span><br><span class="line">udp://api.bitumconference.ru:6969/announce</span><br><span class="line">udp://aruacfilmes.com.br:6969/announce</span><br><span class="line">udp://bclearning.top:6969/announce</span><br><span class="line">udp://benouworldtrip.fr:6969/announce</span><br><span class="line">udp://bioquantum.co.za:6969/announce</span><br><span class="line">udp://bitsparadise.info:6969/announce</span><br><span class="line">udp://blokas.io:6969/announce</span><br><span class="line">udp://bms-hosxp.com:6969/announce</span><br><span class="line">udp://bubu.mapfactor.com:6969/announce</span><br><span class="line">udp://cdn-1.gamecoast.org:6969/announce</span><br><span class="line">udp://cdn-2.gamecoast.org:6969/announce</span><br><span class="line">udp://chanchan.uchuu.co.uk:6969/announce</span><br><span class="line">udp://cutiegirl.ru:6969/announce</span><br><span class="line">udp://daveking.com:6969/announce</span><br><span class="line">udp://discord.heihachi.pw:6969/announce</span><br><span class="line">udp://dpiui.reedlan.com:6969/announce</span><br><span class="line">udp://edu.uifr.ru:6969/announce</span><br><span class="line">udp://eliastre100.fr:6969/announce</span><br><span class="line">udp://engplus.ru:6969/announce</span><br><span class="line">udp://fe.dealclub.de:6969/announce</span><br><span class="line">udp://forever-tracker.zooki.xyz:6969/announce</span><br><span class="line">udp://inferno.demonoid.is:3391/announce</span><br><span class="line">udp://ipv4.tracker.harry.lu:80/announce</span><br><span class="line">udp://josueunhuit.com:6969/announce</span><br><span class="line">udp://kanal-4.de:6969/announce</span><br><span class="line">udp://koli.services:6969/announce</span><br><span class="line">udp://mail.realliferpg.de:6969/announce</span><br><span class="line">udp://movies.zsw.ca:6969/announce</span><br><span class="line">udp://mts.tvbit.co:6969/announce</span><br><span class="line">udp://nagios.tks.sumy.ua:80/announce</span><br><span class="line">udp://ns-1.x-fins.com:6969/announce</span><br><span class="line">udp://open.stealth.si:80/announce</span><br><span class="line">udp://opentor.org:2710/announce</span><br><span class="line">udp://opentracker.arg.bz:6969/announce</span><br><span class="line">udp://opentracker.i2p.rocks:6969/announce</span><br><span class="line">udp://publictracker.xyz:6969/announce</span><br><span class="line">udp://qg.lorzl.gq:2710/announce</span><br><span class="line">udp://retracker.akado-ural.ru:80/announce</span><br><span class="line">udp://retracker.lanta-net.ru:2710/announce</span><br><span class="line">udp://retracker.local.msn-net.ru:6969/announce</span><br><span class="line">udp://retracker.netbynet.ru:2710/announce</span><br><span class="line">udp://retracker.sevstar.net:2710/announce</span><br><span class="line">udp://rutorrent.frontline-mod.com:6969/announce</span><br><span class="line">udp://sd-161673.dedibox.fr:6969/announce</span><br><span class="line">udp://storage.groupees.com:6969/announce</span><br><span class="line">udp://teamspeak.value-wolf.org:6969/announce</span><br><span class="line">udp://torrent.tdjs.tech:6969/announce</span><br><span class="line">udp://tr.cili001.com:8070/announce</span><br><span class="line">udp://tracker.0x.tf:6969/announce</span><br><span class="line">udp://tracker.altrosky.nl:6969/announce</span><br><span class="line">udp://tracker.blacksparrowmedia.net:6969/announce</span><br><span class="line">udp://tracker.coppersurfer.tk:6969/announce</span><br><span class="line">udp://tracker.dler.org:6969/announce</span><br><span class="line">udp://tracker.ds.is:6969/announce</span><br><span class="line">udp://tracker.dyne.org:6969/announce</span><br><span class="line">udp://tracker.filemail.com:6969/announce</span><br><span class="line">udp://tracker.fortu.io:6969/announce</span><br><span class="line">udp://tracker.kamigami.org:2710/announce</span><br><span class="line">udp://tracker.leechers-paradise.org:6969/announce</span><br><span class="line">udp://tracker.lelux.fi:6969/announce</span><br><span class="line">udp://tracker.opentrackr.org:1337/announce</span><br><span class="line">udp://tracker.shkinev.me:6969/announce</span><br><span class="line">udp://tracker.skynetcloud.site:6969/announce</span><br><span class="line">udp://tracker.skyts.net:6969/announce</span><br><span class="line">udp://tracker.tiny-vps.com:6969/announce</span><br><span class="line">udp://tracker.uw0.xyz:6969/announce</span><br><span class="line">udp://tracker.v6speed.org:6969/announce</span><br><span class="line">udp://tracker.vulnix.sh:6969/announce</span><br><span class="line">udp://tracker.zemoj.com:6969/announce</span><br><span class="line">udp://tracker.zerobytes.xyz:1337/announce</span><br><span class="line">udp://tracker.zum.bi:6969/announce</span><br><span class="line">udp://tracker0.ufibox.com:6969/announce</span><br><span class="line">udp://tracker2.dler.org:80/announce</span><br><span class="line">udp://tracker2.itzmx.com:6961/announce</span><br><span class="line">udp://tracker3.itzmx.com:6961/announce</span><br><span class="line">udp://tracker6.dler.org:2710/announce</span><br><span class="line">udp://tracker-udp.gbitt.info:80/announce</span><br><span class="line">udp://ultra.zt.ua:6969/announce</span><br><span class="line">udp://us-tracker.publictracker.xyz:6969/announce</span><br><span class="line">udp://valakas.rollo.dnsabr.com:2710/announce</span><br><span class="line">udp://vibe.community:6969/announce</span><br><span class="line">udp://www.midea123.z-media.com.cn:6969/announce</span><br><span class="line">udp://zephir.monocul.us:6969/announce</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-正则"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/python/%E6%AD%A3%E5%88%99/"
-    >正则</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/python/%E6%AD%A3%E5%88%99/" class="article-date">
-  <time datetime="2022-09-08T09:42:50.000Z" itemprop="datePublished">2022-09-08</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/python/">python</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="正则化匹配"><a href="#正则化匹配" class="headerlink" title="正则化匹配"></a>正则化匹配</h1><blockquote>
-<p>python</p>
-</blockquote>
-<p>推荐阅读</p>
-<ul>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43696515/article/details/88978031">https://blog.csdn.net/weixin_43696515/article/details/88978031</a></p>
-<p>提到了使用 compile 避免重复解释</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/guo_qingxia/article/details/113979135">https://blog.csdn.net/guo_qingxia/article/details/113979135</a></p>
-<p>排版好</p>
-</li>
-</ul>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
   </article>
   
 
   
   <nav class="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
   </nav>
   
 </section>

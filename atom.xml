@@ -6,7 +6,7 @@
   <link href="https://jieshenai.github.io/atom.xml" rel="self"/>
   
   <link href="https://jieshenai.github.io/"/>
-  <updated>2022-09-24T15:06:22.008Z</updated>
+  <updated>2022-10-14T08:54:46.087Z</updated>
   <id>https://jieshenai.github.io/</id>
   
   <author>
@@ -15,6 +15,121 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo设置</title>
+    <link href="https://jieshenai.github.io/2022/other/hexo%E8%AE%BE%E7%BD%AE/"/>
+    <id>https://jieshenai.github.io/2022/other/hexo%E8%AE%BE%E7%BD%AE/</id>
+    <published>2022-10-14T08:11:19.000Z</published>
+    <updated>2022-10-14T08:54:46.087Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;hexo设置&quot;&gt;&lt;a href=&quot;#hexo设置&quot; class=&quot;headerlink&quot; title=&quot;hexo设置&quot;&gt;&lt;/a&gt;hexo设置&lt;/h1&gt;&lt;p&gt;typora编写的md文档，其中的图片会存放到</summary>
+        
+      
+    
+    
+    
+    <category term="other" scheme="https://jieshenai.github.io/categories/other/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>django设置</title>
+    <link href="https://jieshenai.github.io/2022/django/django%E8%AE%BE%E7%BD%AE/"/>
+    <id>https://jieshenai.github.io/2022/django/django%E8%AE%BE%E7%BD%AE/</id>
+    <published>2022-10-11T09:24:01.000Z</published>
+    <updated>2022-10-14T08:54:26.645Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Django设置&quot;&gt;&lt;a href=&quot;#Django设置&quot; class=&quot;headerlink&quot; title=&quot;Django设置&quot;&gt;&lt;/a&gt;Django设置&lt;/h1&gt;&lt;h2 id=&quot;apps&quot;&gt;&lt;a href=&quot;#apps&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="django" scheme="https://jieshenai.github.io/categories/django/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>pyVSjs</title>
+    <link href="https://jieshenai.github.io/2022/leetcode/pyVSjs/"/>
+    <id>https://jieshenai.github.io/2022/leetcode/pyVSjs/</id>
+    <published>2022-10-08T02:40:25.000Z</published>
+    <updated>2022-10-08T03:18:48.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;pyVSjs&quot;&gt;&lt;a href=&quot;#pyVSjs&quot; class=&quot;headerlink&quot; title=&quot;pyVSjs&quot;&gt;&lt;/a&gt;pyVSjs&lt;/h1&gt;&lt;h2 id=&quot;数组赋值&quot;&gt;&lt;a href=&quot;#数组赋值&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="leetcode" scheme="https://jieshenai.github.io/categories/leetcode/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>DRF</title>
+    <link href="https://jieshenai.github.io/2022/django/DRF/"/>
+    <id>https://jieshenai.github.io/2022/django/DRF/</id>
+    <published>2022-10-06T09:56:39.000Z</published>
+    <updated>2022-10-14T08:26:06.960Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;DRF&quot;&gt;&lt;a href=&quot;#DRF&quot; class=&quot;headerlink&quot; title=&quot;DRF&quot;&gt;&lt;/a&gt;DRF&lt;/h1&gt;&lt;h2 id=&quot;创建Serializer对象&quot;&gt;&lt;a href=&quot;#创建Serializer对象&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="django" scheme="https://jieshenai.github.io/categories/django/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>mysql</title>
+    <link href="https://jieshenai.github.io/2022/django/mysql/"/>
+    <id>https://jieshenai.github.io/2022/django/mysql/</id>
+    <published>2022-09-26T01:59:50.000Z</published>
+    <updated>2022-09-26T02:25:35.921Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="django" scheme="https://jieshenai.github.io/categories/django/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>leetcode入门</title>
@@ -359,29 +474,6 @@
     
     
     <category term="linux" scheme="https://jieshenai.github.io/categories/linux/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>hexo</title>
-    <link href="https://jieshenai.github.io/2022/tools/hexo/"/>
-    <id>https://jieshenai.github.io/2022/tools/hexo/</id>
-    <published>2022-09-04T07:32:43.000Z</published>
-    <updated>2022-09-04T07:57:58.528Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;文章按类别存储&quot;&gt;&lt;a href=&quot;#文章按类别存储&quot; class=&quot;headerlink&quot; title=&quot;文章按类别存储&quot;&gt;&lt;/a&gt;文章按类别存储&lt;/h2&gt;&lt;p&gt;原来的博客文章全部保存在</summary>
-        
-      
-    
-    
-    
-    <category term="tools" scheme="https://jieshenai.github.io/categories/tools/"/>
     
     
   </entry>

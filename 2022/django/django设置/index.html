@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>leetcode入门 |  Hidden yourself until New God appear!</title>
+      <title>django设置 |  Hidden yourself until New God appear!</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -54,7 +54,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-leetcode入门"
+  id="post-django设置"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -65,7 +65,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  leetcode入门
+  django设置
 </h1>
  
 
@@ -73,11 +73,11 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2022/leetcode/leetcode%E5%85%A5%E9%97%A8/" class="article-date">
-  <time datetime="2022-09-24T03:08:15.000Z" itemprop="datePublished">2022-09-24</time>
+      <a href="/2022/django/django%E8%AE%BE%E7%BD%AE/" class="article-date">
+  <time datetime="2022-10-11T09:24:01.000Z" itemprop="datePublished">2022-10-11</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/leetcode/">leetcode</a>
+    <a class="article-category-link" href="/categories/django/">django</a>
   </div>
   
 <div class="word_count">
@@ -85,7 +85,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">245</span>
+            <span class="post-count">628</span>
         </span>
     </span>
 
@@ -94,7 +94,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">2 分钟</span>
         </span>
     </span>
 </div>
@@ -109,14 +109,97 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="leetcode"><a href="#leetcode" class="headerlink" title="leetcode"></a>leetcode</h1><h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><ul>
-<li><strong>节约空间</strong></li>
-</ul>
-<p>动态规划经常用到一个记录状态的数组，若始终只用到当前值和前一个值的话，只需使用一个变量存下前一个值即可。无需使用数组存一些以后不会用到的值。</p>
-<h2 id="结尾检查"><a href="#结尾检查" class="headerlink" title="结尾检查"></a>结尾检查</h2><h4 id="2414-最长的字母序连续子字符串的长度"><a href="#2414-最长的字母序连续子字符串的长度" class="headerlink" title="2414. 最长的字母序连续子字符串的长度"></a><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/length-of-the-longest-alphabetical-continuous-substring/">2414. 最长的字母序连续子字符串的长度</a></h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">longestContinuousSubstring</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        max_len = <span class="number">1</span></span><br><span class="line">        pre = s[<span class="number">0</span>]</span><br><span class="line">        cnt = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> ch <span class="keyword">in</span> s[<span class="number">1</span>::]:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">ord</span>(ch) - <span class="built_in">ord</span>(pre) == <span class="number">1</span>:</span><br><span class="line">                cnt += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                max_len = <span class="built_in">max</span>(max_len,cnt)</span><br><span class="line">                cnt = <span class="number">1</span></span><br><span class="line">            pre = ch</span><br><span class="line">        <span class="comment"># 容易遗漏</span></span><br><span class="line">        max_len = <span class="built_in">max</span>(max_len,cnt)</span><br><span class="line">        <span class="keyword">return</span> max_len</span><br></pre></td></tr></table></figure>
+  <h1 id="Django设置"><a href="#Django设置" class="headerlink" title="Django设置"></a>Django设置</h1><h2 id="apps"><a href="#apps" class="headerlink" title="apps"></a>apps</h2><p>在项目根目录下创建<code>apps</code>目录，把<code>app</code>都放在<code>apps</code>文件夹下</p>
+<p><img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221012215758162.png" alt="image-20221012215758162"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">新建apps目录</span></span><br><span class="line">cd apps</span><br><span class="line">python ../manage.py startapp users</span><br></pre></td></tr></table></figure>
 
-<p>最后在循环外的 <code>max_len = max(max_len,cnt)</code> 检查，很容易遗漏。</p>
-<p>在for循环中的检查不会遗漏，但是若恰好在循坏的最后一个阶段得到了最后解，此时循环结束，没有下一个循环状态来更新，所以造成漏解。故若循环有状态更新，一定留意循环结束时的状态是否需要更新。</p>
+
+
+<p>将<code>apps</code>目录添加进系统路径中</p>
+<p><code>settings.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># Build paths inside the project like this: BASE_DIR / &#x27;subdir&#x27;.</span></span><br><span class="line">BASE_DIR = Path(__file__).resolve().parent.parent</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加导包路径</span></span><br><span class="line">sys.path.insert(<span class="number">0</span>, os.path.join(BASE_DIR, <span class="string">&#x27;apps&#x27;</span>))</span><br><span class="line"></span><br><span class="line">INSTALLED_APPS = [</span><br><span class="line">    <span class="string">&quot;django.contrib.admin&quot;</span>,</span><br><span class="line">    <span class="string">&quot;django.contrib.auth&quot;</span>,</span><br><span class="line">    <span class="string">&quot;django.contrib.contenttypes&quot;</span>,</span><br><span class="line">    <span class="string">&quot;django.contrib.sessions&quot;</span>,</span><br><span class="line">    <span class="string">&quot;django.contrib.messages&quot;</span>,</span><br><span class="line">    <span class="string">&quot;django.contrib.staticfiles&quot;</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment"># apps for this project</span></span><br><span class="line">    <span class="string">&quot;users.apps.UsersConfig&quot;</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>由于<code>apps</code>已进入系统目录，故<code>&quot;users.apps.UsersConfig&quot;</code>，无需写前面的<code>apps</code>文件夹名</p>
+<h2 id="migrations"><a href="#migrations" class="headerlink" title="migrations"></a>migrations</h2><h3 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h3><p>出现了 如下报错</p>
+<blockquote>
+<p>django.db.migrations.exceptions.InconsistentMigrationHistory: Migration <strong>admin</strong>.0001_initial is applied before its dependency users.0001<br>_initial on database ‘default’.</p>
+</blockquote>
+<ul>
+<li>根据报错的信息，删除数据库中，该表的数据。</li>
+</ul>
+<p><img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221011172831519.png" alt="image-20221011172831519"></p>
+<ul>
+<li>鼠标右键点击删除</li>
+</ul>
+<img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221011172932906.png" alt="image-20221011172932906" style="zoom: 67%;">
+
+
+
+<ul>
+<li>提交，保存修改到数据库中</li>
+</ul>
+<img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221011173040345.png" alt="image-20221011173040345" style="zoom:80%;">
+
+
+
+<ul>
+<li><p>重新进行迁移，但是依然失败了<img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221011173333682.png" alt="image-20221011173333682"></p>
+</li>
+<li><p>根据报错信息，将表 <code>django_admin_log</code>删除</p>
+</li>
+<li><p>继续报错，继续删表</p>
+<p><img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221013130807591.png" alt="image-20221013130807591"></p>
+</li>
+<li><p>把数据库中的很多表删除后，重新迁移</p>
+</li>
+</ul>
+<p>若还遇到其他迁移失败的报错，可以尝试如下操作：</p>
+<ol>
+<li>删除数据库记录该model的记录</li>
+</ol>
+<p><img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221013161725041.png" alt="image-20221013161725041"></p>
+<ol start="2">
+<li>删除记录迁移的文件，接着重新迁移；</li>
+</ol>
+<p><img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221013161452474.png" alt="image-20221013161452474"></p>
+<h3 id="密码正确登录不上"><a href="#密码正确登录不上" class="headerlink" title="密码正确登录不上"></a>密码正确登录不上</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_49861340/article/details/123409143">修改管理员密码</a>后，发现还是登录不上，我是按如下方式处理的</p>
+<ul>
+<li>删除了数据库的所有表，除了sqlite_开头的两个表</li>
+</ul>
+<p><img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221013183956861.png" alt="image-20221013183956861"></p>
+<ul>
+<li><p>清理记录迁移的文件</p>
+<p><img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221013161452474.png" alt="image-20221013161452474"></p>
+</li>
+</ul>
+<h2 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h2><p>前后端在不同的域名下，需要解决跨域问题</p>
+<h2 id="Simple-JWT"><a href="#Simple-JWT" class="headerlink" title="Simple JWT"></a>Simple JWT</h2><p><code>djangorestframework-jwt</code>库，在17年已不再维护，推荐使用</p>
+<ul>
+<li><p>成功实现，参考的是这篇<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_52385631/article/details/126840331">博客</a>，这篇博客中给出的参考链接也有价值</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/roy8666/article/details/124948426">simple jwt实现登录注册</a> 但是博主没有公开他的 <code>tools.py</code>的代码，可参考他的思路</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43880991/article/details/121347569">simple-jwt</a> </p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42586468/article/details/112524452">抽象用户</a></p>
+</li>
+</ul>
+<h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>提交token时，被Django的CORS给拦截了</p>
+<p><code>pip install django-cors-headers</code></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/li944254211/article/details/109510278">Django项目关于跨域cors及解决方案（配置项）</a></p>
+<h3 id="Postman"><a href="#Postman" class="headerlink" title="Postman"></a>Postman</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yueguangMaNong/article/details/116797640">这篇文章</a> 关于 postman给 jwt 传递参数写的比较细</p>
+<blockquote>
+<p>我发现使用 postman，不会涉及到CORS，以及跨域访问的问题；即使没有在Django 的 setting.py中进行任何的设置，Postman也是可以使用</p>
+</blockquote>
+<p>使用Postman编辑传递的参数，使用网页端的postman失败了</p>
+<img src="/2022/django/django%E8%AE%BE%E7%BD%AE/image-20221013220548895.png" alt="image-20221013220548895" style="zoom: 50%;">
+
+
+
+<p>下载了桌面版的Postman传参，成功</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;refresh&quot;</span><span class="punctuation">:</span> <span class="string">&quot;xxx&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;access&quot;</span><span class="punctuation">:</span> <span class="string">&quot;xxx&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用access作为token，提交给服务器</p>
  
       <!-- reward -->
       
@@ -187,7 +270,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://jieshenai.github.io/2022/leetcode/leetcode%E5%85%A5%E9%97%A8/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://jieshenai.github.io/2022/django/django%E8%AE%BE%E7%BD%AE/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -198,19 +281,19 @@
    
   <nav class="article-nav">
     
-      <a href="/2022/django/mysql/" class="article-nav-link">
+      <a href="/2022/other/hexo%E8%AE%BE%E7%BD%AE/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            mysql
+            hexo设置
           
         </div>
       </a>
     
     
-      <a href="/2022/django/token%E8%AE%A4%E8%AF%81/" class="article-nav-link">
+      <a href="/2022/leetcode/pyVSjs/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">token认证</div>
+        <div class="article-nav-title">pyVSjs</div>
       </a>
     
   </nav>
